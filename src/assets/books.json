@@ -1,0 +1,2113 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "title": "The Prince",
+      "author": {
+        "name": "Niccolò Machiavelli",
+        "bio": "A brief biography of Niccolò Machiavelli",
+        "profile_picture": "assets/books/covers/1_the-prince.jpg"
+      },
+      "isbn": "978-871869165",
+      "genre": [
+        "Fiction",
+        "Science Fiction"
+      ],
+      "language": "English",
+      "published_year": 1947,
+      "cover_image": "assets/books/covers/1_the-prince.jpg",
+      "description": "A classic work by Niccolò Machiavelli",
+      "file_type": "text",
+      "file_path": "assets/books/text\\10_capital-stock.txt",
+      "content": "Content preview...",
+      "total_pages": 307,
+      "read_time": 3,
+      "rating": 3.8,
+      "reviews": [
+        {
+          "user": "User648",
+          "rating": 4,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/1"
+    },
+    {
+      "id": 2,
+      "title": "The Prince",
+      "author": {
+        "name": "Niccolò Machiavelli",
+        "bio": "A brief biography of Niccolò Machiavelli",
+        "profile_picture": "assets/books/covers/2_the-prince.jpg"
+      },
+      "isbn": "978-363787263",
+      "genre": [
+        "Romance"
+      ],
+      "language": "English",
+      "published_year": 1930,
+      "cover_image": "assets/books/covers/2_the-prince.jpg",
+      "description": "A classic work by Niccolò Machiavelli",
+      "file_type": "text",
+      "file_path": "assets/books/text\\10_floor-race-within.txt",
+      "content": "Content preview...",
+      "total_pages": 147,
+      "read_time": 3,
+      "rating": 3.1,
+      "reviews": [
+        {
+          "user": "User657",
+          "rating": 5,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/2"
+    },
+    {
+      "id": 3,
+      "title": "10_generation.txt",
+      "author": {
+        "name": "Unknown",
+        "bio": "A brief biography of Unknown",
+        "profile_picture": "assets/books/covers/3_10_generation.txt.jpg"
+      },
+      "isbn": "978-795200562",
+      "genre": [
+        "Fantasy",
+        "Science Fiction"
+      ],
+      "language": "English",
+      "published_year": 1846,
+      "cover_image": "assets/books/covers/3_10_generation.txt.jpg",
+      "description": "A classic work by Unknown",
+      "file_type": "text",
+      "file_path": "assets/books/text\\10_generation.txt",
+      "content": "Content preview...",
+      "total_pages": 294,
+      "read_time": 7,
+      "rating": 3.3,
+      "reviews": [
+        {
+          "user": "User11",
+          "rating": 5,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/3"
+    },
+    {
+      "id": 4,
+      "title": "Operative bandwidth-monitored attitude",
+      "author": {
+        "name": "Chad Jackson",
+        "bio": "A brief biography of Chad Jackson",
+        "profile_picture": "assets/books/covers/4_operative-bandwidth-monitored-.jpg"
+      },
+      "isbn": "978-568420378",
+      "genre": [
+        "Biography",
+        "Non-Fiction"
+      ],
+      "language": "English",
+      "published_year": 1949,
+      "cover_image": "assets/books/covers/4_operative-bandwidth-monitored-.jpg",
+      "description": "A classic work by Chad Jackson",
+      "file_type": "text",
+      "file_path": "assets/books/text\\11_like-three-how-form.txt",
+      "content": "Content preview...",
+      "total_pages": 404,
+      "read_time": 10,
+      "rating": 3.1,
+      "reviews": [
+        {
+          "user": "User683",
+          "rating": 4,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/4"
+    },
+    {
+      "id": 5,
+      "title": "Quality-focused composite middleware",
+      "author": {
+        "name": "Allen Wilson",
+        "bio": "A brief biography of Allen Wilson",
+        "profile_picture": "assets/books/covers/5_quality-focused-composite-midd.jpg"
+      },
+      "isbn": "978-833955053",
+      "genre": [
+        "Non-Fiction",
+        "Romance"
+      ],
+      "language": "English",
+      "published_year": 1855,
+      "cover_image": "assets/books/covers/5_quality-focused-composite-midd.jpg",
+      "description": "A classic work by Allen Wilson",
+      "file_type": "text",
+      "file_path": "assets/books/text\\11_onto-here-kid-voice.txt",
+      "content": "Content preview...",
+      "total_pages": 135,
+      "read_time": 10,
+      "rating": 4.6,
+      "reviews": [
+        {
+          "user": "User965",
+          "rating": 3,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/5"
+    },
+    {
+      "id": 6,
+      "title": "11_remember-accept.txt",
+      "author": {
+        "name": "Unknown",
+        "bio": "A brief biography of Unknown",
+        "profile_picture": "assets/books/covers/6_11_remember-accept.txt.jpg"
+      },
+      "isbn": "978-278109922",
+      "genre": [
+        "Romance"
+      ],
+      "language": "English",
+      "published_year": 1902,
+      "cover_image": "assets/books/covers/6_11_remember-accept.txt.jpg",
+      "description": "A classic work by Unknown",
+      "file_type": "text",
+      "file_path": "assets/books/text\\11_remember-accept.txt",
+      "content": "Content preview...",
+      "total_pages": 306,
+      "read_time": 8,
+      "rating": 4.0,
+      "reviews": [
+        {
+          "user": "User689",
+          "rating": 4,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/6"
+    },
+    {
+      "id": 7,
+      "title": "Diverse mission-critical task-force",
+      "author": {
+        "name": "Robert Dennis",
+        "bio": "A brief biography of Robert Dennis",
+        "profile_picture": "assets/books/covers/7_diverse-mission-critical-task-.jpg"
+      },
+      "isbn": "978-993381398",
+      "genre": [
+        "Mystery"
+      ],
+      "language": "English",
+      "published_year": 1989,
+      "cover_image": "assets/books/covers/7_diverse-mission-critical-task-.jpg",
+      "description": "A classic work by Robert Dennis",
+      "file_type": "text",
+      "file_path": "assets/books/text\\12_approach-government.txt",
+      "content": "Content preview...",
+      "total_pages": 101,
+      "read_time": 9,
+      "rating": 4.9,
+      "reviews": [
+        {
+          "user": "User563",
+          "rating": 4,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/7"
+    },
+    {
+      "id": 8,
+      "title": "12_must-candidate.txt",
+      "author": {
+        "name": "Unknown",
+        "bio": "A brief biography of Unknown",
+        "profile_picture": "assets/books/covers/8_12_must-candidate.txt.jpg"
+      },
+      "isbn": "978-101698838",
+      "genre": [
+        "Non-Fiction"
+      ],
+      "language": "English",
+      "published_year": 1887,
+      "cover_image": "assets/books/covers/8_12_must-candidate.txt.jpg",
+      "description": "A classic work by Unknown",
+      "file_type": "text",
+      "file_path": "assets/books/text\\12_must-candidate.txt",
+      "content": "Content preview...",
+      "total_pages": 498,
+      "read_time": 7,
+      "rating": 3.8,
+      "reviews": [
+        {
+          "user": "User783",
+          "rating": 3,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/8"
+    },
+    {
+      "id": 9,
+      "title": "Mandatory didactic extranet",
+      "author": {
+        "name": "Matthew Lee",
+        "bio": "A brief biography of Matthew Lee",
+        "profile_picture": "assets/books/covers/9_mandatory-didactic-extranet.jpg"
+      },
+      "isbn": "978-215570391",
+      "genre": [
+        "Romance",
+        "Science Fiction"
+      ],
+      "language": "English",
+      "published_year": 1812,
+      "cover_image": "assets/books/covers/9_mandatory-didactic-extranet.jpg",
+      "description": "A classic work by Matthew Lee",
+      "file_type": "text",
+      "file_path": "assets/books/text\\12_soon-event-however.txt",
+      "content": "Content preview...",
+      "total_pages": 410,
+      "read_time": 7,
+      "rating": 4.7,
+      "reviews": [
+        {
+          "user": "User62",
+          "rating": 3,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/9"
+    },
+    {
+      "id": 10,
+      "title": "13_main-them-between.txt",
+      "author": {
+        "name": "Unknown",
+        "bio": "A brief biography of Unknown",
+        "profile_picture": "assets/books/covers/10_13_main-them-between.txt.jpg"
+      },
+      "isbn": "978-810537953",
+      "genre": [
+        "Fantasy",
+        "Thriller",
+        "Non-Fiction"
+      ],
+      "language": "English",
+      "published_year": 2002,
+      "cover_image": "assets/books/covers/10_13_main-them-between.txt.jpg",
+      "description": "A classic work by Unknown",
+      "file_type": "text",
+      "file_path": "assets/books/text\\13_main-them-between.txt",
+      "content": "Content preview...",
+      "total_pages": 127,
+      "read_time": 7,
+      "rating": 4.3,
+      "reviews": [
+        {
+          "user": "User916",
+          "rating": 3,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/10"
+    },
+    {
+      "id": 11,
+      "title": "Customizable system-worthy info-mediaries",
+      "author": {
+        "name": "Jeremy Edwards",
+        "bio": "A brief biography of Jeremy Edwards",
+        "profile_picture": "assets/books/covers/11_customizable-system-worthy-inf.jpg"
+      },
+      "isbn": "978-889742029",
+      "genre": [
+        "Fantasy"
+      ],
+      "language": "English",
+      "published_year": 1984,
+      "cover_image": "assets/books/covers/11_customizable-system-worthy-inf.jpg",
+      "description": "A classic work by Jeremy Edwards",
+      "file_type": "text",
+      "file_path": "assets/books/text\\13_property-such.txt",
+      "content": "Content preview...",
+      "total_pages": 410,
+      "read_time": 10,
+      "rating": 4.9,
+      "reviews": [
+        {
+          "user": "User737",
+          "rating": 5,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/11"
+    },
+    {
+      "id": 12,
+      "title": "Object-based bottom-line conglomeration",
+      "author": {
+        "name": "Patricia Aguirre",
+        "bio": "A brief biography of Patricia Aguirre",
+        "profile_picture": "assets/books/covers/12_object-based-bottom-line-congl.jpg"
+      },
+      "isbn": "978-793271149",
+      "genre": [
+        "Biography"
+      ],
+      "language": "English",
+      "published_year": 1919,
+      "cover_image": "assets/books/covers/12_object-based-bottom-line-congl.jpg",
+      "description": "A classic work by Patricia Aguirre",
+      "file_type": "text",
+      "file_path": "assets/books/text\\13_show-money-finally.txt",
+      "content": "Content preview...",
+      "total_pages": 420,
+      "read_time": 4,
+      "rating": 4.9,
+      "reviews": [
+        {
+          "user": "User807",
+          "rating": 3,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/12"
+    },
+    {
+      "id": 13,
+      "title": "14_mind-term-why.txt",
+      "author": {
+        "name": "Unknown",
+        "bio": "A brief biography of Unknown",
+        "profile_picture": "assets/books/covers/13_14_mind-term-why.txt.jpg"
+      },
+      "isbn": "978-833332441",
+      "genre": [
+        "Fiction",
+        "Non-Fiction"
+      ],
+      "language": "English",
+      "published_year": 1889,
+      "cover_image": "assets/books/covers/13_14_mind-term-why.txt.jpg",
+      "description": "A classic work by Unknown",
+      "file_type": "text",
+      "file_path": "assets/books/text\\14_mind-term-why.txt",
+      "content": "Content preview...",
+      "total_pages": 145,
+      "read_time": 8,
+      "rating": 4.0,
+      "reviews": [
+        {
+          "user": "User897",
+          "rating": 3,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/13"
+    },
+    {
+      "id": 14,
+      "title": "Centralized holistic protocol",
+      "author": {
+        "name": "Joseph Garcia",
+        "bio": "A brief biography of Joseph Garcia",
+        "profile_picture": "assets/books/covers/14_centralized-holistic-protocol.jpg"
+      },
+      "isbn": "978-615383091",
+      "genre": [
+        "Romance",
+        "Science",
+        "Fiction"
+      ],
+      "language": "English",
+      "published_year": 1988,
+      "cover_image": "assets/books/covers/14_centralized-holistic-protocol.jpg",
+      "description": "A classic work by Joseph Garcia",
+      "file_type": "text",
+      "file_path": "assets/books/text\\14_record-area.txt",
+      "content": "Content preview...",
+      "total_pages": 328,
+      "read_time": 8,
+      "rating": 3.8,
+      "reviews": [
+        {
+          "user": "User366",
+          "rating": 5,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/14"
+    },
+    {
+      "id": 15,
+      "title": "Innovative mobile protocol",
+      "author": {
+        "name": "Ashley Wheeler",
+        "bio": "A brief biography of Ashley Wheeler",
+        "profile_picture": "assets/books/covers/15_innovative-mobile-protocol.jpg"
+      },
+      "isbn": "978-435401259",
+      "genre": [
+        "History",
+        "Thriller"
+      ],
+      "language": "English",
+      "published_year": 2016,
+      "cover_image": "assets/books/covers/15_innovative-mobile-protocol.jpg",
+      "description": "A classic work by Ashley Wheeler",
+      "file_type": "text",
+      "file_path": "assets/books/text\\14_republican-thousand.txt",
+      "content": "Content preview...",
+      "total_pages": 164,
+      "read_time": 6,
+      "rating": 4.2,
+      "reviews": [
+        {
+          "user": "User129",
+          "rating": 4,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/15"
+    },
+    {
+      "id": 16,
+      "title": "Assimilated methodical array",
+      "author": {
+        "name": "Sarah Kelly",
+        "bio": "A brief biography of Sarah Kelly",
+        "profile_picture": "assets/books/covers/16_assimilated-methodical-array.jpg"
+      },
+      "isbn": "978-611610794",
+      "genre": [
+        "Fiction",
+        "Science"
+      ],
+      "language": "English",
+      "published_year": 1907,
+      "cover_image": "assets/books/covers/16_assimilated-methodical-array.jpg",
+      "description": "A classic work by Sarah Kelly",
+      "file_type": "text",
+      "file_path": "assets/books/text\\15_most-relationship.txt",
+      "content": "Content preview...",
+      "total_pages": 171,
+      "read_time": 7,
+      "rating": 3.1,
+      "reviews": [
+        {
+          "user": "User856",
+          "rating": 5,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/16"
+    },
+    {
+      "id": 17,
+      "title": "15_pressure-purpose.txt",
+      "author": {
+        "name": "Unknown",
+        "bio": "A brief biography of Unknown",
+        "profile_picture": "assets/books/covers/17_15_pressure-purpose.txt.jpg"
+      },
+      "isbn": "978-216558252",
+      "genre": [
+        "Romance",
+        "Fantasy",
+        "Science Fiction"
+      ],
+      "language": "English",
+      "published_year": 1804,
+      "cover_image": "assets/books/covers/17_15_pressure-purpose.txt.jpg",
+      "description": "A classic work by Unknown",
+      "file_type": "text",
+      "file_path": "assets/books/text\\15_pressure-purpose.txt",
+      "content": "Content preview...",
+      "total_pages": 497,
+      "read_time": 5,
+      "rating": 3.6,
+      "reviews": [
+        {
+          "user": "User625",
+          "rating": 4,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/17"
+    },
+    {
+      "id": 18,
+      "title": "Profit-focused exuding definition",
+      "author": {
+        "name": "Ryan Moody",
+        "bio": "A brief biography of Ryan Moody",
+        "profile_picture": "assets/books/covers/18_profit-focused-exuding-definit.jpg"
+      },
+      "isbn": "978-880167350",
+      "genre": [
+        "Thriller",
+        "History"
+      ],
+      "language": "English",
+      "published_year": 1972,
+      "cover_image": "assets/books/covers/18_profit-focused-exuding-definit.jpg",
+      "description": "A classic work by Ryan Moody",
+      "file_type": "text",
+      "file_path": "assets/books/text\\15_than-south-hour.txt",
+      "content": "Content preview...",
+      "total_pages": 299,
+      "read_time": 5,
+      "rating": 3.1,
+      "reviews": [
+        {
+          "user": "User837",
+          "rating": 3,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/18"
+    },
+    {
+      "id": 19,
+      "title": "16_color-must-back.txt",
+      "author": {
+        "name": "Unknown",
+        "bio": "A brief biography of Unknown",
+        "profile_picture": "assets/books/covers/19_16_color-must-back.txt.jpg"
+      },
+      "isbn": "978-588449620",
+      "genre": [
+        "Biography",
+        "Science Fiction"
+      ],
+      "language": "English",
+      "published_year": 1908,
+      "cover_image": "assets/books/covers/19_16_color-must-back.txt.jpg",
+      "description": "A classic work by Unknown",
+      "file_type": "text",
+      "file_path": "assets/books/text\\16_color-must-back.txt",
+      "content": "Content preview...",
+      "total_pages": 311,
+      "read_time": 10,
+      "rating": 4.1,
+      "reviews": [
+        {
+          "user": "User379",
+          "rating": 5,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/19"
+    },
+    {
+      "id": 20,
+      "title": "Operative needs-based solution",
+      "author": {
+        "name": "Julie Cline",
+        "bio": "A brief biography of Julie Cline",
+        "profile_picture": "assets/books/covers/20_operative-needs-based-solution.jpg"
+      },
+      "isbn": "978-914352890",
+      "genre": [
+        "Science",
+        "Biography",
+        "Science Fiction"
+      ],
+      "language": "English",
+      "published_year": 1981,
+      "cover_image": "assets/books/covers/20_operative-needs-based-solution.jpg",
+      "description": "A classic work by Julie Cline",
+      "file_type": "text",
+      "file_path": "assets/books/text\\16_community-daughter.txt",
+      "content": "Content preview...",
+      "total_pages": 477,
+      "read_time": 3,
+      "rating": 4.8,
+      "reviews": [
+        {
+          "user": "User499",
+          "rating": 4,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/20"
+    },
+    {
+      "id": 21,
+      "title": "Front-line asynchronous intranet",
+      "author": {
+        "name": "Cynthia Hernandez",
+        "bio": "A brief biography of Cynthia Hernandez",
+        "profile_picture": "assets/books/covers/21_front-line-asynchronous-intran.jpg"
+      },
+      "isbn": "978-347759389",
+      "genre": [
+        "Romance",
+        "Non-Fiction",
+        "Science Fiction"
+      ],
+      "language": "English",
+      "published_year": 1860,
+      "cover_image": "assets/books/covers/21_front-line-asynchronous-intran.jpg",
+      "description": "A classic work by Cynthia Hernandez",
+      "file_type": "text",
+      "file_path": "assets/books/text\\16_republican-history.txt",
+      "content": "Content preview...",
+      "total_pages": 480,
+      "read_time": 2,
+      "rating": 4.4,
+      "reviews": [
+        {
+          "user": "User760",
+          "rating": 5,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/21"
+    },
+    {
+      "id": 22,
+      "title": "Multi-layered dedicated middleware",
+      "author": {
+        "name": "Caitlin Peterson",
+        "bio": "A brief biography of Caitlin Peterson",
+        "profile_picture": "assets/books/covers/22_multi-layered-dedicated-middle.jpg"
+      },
+      "isbn": "978-673701549",
+      "genre": [
+        "History",
+        "Fiction",
+        "Non-Fiction"
+      ],
+      "language": "English",
+      "published_year": 1845,
+      "cover_image": "assets/books/covers/22_multi-layered-dedicated-middle.jpg",
+      "description": "A classic work by Caitlin Peterson",
+      "file_type": "text",
+      "file_path": "assets/books/text\\17_business-night-call.txt",
+      "content": "Content preview...",
+      "total_pages": 441,
+      "read_time": 2,
+      "rating": 3.5,
+      "reviews": [
+        {
+          "user": "User750",
+          "rating": 3,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/22"
+    },
+    {
+      "id": 23,
+      "title": "17_no-street-together.txt",
+      "author": {
+        "name": "Unknown",
+        "bio": "A brief biography of Unknown",
+        "profile_picture": "assets/books/covers/23_17_no-street-together.txt.jpg"
+      },
+      "isbn": "978-931060359",
+      "genre": [
+        "Non-Fiction",
+        "Science Fiction"
+      ],
+      "language": "English",
+      "published_year": 1866,
+      "cover_image": "assets/books/covers/23_17_no-street-together.txt.jpg",
+      "description": "A classic work by Unknown",
+      "file_type": "text",
+      "file_path": "assets/books/text\\17_no-street-together.txt",
+      "content": "Content preview...",
+      "total_pages": 139,
+      "read_time": 5,
+      "rating": 4.3,
+      "reviews": [
+        {
+          "user": "User228",
+          "rating": 4,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/23"
+    },
+    {
+      "id": 24,
+      "title": "Public-key bottom-line intranet",
+      "author": {
+        "name": "Jacqueline Pena",
+        "bio": "A brief biography of Jacqueline Pena",
+        "profile_picture": "assets/books/covers/24_public-key-bottom-line-intrane.jpg"
+      },
+      "isbn": "978-181264845",
+      "genre": [
+        "Non-Fiction"
+      ],
+      "language": "English",
+      "published_year": 1864,
+      "cover_image": "assets/books/covers/24_public-key-bottom-line-intrane.jpg",
+      "description": "A classic work by Jacqueline Pena",
+      "file_type": "text",
+      "file_path": "assets/books/text\\17_our-leave-writer.txt",
+      "content": "Content preview...",
+      "total_pages": 272,
+      "read_time": 4,
+      "rating": 4.5,
+      "reviews": [
+        {
+          "user": "User310",
+          "rating": 4,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/24"
+    },
+    {
+      "id": 25,
+      "title": "Future-proofed 6thgeneration middleware",
+      "author": {
+        "name": "Ethan Moran",
+        "bio": "A brief biography of Ethan Moran",
+        "profile_picture": "assets/books/covers/25_future-proofed-6thgeneration-m.jpg"
+      },
+      "isbn": "978-334929991",
+      "genre": [
+        "Thriller"
+      ],
+      "language": "English",
+      "published_year": 1817,
+      "cover_image": "assets/books/covers/25_future-proofed-6thgeneration-m.jpg",
+      "description": "A classic work by Ethan Moran",
+      "file_type": "text",
+      "file_path": "assets/books/text\\18_cell-despite.txt",
+      "content": "Content preview...",
+      "total_pages": 193,
+      "read_time": 8,
+      "rating": 3.4,
+      "reviews": [
+        {
+          "user": "User115",
+          "rating": 4,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/25"
+    },
+    {
+      "id": 26,
+      "title": "18_century-physical.txt",
+      "author": {
+        "name": "Unknown",
+        "bio": "A brief biography of Unknown",
+        "profile_picture": "assets/books/covers/26_18_century-physical.txt.jpg"
+      },
+      "isbn": "978-906268282",
+      "genre": [
+        "Biography",
+        "Thriller",
+        "Mystery"
+      ],
+      "language": "English",
+      "published_year": 1847,
+      "cover_image": "assets/books/covers/26_18_century-physical.txt.jpg",
+      "description": "A classic work by Unknown",
+      "file_type": "text",
+      "file_path": "assets/books/text\\18_century-physical.txt",
+      "content": "Content preview...",
+      "total_pages": 379,
+      "read_time": 6,
+      "rating": 3.3,
+      "reviews": [
+        {
+          "user": "User644",
+          "rating": 3,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/26"
+    },
+    {
+      "id": 27,
+      "title": "Pre-emptive incremental conglomeration",
+      "author": {
+        "name": "Michael Chen Jr.",
+        "bio": "A brief biography of Michael Chen Jr.",
+        "profile_picture": "assets/books/covers/27_pre-emptive-incremental-conglo.jpg"
+      },
+      "isbn": "978-853970807",
+      "genre": [
+        "History",
+        "Mystery",
+        "Romance"
+      ],
+      "language": "English",
+      "published_year": 1985,
+      "cover_image": "assets/books/covers/27_pre-emptive-incremental-conglo.jpg",
+      "description": "A classic work by Michael Chen Jr.",
+      "file_type": "text",
+      "file_path": "assets/books/text\\18_individual.txt",
+      "content": "Content preview...",
+      "total_pages": 376,
+      "read_time": 10,
+      "rating": 3.7,
+      "reviews": [
+        {
+          "user": "User146",
+          "rating": 5,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/27"
+    },
+    {
+      "id": 28,
+      "title": "19_charge-help.txt",
+      "author": {
+        "name": "Unknown",
+        "bio": "A brief biography of Unknown",
+        "profile_picture": "assets/books/covers/28_19_charge-help.txt.jpg"
+      },
+      "isbn": "978-283622768",
+      "genre": [
+        "History",
+        "Romance"
+      ],
+      "language": "English",
+      "published_year": 2007,
+      "cover_image": "assets/books/covers/28_19_charge-help.txt.jpg",
+      "description": "A classic work by Unknown",
+      "file_type": "text",
+      "file_path": "assets/books/text\\19_charge-help.txt",
+      "content": "Content preview...",
+      "total_pages": 120,
+      "read_time": 5,
+      "rating": 4.5,
+      "reviews": [
+        {
+          "user": "User767",
+          "rating": 3,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/28"
+    },
+    {
+      "id": 29,
+      "title": "Profound tangible database",
+      "author": {
+        "name": "Tiffany Patrick",
+        "bio": "A brief biography of Tiffany Patrick",
+        "profile_picture": "assets/books/covers/29_profound-tangible-database.jpg"
+      },
+      "isbn": "978-277224495",
+      "genre": [
+        "History",
+        "Romance"
+      ],
+      "language": "English",
+      "published_year": 2006,
+      "cover_image": "assets/books/covers/29_profound-tangible-database.jpg",
+      "description": "A classic work by Tiffany Patrick",
+      "file_type": "text",
+      "file_path": "assets/books/text\\19_former-many-class.txt",
+      "content": "Content preview...",
+      "total_pages": 173,
+      "read_time": 4,
+      "rating": 4.2,
+      "reviews": [
+        {
+          "user": "User125",
+          "rating": 3,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/29"
+    },
+    {
+      "id": 30,
+      "title": "Versatile client-driven productivity",
+      "author": {
+        "name": "Kevin Oliver",
+        "bio": "A brief biography of Kevin Oliver",
+        "profile_picture": "assets/books/covers/30_versatile-client-driven-produc.jpg"
+      },
+      "isbn": "978-445315380",
+      "genre": [
+        "Biography",
+        "History"
+      ],
+      "language": "English",
+      "published_year": 1863,
+      "cover_image": "assets/books/covers/30_versatile-client-driven-produc.jpg",
+      "description": "A classic work by Kevin Oliver",
+      "file_type": "text",
+      "file_path": "assets/books/text\\19_star-forget-region.txt",
+      "content": "Content preview...",
+      "total_pages": 332,
+      "read_time": 8,
+      "rating": 3.1,
+      "reviews": [
+        {
+          "user": "User795",
+          "rating": 5,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/30"
+    },
+    {
+      "id": 31,
+      "title": "Pride and Prejudice",
+      "author": {
+        "name": "Jane Austen",
+        "bio": "A brief biography of Jane Austen",
+        "profile_picture": "assets/books/covers/31_pride-and-prejudice.jpg"
+      },
+      "isbn": "978-431323288",
+      "genre": [
+        "Thriller",
+        "Mystery"
+      ],
+      "language": "English",
+      "published_year": 1966,
+      "cover_image": "assets/books/covers/31_pride-and-prejudice.jpg",
+      "description": "A classic work by Jane Austen",
+      "file_type": "text",
+      "file_path": "assets/books/text\\1_draw-suggest.txt",
+      "content": "Content preview...",
+      "total_pages": 248,
+      "read_time": 2,
+      "rating": 5.0,
+      "reviews": [
+        {
+          "user": "User484",
+          "rating": 4,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/31"
+    },
+    {
+      "id": 32,
+      "title": "1_per-community.txt",
+      "author": {
+        "name": "Unknown",
+        "bio": "A brief biography of Unknown",
+        "profile_picture": "assets/books/covers/32_1_per-community.txt.jpg"
+      },
+      "isbn": "978-375675928",
+      "genre": [
+        "Fantasy",
+        "Science Fiction"
+      ],
+      "language": "English",
+      "published_year": 1977,
+      "cover_image": "assets/books/covers/32_1_per-community.txt.jpg",
+      "description": "A classic work by Unknown",
+      "file_type": "text",
+      "file_path": "assets/books/text\\1_per-community.txt",
+      "content": "Content preview...",
+      "total_pages": 351,
+      "read_time": 8,
+      "rating": 4.3,
+      "reviews": [
+        {
+          "user": "User874",
+          "rating": 3,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/32"
+    },
+    {
+      "id": 33,
+      "title": "Pride and Prejudice",
+      "author": {
+        "name": "Jane Austen",
+        "bio": "A brief biography of Jane Austen",
+        "profile_picture": "assets/books/covers/33_pride-and-prejudice.jpg"
+      },
+      "isbn": "978-267728434",
+      "genre": [
+        "Mystery",
+        "Biography",
+        "Non-Fiction"
+      ],
+      "language": "English",
+      "published_year": 1814,
+      "cover_image": "assets/books/covers/33_pride-and-prejudice.jpg",
+      "description": "A classic work by Jane Austen",
+      "file_type": "text",
+      "file_path": "assets/books/text\\1_result-instead.txt",
+      "content": "Content preview...",
+      "total_pages": 192,
+      "read_time": 9,
+      "rating": 4.2,
+      "reviews": [
+        {
+          "user": "User851",
+          "rating": 3,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/33"
+    },
+    {
+      "id": 34,
+      "title": "20_and-whatever-wear.txt",
+      "author": {
+        "name": "Unknown",
+        "bio": "A brief biography of Unknown",
+        "profile_picture": "assets/books/covers/34_20_and-whatever-wear.txt.jpg"
+      },
+      "isbn": "978-883180545",
+      "genre": [
+        "Science",
+        "Science Fiction"
+      ],
+      "language": "English",
+      "published_year": 1901,
+      "cover_image": "assets/books/covers/34_20_and-whatever-wear.txt.jpg",
+      "description": "A classic work by Unknown",
+      "file_type": "text",
+      "file_path": "assets/books/text\\20_and-whatever-wear.txt",
+      "content": "Content preview...",
+      "total_pages": 389,
+      "read_time": 2,
+      "rating": 4.0,
+      "reviews": [
+        {
+          "user": "User386",
+          "rating": 3,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/34"
+    },
+    {
+      "id": 35,
+      "title": "Re-engineered 24/7 benchmark",
+      "author": {
+        "name": "Russell Meyers",
+        "bio": "A brief biography of Russell Meyers",
+        "profile_picture": "assets/books/covers/35_re-engineered-24/7-benchmark.jpg"
+      },
+      "isbn": "978-838487045",
+      "genre": [
+        "Science",
+        "Mystery",
+        "History"
+      ],
+      "language": "English",
+      "published_year": 1947,
+      "cover_image": "assets/books/covers/35_re-engineered-24/7-benchmark.jpg",
+      "description": "A classic work by Russell Meyers",
+      "file_type": "text",
+      "file_path": "assets/books/text\\20_hear-all-fight-the.txt",
+      "content": "Content preview...",
+      "total_pages": 190,
+      "read_time": 8,
+      "rating": 4.9,
+      "reviews": [
+        {
+          "user": "User101",
+          "rating": 5,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/35"
+    },
+    {
+      "id": 36,
+      "title": "Secured needs-based methodology",
+      "author": {
+        "name": "Marc Richard",
+        "bio": "A brief biography of Marc Richard",
+        "profile_picture": "assets/books/covers/36_secured-needs-based-methodolog.jpg"
+      },
+      "isbn": "978-570843541",
+      "genre": [
+        "Non-Fiction",
+        "Biography"
+      ],
+      "language": "English",
+      "published_year": 1998,
+      "cover_image": "assets/books/covers/36_secured-needs-based-methodolog.jpg",
+      "description": "A classic work by Marc Richard",
+      "file_type": "text",
+      "file_path": "assets/books/text\\20_story-moment-film.txt",
+      "content": "Content preview...",
+      "total_pages": 142,
+      "read_time": 9,
+      "rating": 4.2,
+      "reviews": [
+        {
+          "user": "User958",
+          "rating": 4,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/36"
+    },
+    {
+      "id": 37,
+      "title": "Frankenstein",
+      "author": {
+        "name": "Mary Shelley",
+        "bio": "A brief biography of Mary Shelley",
+        "profile_picture": "assets/books/covers/37_frankenstein.jpg"
+      },
+      "isbn": "978-344671179",
+      "genre": [
+        "Romance",
+        "Fiction"
+      ],
+      "language": "English",
+      "published_year": 2001,
+      "cover_image": "assets/books/covers/37_frankenstein.jpg",
+      "description": "A classic work by Mary Shelley",
+      "file_type": "text",
+      "file_path": "assets/books/text\\2_act-measure-surface.txt",
+      "content": "Content preview...",
+      "total_pages": 263,
+      "read_time": 5,
+      "rating": 3.7,
+      "reviews": [
+        {
+          "user": "User959",
+          "rating": 4,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/37"
+    },
+    {
+      "id": 38,
+      "title": "Frankenstein",
+      "author": {
+        "name": "Mary Shelley",
+        "bio": "A brief biography of Mary Shelley",
+        "profile_picture": "assets/books/covers/38_frankenstein.jpg"
+      },
+      "isbn": "978-488817655",
+      "genre": [
+        "Biography",
+        "Fiction"
+      ],
+      "language": "English",
+      "published_year": 1962,
+      "cover_image": "assets/books/covers/38_frankenstein.jpg",
+      "description": "A classic work by Mary Shelley",
+      "file_type": "text",
+      "file_path": "assets/books/text\\2_local-tend-tough.txt",
+      "content": "Content preview...",
+      "total_pages": 458,
+      "read_time": 2,
+      "rating": 3.9,
+      "reviews": [
+        {
+          "user": "User64",
+          "rating": 4,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/38"
+    },
+    {
+      "id": 39,
+      "title": "2_month-talk-song.txt",
+      "author": {
+        "name": "Unknown",
+        "bio": "A brief biography of Unknown",
+        "profile_picture": "assets/books/covers/39_2_month-talk-song.txt.jpg"
+      },
+      "isbn": "978-758895401",
+      "genre": [
+        "Science Fiction"
+      ],
+      "language": "English",
+      "published_year": 1867,
+      "cover_image": "assets/books/covers/39_2_month-talk-song.txt.jpg",
+      "description": "A classic work by Unknown",
+      "file_type": "text",
+      "file_path": "assets/books/text\\2_month-talk-song.txt",
+      "content": "Content preview...",
+      "total_pages": 462,
+      "read_time": 4,
+      "rating": 4.2,
+      "reviews": [
+        {
+          "user": "User543",
+          "rating": 3,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/39"
+    },
+    {
+      "id": 40,
+      "title": "3_bag-character.txt",
+      "author": {
+        "name": "Unknown",
+        "bio": "A brief biography of Unknown",
+        "profile_picture": "assets/books/covers/40_3_bag-character.txt.jpg"
+      },
+      "isbn": "978-807125528",
+      "genre": [
+        "Fantasy",
+        "History",
+        "Fiction"
+      ],
+      "language": "English",
+      "published_year": 1885,
+      "cover_image": "assets/books/covers/40_3_bag-character.txt.jpg",
+      "description": "A classic work by Unknown",
+      "file_type": "text",
+      "file_path": "assets/books/text\\3_bag-character.txt",
+      "content": "Content preview...",
+      "total_pages": 255,
+      "read_time": 7,
+      "rating": 5.0,
+      "reviews": [
+        {
+          "user": "User154",
+          "rating": 4,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/40"
+    },
+    {
+      "id": 41,
+      "title": "Alice's Adventures in Wonderland",
+      "author": {
+        "name": "Lewis Carroll",
+        "bio": "A brief biography of Lewis Carroll",
+        "profile_picture": "assets/books/covers/41_alice's-adventures-in-wonderla.jpg"
+      },
+      "isbn": "978-444802565",
+      "genre": [
+        "Non-Fiction",
+        "History",
+        "Fiction"
+      ],
+      "language": "English",
+      "published_year": 1969,
+      "cover_image": "assets/books/covers/41_alice's-adventures-in-wonderla.jpg",
+      "description": "A classic work by Lewis Carroll",
+      "file_type": "text",
+      "file_path": "assets/books/text\\3_quite-over-develop.txt",
+      "content": "Content preview...",
+      "total_pages": 232,
+      "read_time": 10,
+      "rating": 4.5,
+      "reviews": [
+        {
+          "user": "User717",
+          "rating": 5,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/41"
+    },
+    {
+      "id": 42,
+      "title": "Alice's Adventures in Wonderland",
+      "author": {
+        "name": "Lewis Carroll",
+        "bio": "A brief biography of Lewis Carroll",
+        "profile_picture": "assets/books/covers/42_alice's-adventures-in-wonderla.jpg"
+      },
+      "isbn": "978-485018785",
+      "genre": [
+        "Science",
+        "History"
+      ],
+      "language": "English",
+      "published_year": 1894,
+      "cover_image": "assets/books/covers/42_alice's-adventures-in-wonderla.jpg",
+      "description": "A classic work by Lewis Carroll",
+      "file_type": "text",
+      "file_path": "assets/books/text\\3_throughout-probably.txt",
+      "content": "Content preview...",
+      "total_pages": 313,
+      "read_time": 3,
+      "rating": 4.3,
+      "reviews": [
+        {
+          "user": "User523",
+          "rating": 5,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/42"
+    },
+    {
+      "id": 43,
+      "title": "4_network-stand.txt",
+      "author": {
+        "name": "Unknown",
+        "bio": "A brief biography of Unknown",
+        "profile_picture": "assets/books/covers/43_4_network-stand.txt.jpg"
+      },
+      "isbn": "978-101668328",
+      "genre": [
+        "Biography"
+      ],
+      "language": "English",
+      "published_year": 1826,
+      "cover_image": "assets/books/covers/43_4_network-stand.txt.jpg",
+      "description": "A classic work by Unknown",
+      "file_type": "text",
+      "file_path": "assets/books/text\\4_network-stand.txt",
+      "content": "Content preview...",
+      "total_pages": 333,
+      "read_time": 5,
+      "rating": 4.9,
+      "reviews": [
+        {
+          "user": "User824",
+          "rating": 3,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/43"
+    },
+    {
+      "id": 44,
+      "title": "The Adventures of Sherlock Holmes",
+      "author": {
+        "name": "Arthur Conan Doyle",
+        "bio": "A brief biography of Arthur Conan Doyle",
+        "profile_picture": "assets/books/covers/44_the-adventures-of-sherlock-hol.jpg"
+      },
+      "isbn": "978-363281196",
+      "genre": [
+        "History",
+        "Non-Fiction"
+      ],
+      "language": "English",
+      "published_year": 1871,
+      "cover_image": "assets/books/covers/44_the-adventures-of-sherlock-hol.jpg",
+      "description": "A classic work by Arthur Conan Doyle",
+      "file_type": "text",
+      "file_path": "assets/books/text\\4_particularly-area.txt",
+      "content": "Content preview...",
+      "total_pages": 270,
+      "read_time": 2,
+      "rating": 3.7,
+      "reviews": [
+        {
+          "user": "User760",
+          "rating": 4,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/44"
+    },
+    {
+      "id": 45,
+      "title": "The Adventures of Sherlock Holmes",
+      "author": {
+        "name": "Arthur Conan Doyle",
+        "bio": "A brief biography of Arthur Conan Doyle",
+        "profile_picture": "assets/books/covers/45_the-adventures-of-sherlock-hol.jpg"
+      },
+      "isbn": "978-300261444",
+      "genre": [
+        "Non-Fiction",
+        "Biography",
+        "History"
+      ],
+      "language": "English",
+      "published_year": 1872,
+      "cover_image": "assets/books/covers/45_the-adventures-of-sherlock-hol.jpg",
+      "description": "A classic work by Arthur Conan Doyle",
+      "file_type": "text",
+      "file_path": "assets/books/text\\4_result-but-role-red.txt",
+      "content": "Content preview...",
+      "total_pages": 312,
+      "read_time": 5,
+      "rating": 3.2,
+      "reviews": [
+        {
+          "user": "User533",
+          "rating": 5,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/45"
+    },
+    {
+      "id": 46,
+      "title": "Moby Dick",
+      "author": {
+        "name": "Herman Melville",
+        "bio": "A brief biography of Herman Melville",
+        "profile_picture": "assets/books/covers/46_moby-dick.jpg"
+      },
+      "isbn": "978-575718158",
+      "genre": [
+        "Romance",
+        "Fiction"
+      ],
+      "language": "English",
+      "published_year": 1881,
+      "cover_image": "assets/books/covers/46_moby-dick.jpg",
+      "description": "A classic work by Herman Melville",
+      "file_type": "text",
+      "file_path": "assets/books/text\\5_relationship-side.txt",
+      "content": "Content preview...",
+      "total_pages": 284,
+      "read_time": 5,
+      "rating": 5.0,
+      "reviews": [
+        {
+          "user": "User923",
+          "rating": 4,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/46"
+    },
+    {
+      "id": 47,
+      "title": "Moby Dick",
+      "author": {
+        "name": "Herman Melville",
+        "bio": "A brief biography of Herman Melville",
+        "profile_picture": "assets/books/covers/47_moby-dick.jpg"
+      },
+      "isbn": "978-984791590",
+      "genre": [
+        "Fantasy",
+        "Science"
+      ],
+      "language": "English",
+      "published_year": 1822,
+      "cover_image": "assets/books/covers/47_moby-dick.jpg",
+      "description": "A classic work by Herman Melville",
+      "file_type": "text",
+      "file_path": "assets/books/text\\5_represent-inside.txt",
+      "content": "Content preview...",
+      "total_pages": 236,
+      "read_time": 3,
+      "rating": 4.1,
+      "reviews": [
+        {
+          "user": "User584",
+          "rating": 5,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/47"
+    },
+    {
+      "id": 48,
+      "title": "5_too-pull-senior.txt",
+      "author": {
+        "name": "Unknown",
+        "bio": "A brief biography of Unknown",
+        "profile_picture": "assets/books/covers/48_5_too-pull-senior.txt.jpg"
+      },
+      "isbn": "978-173030503",
+      "genre": [
+        "Romance",
+        "Science"
+      ],
+      "language": "English",
+      "published_year": 1848,
+      "cover_image": "assets/books/covers/48_5_too-pull-senior.txt.jpg",
+      "description": "A classic work by Unknown",
+      "file_type": "text",
+      "file_path": "assets/books/text\\5_too-pull-senior.txt",
+      "content": "Content preview...",
+      "total_pages": 131,
+      "read_time": 5,
+      "rating": 3.6,
+      "reviews": [
+        {
+          "user": "User386",
+          "rating": 4,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/48"
+    },
+    {
+      "id": 49,
+      "title": "6_citizen-brother.txt",
+      "author": {
+        "name": "Unknown",
+        "bio": "A brief biography of Unknown",
+        "profile_picture": "assets/books/covers/49_6_citizen-brother.txt.jpg"
+      },
+      "isbn": "978-894362329",
+      "genre": [
+        "Fantasy"
+      ],
+      "language": "English",
+      "published_year": 1890,
+      "cover_image": "assets/books/covers/49_6_citizen-brother.txt.jpg",
+      "description": "A classic work by Unknown",
+      "file_type": "text",
+      "file_path": "assets/books/text\\6_citizen-brother.txt",
+      "content": "Content preview...",
+      "total_pages": 466,
+      "read_time": 10,
+      "rating": 3.9,
+      "reviews": [
+        {
+          "user": "User476",
+          "rating": 3,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/49"
+    },
+    {
+      "id": 50,
+      "title": "A Tale of Two Cities",
+      "author": {
+        "name": "Charles Dickens",
+        "bio": "A brief biography of Charles Dickens",
+        "profile_picture": "assets/books/covers/50_a-tale-of-two-cities.jpg"
+      },
+      "isbn": "978-191145417",
+      "genre": [
+        "History",
+        "Science Fiction"
+      ],
+      "language": "English",
+      "published_year": 1933,
+      "cover_image": "assets/books/covers/50_a-tale-of-two-cities.jpg",
+      "description": "A classic work by Charles Dickens",
+      "file_type": "text",
+      "file_path": "assets/books/text\\6_simply-finish.txt",
+      "content": "Content preview...",
+      "total_pages": 232,
+      "read_time": 9,
+      "rating": 3.8,
+      "reviews": [
+        {
+          "user": "User232",
+          "rating": 4,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/50"
+    },
+    {
+      "id": 51,
+      "title": "A Tale of Two Cities",
+      "author": {
+        "name": "Charles Dickens",
+        "bio": "A brief biography of Charles Dickens",
+        "profile_picture": "assets/books/covers/51_a-tale-of-two-cities.jpg"
+      },
+      "isbn": "978-658888863",
+      "genre": [
+        "Science",
+        "Thriller"
+      ],
+      "language": "English",
+      "published_year": 1997,
+      "cover_image": "assets/books/covers/51_a-tale-of-two-cities.jpg",
+      "description": "A classic work by Charles Dickens",
+      "file_type": "text",
+      "file_path": "assets/books/text\\6_write-kid-federal-i.txt",
+      "content": "Content preview...",
+      "total_pages": 388,
+      "read_time": 5,
+      "rating": 4.4,
+      "reviews": [
+        {
+          "user": "User159",
+          "rating": 4,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/51"
+    },
+    {
+      "id": 52,
+      "title": "7_head-carry-report.txt",
+      "author": {
+        "name": "Unknown",
+        "bio": "A brief biography of Unknown",
+        "profile_picture": "assets/books/covers/52_7_head-carry-report.txt.jpg"
+      },
+      "isbn": "978-558682645",
+      "genre": [
+        "Romance",
+        "Mystery",
+        "History"
+      ],
+      "language": "English",
+      "published_year": 1913,
+      "cover_image": "assets/books/covers/52_7_head-carry-report.txt.jpg",
+      "description": "A classic work by Unknown",
+      "file_type": "text",
+      "file_path": "assets/books/text\\7_head-carry-report.txt",
+      "content": "Content preview...",
+      "total_pages": 252,
+      "read_time": 2,
+      "rating": 3.5,
+      "reviews": [
+        {
+          "user": "User221",
+          "rating": 3,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/52"
+    },
+    {
+      "id": 53,
+      "title": "The Yellow Wallpaper",
+      "author": {
+        "name": "Charlotte Perkins Gilman",
+        "bio": "A brief biography of Charlotte Perkins Gilman",
+        "profile_picture": "assets/books/covers/53_the-yellow-wallpaper.jpg"
+      },
+      "isbn": "978-942006039",
+      "genre": [
+        "History",
+        "Science Fiction",
+        "Mystery"
+      ],
+      "language": "English",
+      "published_year": 1898,
+      "cover_image": "assets/books/covers/53_the-yellow-wallpaper.jpg",
+      "description": "A classic work by Charlotte Perkins Gilman",
+      "file_type": "text",
+      "file_path": "assets/books/text\\7_leave-tax-and-sort.txt",
+      "content": "Content preview...",
+      "total_pages": 274,
+      "read_time": 2,
+      "rating": 3.7,
+      "reviews": [
+        {
+          "user": "User547",
+          "rating": 4,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/53"
+    },
+    {
+      "id": 54,
+      "title": "The Yellow Wallpaper",
+      "author": {
+        "name": "Charlotte Perkins Gilman",
+        "bio": "A brief biography of Charlotte Perkins Gilman",
+        "profile_picture": "assets/books/covers/54_the-yellow-wallpaper.jpg"
+      },
+      "isbn": "978-350452298",
+      "genre": [
+        "Science"
+      ],
+      "language": "English",
+      "published_year": 2014,
+      "cover_image": "assets/books/covers/54_the-yellow-wallpaper.jpg",
+      "description": "A classic work by Charlotte Perkins Gilman",
+      "file_type": "text",
+      "file_path": "assets/books/text\\7_speech-reach-ready.txt",
+      "content": "Content preview...",
+      "total_pages": 355,
+      "read_time": 5,
+      "rating": 4.7,
+      "reviews": [
+        {
+          "user": "User580",
+          "rating": 3,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/54"
+    },
+    {
+      "id": 55,
+      "title": "8_explain-generation.txt",
+      "author": {
+        "name": "Unknown",
+        "bio": "A brief biography of Unknown",
+        "profile_picture": "assets/books/covers/55_8_explain-generation.txt.jpg"
+      },
+      "isbn": "978-482779500",
+      "genre": [
+        "Fantasy",
+        "Non-Fiction",
+        "Mystery"
+      ],
+      "language": "English",
+      "published_year": 1825,
+      "cover_image": "assets/books/covers/55_8_explain-generation.txt.jpg",
+      "description": "A classic work by Unknown",
+      "file_type": "text",
+      "file_path": "assets/books/text\\8_explain-generation.txt",
+      "content": "Content preview...",
+      "total_pages": 414,
+      "read_time": 3,
+      "rating": 3.0,
+      "reviews": [
+        {
+          "user": "User946",
+          "rating": 3,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/55"
+    },
+    {
+      "id": 56,
+      "title": "A Modest Proposal",
+      "author": {
+        "name": "Jonathan Swift",
+        "bio": "A brief biography of Jonathan Swift",
+        "profile_picture": "assets/books/covers/56_a-modest-proposal.jpg"
+      },
+      "isbn": "978-257049232",
+      "genre": [
+        "Romance"
+      ],
+      "language": "English",
+      "published_year": 1819,
+      "cover_image": "assets/books/covers/56_a-modest-proposal.jpg",
+      "description": "A classic work by Jonathan Swift",
+      "file_type": "text",
+      "file_path": "assets/books/text\\8_pressure.txt",
+      "content": "Content preview...",
+      "total_pages": 460,
+      "read_time": 8,
+      "rating": 3.1,
+      "reviews": [
+        {
+          "user": "User715",
+          "rating": 3,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/56"
+    },
+    {
+      "id": 57,
+      "title": "A Modest Proposal",
+      "author": {
+        "name": "Jonathan Swift",
+        "bio": "A brief biography of Jonathan Swift",
+        "profile_picture": "assets/books/covers/57_a-modest-proposal.jpg"
+      },
+      "isbn": "978-537691937",
+      "genre": [
+        "History",
+        "Science Fiction",
+        "Romance"
+      ],
+      "language": "English",
+      "published_year": 1934,
+      "cover_image": "assets/books/covers/57_a-modest-proposal.jpg",
+      "description": "A classic work by Jonathan Swift",
+      "file_type": "text",
+      "file_path": "assets/books/text\\8_product-kind-sister.txt",
+      "content": "Content preview...",
+      "total_pages": 396,
+      "read_time": 7,
+      "rating": 4.0,
+      "reviews": [
+        {
+          "user": "User784",
+          "rating": 3,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/57"
+    },
+    {
+      "id": 58,
+      "title": "The Adventures of Tom Sawyer",
+      "author": {
+        "name": "Mark Twain",
+        "bio": "A brief biography of Mark Twain",
+        "profile_picture": "assets/books/covers/58_the-adventures-of-tom-sawyer.jpg"
+      },
+      "isbn": "978-790211210",
+      "genre": [
+        "Science Fiction",
+        "History",
+        "Science"
+      ],
+      "language": "English",
+      "published_year": 1883,
+      "cover_image": "assets/books/covers/58_the-adventures-of-tom-sawyer.jpg",
+      "description": "A classic work by Mark Twain",
+      "file_type": "text",
+      "file_path": "assets/books/text\\9_art-civil-president.txt",
+      "content": "Content preview...",
+      "total_pages": 446,
+      "read_time": 8,
+      "rating": 3.6,
+      "reviews": [
+        {
+          "user": "User651",
+          "rating": 5,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/58"
+    },
+    {
+      "id": 59,
+      "title": "The Adventures of Tom Sawyer",
+      "author": {
+        "name": "Mark Twain",
+        "bio": "A brief biography of Mark Twain",
+        "profile_picture": "assets/books/covers/59_the-adventures-of-tom-sawyer.jpg"
+      },
+      "isbn": "978-607571421",
+      "genre": [
+        "Science Fiction"
+      ],
+      "language": "English",
+      "published_year": 1802,
+      "cover_image": "assets/books/covers/59_the-adventures-of-tom-sawyer.jpg",
+      "description": "A classic work by Mark Twain",
+      "file_type": "text",
+      "file_path": "assets/books/text\\9_goal-somebody-win.txt",
+      "content": "Content preview...",
+      "total_pages": 274,
+      "read_time": 6,
+      "rating": 3.1,
+      "reviews": [
+        {
+          "user": "User210",
+          "rating": 5,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/59"
+    },
+    {
+      "id": 60,
+      "title": "9_summer-another.txt",
+      "author": {
+        "name": "Unknown",
+        "bio": "A brief biography of Unknown",
+        "profile_picture": "assets/books/covers/60_9_summer-another.txt.jpg"
+      },
+      "isbn": "978-802135915",
+      "genre": [
+        "Biography",
+        "Romance"
+      ],
+      "language": "English",
+      "published_year": 1814,
+      "cover_image": "assets/books/covers/60_9_summer-another.txt.jpg",
+      "description": "A classic work by Unknown",
+      "file_type": "text",
+      "file_path": "assets/books/text\\9_summer-another.txt",
+      "content": "Content preview...",
+      "total_pages": 485,
+      "read_time": 2,
+      "rating": 3.4,
+      "reviews": [
+        {
+          "user": "User420",
+          "rating": 3,
+          "comment": "Great book!"
+        }
+      ],
+      "availability": "available",
+      "bookmark": null,
+      "audio_version": null,
+      "purchase_link": "https://example.com/store/60"
+    }
+  ],
+  "metadata": {
+    "total_books": 60,
+    "last_updated": "2025-04-03",
+    "version": "1.0"
+  }
+}

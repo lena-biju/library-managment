@@ -1,0 +1,206 @@
+.auth-page {
+  min-height: 100vh;
+  background-color: #FFF3E0;
+  padding: 2rem 0;
+}
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.auth-card {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(139, 69, 19, 0.1);
+  text-align: center;
+}
+
+.paper-effect {
+  background: linear-gradient(to bottom right, #ffffff, #FFF9F0);
+  border: 1px solid #E6D5C3;
+  box-shadow: 0 4px 8px rgba(139, 69, 19, 0.15);
+}
+
+.auth-card h1 {
+  color: #4A2B0F;
+  margin-bottom: 0.5rem;
+  font-size: 2.2rem;
+  font-weight: 600;
+}
+
+.auth-subtitle {
+  color: #8B4513;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #4A2B0F;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.875rem;
+  border: 2px solid #E6D5C3;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: #FFF9F0;
+  color: #4A2B0F;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #8B4513;
+  box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+  background-color: #fff;
+}
+
+.form-input.error {
+  border-color: #c0392b;
+  background-color: #fff;
+}
+
+.error-message {
+  color: #c0392b;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #8B4513;
+  font-size: 0.95rem;
+}
+
+.forgot-password {
+  color: #8B4513;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.forgot-password:hover {
+  color: #4A2B0F;
+  text-decoration: underline;
+}
+
+.auth-btn {
+  width: 100%;
+  padding: 0.875rem;
+  background-color: #8B4513;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.auth-btn:hover {
+  background-color: #6B3410;
+  transform: translateY(-2px);
+}
+
+.auth-link {
+  margin-top: 1.75rem;
+  color: #8B4513;
+  font-size: 1rem;
+}
+
+.auth-link a {
+  color: #4A2B0F;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.auth-link a:hover {
+  color: #8B4513;
+  text-decoration: underline;
+}
+
+.payment-section {
+  text-align: center;
+  padding: 1.5rem 0;
+}
+
+.payment-section h2 {
+  color: #4A2B0F;
+  margin-bottom: 1rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.fee-amount {
+  font-size: 2.75rem;
+  color: #8B4513;
+  font-weight: bold;
+  margin: 1.5rem 0;
+}
+
+.fee-description {
+  color: #4A2B0F;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+.back-btn {
+  width: 100%;
+  padding: 0.875rem;
+  background-color: #E6D5C3;
+  color: #4A2B0F;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1.25rem;
+}
+
+.back-btn:hover {
+  background-color: #D4C4B2;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 1.75rem;
+  }
+
+  .form-options {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .fee-amount {
+    font-size: 2.25rem;
+  }
+} 

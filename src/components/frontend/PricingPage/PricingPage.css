@@ -1,0 +1,99 @@
+.pricing-page {
+  min-height: 100vh;
+  background-color: #FFF3E0;
+  padding-top: 100px;
+}
+
+.pricing-page h1 {
+  color: #4A2B0F;
+  margin-bottom: 3rem;
+  font-size: 2.5rem;
+}
+
+.pricing-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pricing-card {
+  flex: 1;
+  max-width: 400px;
+  padding: 2rem;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.pricing-card:hover {
+  transform: translateY(-10px);
+}
+
+.pricing-card h2 {
+  color: #4A2B0F;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.price {
+  font-size: 2.5rem;
+  color: #8B4513;
+  margin-bottom: 2rem;
+}
+
+.price span {
+  font-size: 1rem;
+  color: #6B4423;
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+}
+
+.features li {
+  color: #6B4423;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #E8E8E8;
+}
+
+.features li:last-child {
+  border-bottom: none;
+}
+
+.subscribe-btn {
+  background-color: #8B4513;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.subscribe-btn:hover {
+  background-color: #6B3410;
+}
+
+@media (max-width: 768px) {
+  .pricing-grid {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .pricing-card {
+    width: 100%;
+  }
+
+  .pricing-page h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+} 
