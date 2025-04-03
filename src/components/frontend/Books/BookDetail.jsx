@@ -11,6 +11,9 @@ const BookDetail = () => {
   const [book, setBook] = useState(null);
   const [showLoginAlert, setShowLoginAlert] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const [bookContent, setBookContent] = useState('');
+  const [showContent, setShowContent] = useState(false);
+  const [userTransactions, setUserTransactions] = useState({ purchased: [], rented: [] });
 
   useEffect(() => {
     // Get current user from localStorage
@@ -19,6 +22,10 @@ const BookDetail = () => {
       try {
         const user = JSON.parse(userStr);
         setCurrentUser(user);
+        
+        // Get user's transactions
+        const transactions = JSON.parse(localStorage.getItem('userTransactions') || '{}');
+        setUserTransactions(transactions[user.phone] || { purchased: [], rented: [] });
       } catch (e) {
         console.error('Error parsing user data:', e);
       }
@@ -39,11 +46,49 @@ const BookDetail = () => {
           rentPrice: 9.99,
           category: bookData.genre.join(', ')
         });
+
+        // Check if user has access to this book
+        if (currentUser) {
+          const hasAccess = userTransactions.purchased.some(t => t.bookId === bookData.id) ||
+                           userTransactions.rented.some(t => t.bookId === bookData.id);
+          if (hasAccess) {
+            loadBookContent(bookData.title);
+          }
+        }
       }
     };
 
     fetchBook();
-  }, [id]);
+  }, [id, currentUser, userTransactions]);
+
+  const loadBookContent = async (title) => {
+    try {
+      const response = await fetch(`/assets/books/txt/${title.toLowerCase().replace(/ /g, '-')}.txt`);
+      const text = await response.text();
+      setBookContent(text);
+    } catch (error) {
+      console.error('Error loading book content:', error);
+      setBookContent('Error loading book content. Please try again later.');
+    }
+  };
+
+  const handleReadNow = () => {
+    if (!currentUser) {
+      alert('Please login to read this book.');
+      navigate('/login');
+      return;
+    }
+
+    const hasAccess = userTransactions.purchased.some(t => t.bookId === parseInt(id)) ||
+                     userTransactions.rented.some(t => t.bookId === parseInt(id));
+
+    if (!hasAccess) {
+      alert('Please purchase or rent this book to read it.');
+      return;
+    }
+
+    setShowContent(true);
+  };
 
   const checkUserStatus = () => {
     // Check if user exists in localStorage
@@ -86,6 +131,11 @@ const BookDetail = () => {
     return <div className="loading">Loading...</div>;
   }
 
+  const hasAccess = currentUser && (
+    userTransactions.purchased.some(t => t.bookId === parseInt(id)) ||
+    userTransactions.rented.some(t => t.bookId === parseInt(id))
+  );
+
   return (
     <div className="book-detail-page">
       <Navigation />
@@ -101,18 +151,29 @@ const BookDetail = () => {
           <div className="book-image-section">
             <img src={book.coverImage} alt={book.title} className="book-cover" />
             <div className="book-actions">
-              <button 
-                className="action-btn buy-btn"
-                onClick={() => handleAction('buy')}
-              >
-                Buy - ${book.price}
-              </button>
-              <button 
-                className="action-btn rent-btn"
-                onClick={() => handleAction('rent')}
-              >
-                Rent - ${book.rentPrice}/month
-              </button>
+              {hasAccess ? (
+                <button 
+                  className="action-btn read-btn"
+                  onClick={handleReadNow}
+                >
+                  Read Now
+                </button>
+              ) : (
+                <>
+                  <button 
+                    className="action-btn buy-btn"
+                    onClick={() => handleAction('buy')}
+                  >
+                    Buy - ${book.price}
+                  </button>
+                  <button 
+                    className="action-btn rent-btn"
+                    onClick={() => handleAction('rent')}
+                  >
+                    Rent - ${book.rentPrice}/month
+                  </button>
+                </>
+              )}
             </div>
           </div>
 
@@ -133,25 +194,41 @@ const BookDetail = () => {
               <p>{book.description}</p>
             </div>
 
-            <div className="membership-note">
-              <h3>Membership Benefits</h3>
-              {currentUser ? (
-                <div className="user-welcome">
-                  <p>Welcome, {currentUser.name}!</p>
-                  <p>Enjoy our full library of books as a registered member.</p>
+            {hasAccess && showContent ? (
+              <div className="book-content">
+                <h3>Book Content</h3>
+                <div className="content-container">
+                  {bookContent.split('\n').map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
+                  ))}
                 </div>
-              ) : (
-                <>
-                  <p>Become a member to access our full library of books! Registration fee: $5.99</p>
-                  <button 
-                    className="register-btn"
-                    onClick={() => navigate('/signup')}
-                  >
-                    Register Now
-                  </button>
-                </>
-              )}
-            </div>
+              </div>
+            ) : (
+              <div className="membership-note">
+                <h3>Access Information</h3>
+                {currentUser ? (
+                  hasAccess ? (
+                    <div className="user-welcome">
+                      <p>Click "Read Now" to start reading!</p>
+                    </div>
+                  ) : (
+                    <div className="user-welcome">
+                      <p>Purchase or rent this book to start reading.</p>
+                    </div>
+                  )
+                ) : (
+                  <>
+                    <p>Login or register to access our library of books!</p>
+                    <button 
+                      className="register-btn"
+                      onClick={() => navigate('/signup')}
+                    >
+                      Register Now
+                    </button>
+                  </>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </main>
