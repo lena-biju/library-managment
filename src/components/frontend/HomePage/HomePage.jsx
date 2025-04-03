@@ -2,72 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 import Footer from '../Footer/Footer';
+import { getFeaturedBooks, getRecommendedBooks, getAllGenres, getBooks } from '../../../booksData';
 import './HomePage.css';
 
 const HomePage = () => {
-  const categories = ['ADVENTURE', 'ROMANCE', 'BIOPIC', 'POEM', 'SCI-FI', '18+', 'FANTASY', 'HORROR'];
-
-  const featuredBooks = [
-    {
-      id: 1,
-      title: 'ALONE',
-      coverImage: '/images/books/alone.jpg',
-      category: 'ADVENTURE'
-    },
-    {
-      id: 2,
-      title: "DON'T GO THERE",
-      coverImage: '/images/books/dont-go-there.jpg',
-      category: 'HORROR'
-    },
-    {
-      id: 3,
-      title: 'THE MARTIAN',
-      coverImage: '/images/books/the-martian.jpg',
-      category: 'SCI-FI'
-    },
-    {
-      id: 4,
-      title: 'DEEP NIGHT',
-      coverImage: '/images/books/deep-night.jpg',
-      category: 'HORROR'
-    },
-    {
-      id: 5,
-      title: 'AFRICA RISEN',
-      coverImage: '/images/books/africa-risen.jpg',
-      category: 'FANTASY'
-    }
-  ];
-
-  const bookCards = Array(12).fill(null).map((_, index) => ({
-    id: index + 10,
-    title: 'Book Name',
-    description: 'Description',
-  }));
-
-  const recommendedBooks = [
-    {
-      id: 6,
-      title: 'SENTINEL',
-      coverImage: '/images/books/sentinel.jpg',
-    },
-    {
-      id: 7,
-      title: 'HARRY POTTER',
-      coverImage: '/images/books/harry-potter.jpg',
-    },
-    {
-      id: 8,
-      title: 'SWAMI',
-      coverImage: '/images/books/swami.jpg',
-    },
-    {
-      id: 9,
-      title: 'THE HUNTING GROUND',
-      coverImage: '/images/books/hunting-ground.jpg',
-    }
-  ];
+  const categories = getAllGenres();
+  const featuredBooks = getFeaturedBooks();
+  const recommendedBooks = getRecommendedBooks();
+  const allBooks = getBooks();
 
   return (
     <div className="home-page">
@@ -101,7 +43,7 @@ const HomePage = () => {
         </section>
 
         <section className="book-cards-grid">
-          {bookCards.map(book => (
+          {allBooks.slice(0, 12).map(book => (
             <Link to={`/book/${book.id}`} key={book.id} className="book-card paper-effect">
               <div className="book-info">
                 <h3>{book.title}</h3>
@@ -114,25 +56,15 @@ const HomePage = () => {
           ))}
         </section>
 
-        <section className="recommended-section">
-          <div className="recommended-books">
+        <section className="recommended-books-section">
+          <h2>Recommended Books</h2>
+          <div className="recommended-books-container">
             {recommendedBooks.map(book => (
               <Link to={`/book/${book.id}`} key={book.id} className="recommended-book-card">
                 <img src={book.coverImage} alt={book.title} />
+                <h3>{book.title}</h3>
               </Link>
             ))}
-          </div>
-          <div className="recommended-content">
-            <div className="stars-decoration">
-              <span className="star">★</span>
-              <span className="star">★</span>
-              <span className="star">★</span>
-            </div>
-            <h2>Find Your Favorite Books Here</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <button className="learn-more-btn">
-              Learn More <span className="arrow">→</span>
-            </button>
           </div>
         </section>
       </main>

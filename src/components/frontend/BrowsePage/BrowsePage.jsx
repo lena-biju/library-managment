@@ -1,34 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import Navigation from '../Navigation/Navigation';
 import BookGrid from '../BookGrid/BookGrid';
+import { getBooks, getAllGenres } from '../../../booksData';
 import './BrowsePage.css';
 
 const BrowsePage = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState('popular');
 
-  // Mock data - replace with actual API call
-  const books = [
-    {
-      id: 1,
-      title: "The Great Gatsby",
-      author: "F. Scott Fitzgerald",
-      coverImage: "https://images.unsplash.com/photo-1543002588-bfa74002ed7e",
-      rating: 4.5,
-      readProgress: 75,
-      isFavorite: true,
-      category: "classic"
-    },
-    // Add more mock books here
-  ];
-
   const categories = [
     { id: 'all', name: 'All Books' },
-    { id: 'fiction', name: 'Fiction' },
-    { id: 'non-fiction', name: 'Non-Fiction' },
-    { id: 'classic', name: 'Classics' },
-    { id: 'fantasy', name: 'Fantasy' },
-    { id: 'mystery', name: 'Mystery' }
+    ...getAllGenres().map(genre => ({
+      id: genre.toLowerCase(),
+      name: genre
+    }))
   ];
 
   const sortOptions = [
@@ -36,6 +21,34 @@ const BrowsePage = () => {
     { id: 'newest', name: 'Newest First' },
     { id: 'rating', name: 'Highest Rated' }
   ];
+
+  const filteredAndSortedBooks = useMemo(() => {
+    let books = getBooks();
+
+    // Filter by category
+    if (selectedCategory !== 'all') {
+      books = books.filter(book => 
+        book.genre.some(g => g.toLowerCase() === selectedCategory)
+      );
+    }
+
+    // Sort books
+    switch (sortBy) {
+      case 'newest':
+        books.sort((a, b) => b.publishedYear - a.publishedYear);
+        break;
+      case 'rating':
+        books.sort((a, b) => b.rating - a.rating);
+        break;
+      case 'popular':
+      default:
+        // For popular, we'll use rating as a proxy for popularity
+        books.sort((a, b) => b.rating - a.rating);
+        break;
+    }
+
+    return books;
+  }, [selectedCategory, sortBy]);
 
   return (
     <div className="browse-page">
@@ -70,7 +83,7 @@ const BrowsePage = () => {
           </div>
         </div>
 
-        <BookGrid books={books} />
+        <BookGrid books={filteredAndSortedBooks} />
       </div>
     </div>
   );
