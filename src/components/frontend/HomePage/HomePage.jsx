@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 import Footer from '../Footer/Footer';
-import { getFeaturedBooks, getRecommendedBooks, getAllGenres, getBooks } from '../../../booksData';
+import { getFeaturedBooks, getAllGenres, getBooks, getBooksByGenre } from '../../../booksData';
 import './HomePage.css';
 
 const HomePage = () => {
-  const categories = getAllGenres();
+  const [selectedGenre, setSelectedGenre] = useState('all');
+  const categories = ['All Books', ...getAllGenres()];
   const featuredBooks = getFeaturedBooks();
-  const recommendedBooks = getRecommendedBooks();
   const allBooks = getBooks();
+  
+  const displayedBooks = selectedGenre === 'all' 
+    ? allBooks.slice(0, 12)
+    : getBooksByGenre(selectedGenre).slice(0, 12);
+
+  const handleGenreClick = (genre) => {
+    setSelectedGenre(genre === 'All Books' ? 'all' : genre);
+  };
 
   return (
     <div className="home-page">
@@ -36,14 +44,18 @@ const HomePage = () => {
 
         <section className="categories-bar">
           {categories.map(category => (
-            <button key={category} className="category-btn">
+            <button 
+              key={category} 
+              className={`category-btn ${selectedGenre === (category === 'All Books' ? 'all' : category) ? 'active' : ''}`}
+              onClick={() => handleGenreClick(category)}
+            >
               {category}
             </button>
           ))}
         </section>
 
         <section className="book-cards-grid">
-          {allBooks.slice(0, 12).map(book => (
+          {displayedBooks.map(book => (
             <Link to={`/book/${book.id}`} key={book.id} className="book-card paper-effect">
               <div className="book-info">
                 <h3>{book.title}</h3>
@@ -54,18 +66,11 @@ const HomePage = () => {
               </div>
             </Link>
           ))}
-        </section>
-
-        <section className="recommended-books-section">
-          <h2>Recommended Books</h2>
-          <div className="recommended-books-container">
-            {recommendedBooks.map(book => (
-              <Link to={`/book/${book.id}`} key={book.id} className="recommended-book-card">
-                <img src={book.coverImage} alt={book.title} />
-                <h3>{book.title}</h3>
-              </Link>
-            ))}
-          </div>
+          {displayedBooks.length === 0 && (
+            <div className="no-books-message">
+              No books found in this category
+            </div>
+          )}
         </section>
       </main>
 

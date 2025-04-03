@@ -1,10 +1,13 @@
 import booksData from './assets/books.json';
 
 // Helper function to get the correct image path
-const getImagePath = (imagePath) => {
-  if (!imagePath) return '/placeholder-book.jpg';
-  // Remove 'assets/' from the path since we're already in the assets directory
-  return imagePath.replace('assets/', '');
+const getImagePath = (bookId, title) => {
+  try {
+    return require(`./assets/books/covers/${bookId}_${title.toLowerCase().replace(/ /g, '-')}.jpg`);
+  } catch (e) {
+    console.warn(`Could not load image for book ${bookId}: ${title}`);
+    return null;
+  }
 };
 
 // Transform the data to match our component requirements
@@ -13,8 +16,8 @@ export const getBooks = () => {
     id: book.id,
     title: book.title,
     description: book.description,
-    coverImage: getImagePath(book.cover_image),
-    author: book.author.name,
+    coverImage: getImagePath(book.id, book.title),
+    author: book.author,
     genre: book.genre,
     rating: book.rating,
     publishedYear: book.published_year,

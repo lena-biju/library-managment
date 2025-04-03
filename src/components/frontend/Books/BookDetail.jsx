@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 import Footer from '../Footer/Footer';
+import { getBookById } from '../../../booksData';
 import './BookDetail.css';
 
 const BookDetail = () => {
@@ -24,23 +25,21 @@ const BookDetail = () => {
     }
   }, []);
 
-  // Simulated book data - In real app, fetch from API
   useEffect(() => {
-    // Simulate API call
     const fetchBook = () => {
-      const bookData = {
-        id,
-        title: 'The Martian',
-        author: 'Andy Weir',
-        coverImage: '/images/books/the-martian.jpg',
-        description: "Six days ago, astronaut Mark Watney became one of the first people to walk on Mars. Now, he's sure he'll be the first person to die there. After a dust storm nearly kills him and forces his crew to evacuate while thinking him dead, Mark finds himself stranded and completely alone with no way to even signal Earth that he's alive—and even if he could get word out, his supplies would be gone long before a rescue could arrive.",
-        price: 29.99,
-        rentPrice: 9.99,
-        category: 'SCI-FI',
-        rating: 4.5,
-        reviews: 1250
-      };
-      setBook(bookData);
+      const bookData = getBookById(parseInt(id));
+      if (bookData) {
+        // Import the cover image
+        const coverImage = require(`../../../assets/books/covers/${bookData.id}_${bookData.title.toLowerCase().replace(/ /g, '-')}.jpg`);
+        
+        setBook({
+          ...bookData,
+          coverImage,
+          price: 29.99,
+          rentPrice: 9.99,
+          category: bookData.genre.join(', ')
+        });
+      }
     };
 
     fetchBook();
@@ -119,13 +118,13 @@ const BookDetail = () => {
 
           <div className="book-info-section">
             <h1>{book.title}</h1>
-            <h2>by {book.author}</h2>
+            <h2>by {book.author.name}</h2>
             
             <div className="book-meta">
               <span className="category">{book.category}</span>
               <div className="rating">
                 <span className="stars">{'★'.repeat(Math.floor(book.rating))}{'☆'.repeat(5 - Math.floor(book.rating))}</span>
-                <span className="rating-count">({book.reviews} reviews)</span>
+                <span className="rating-count">({book.reviews.length} reviews)</span>
               </div>
             </div>
 
