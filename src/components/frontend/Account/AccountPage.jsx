@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 import Footer from '../Footer/Footer';
 import './AccountPage.css';
 
 const AccountPage = () => {
   const [currentUser, setCurrentUser] = useState(null);
+  const [userBooks, setUserBooks] = useState({ purchased: [], rented: [] });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,6 +18,11 @@ const AccountPage = () => {
     try {
       const user = JSON.parse(userStr);
       setCurrentUser(user);
+
+      // Load user's transactions
+      const userTransactions = JSON.parse(localStorage.getItem('userTransactions') || '{}');
+      const transactions = userTransactions[user.phone] || { purchased: [], rented: [] };
+      setUserBooks(transactions);
     } catch (e) {
       console.error('Error parsing user data:', e);
       navigate('/');
@@ -27,6 +33,14 @@ const AccountPage = () => {
     localStorage.removeItem('currentUser');
     localStorage.removeItem('userStatus');
     navigate('/');
+  };
+
+  const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
   };
 
   if (!currentUser) {
@@ -59,17 +73,50 @@ const AccountPage = () => {
           <section className="my-books">
             <h2>My Books</h2>
             <div className="books-grid">
-              <div className="book-card">
-                <h3>Currently Reading</h3>
-                {/* Add book cards here */}
+              <div className="book-section purchased">
+                <h3>Purchased Books</h3>
+                <div className="books-list">
+                  {userBooks.purchased.length > 0 ? (
+                    userBooks.purchased.map((transaction, index) => (
+                      <div key={index} className="book-item">
+                        <img src={transaction.coverImage} alt={transaction.bookTitle} className="book-cover" />
+                        <div className="book-details">
+                          <h4>{transaction.bookTitle}</h4>
+                          <p>Purchased on: {formatDate(transaction.date)}</p>
+                          <p className="price">Paid: ${transaction.amount}</p>
+                          <Link to={`/book/${transaction.bookId}`} className="view-book">
+                            View Book
+                          </Link>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="no-books">No purchased books yet</p>
+                  )}
+                </div>
               </div>
-              <div className="book-card">
-                <h3>Recently Purchased</h3>
-                {/* Add book cards here */}
-              </div>
-              <div className="book-card">
-                <h3>Reading History</h3>
-                {/* Add book cards here */}
+
+              <div className="book-section rented">
+                <h3>Rented Books</h3>
+                <div className="books-list">
+                  {userBooks.rented.length > 0 ? (
+                    userBooks.rented.map((transaction, index) => (
+                      <div key={index} className="book-item">
+                        <img src={transaction.coverImage} alt={transaction.bookTitle} className="book-cover" />
+                        <div className="book-details">
+                          <h4>{transaction.bookTitle}</h4>
+                          <p>Rented on: {formatDate(transaction.date)}</p>
+                          <p className="price">Monthly fee: ${transaction.amount}</p>
+                          <Link to={`/book/${transaction.bookId}`} className="view-book">
+                            View Book
+                          </Link>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="no-books">No rented books yet</p>
+                  )}
+                </div>
               </div>
             </div>
           </section>
@@ -87,7 +134,7 @@ const AccountPage = () => {
               </div>
               <div className="preference-item">
                 <h3>Reading Goals</h3>
-                <p>Books read this month: 2</p>
+                <p>Books read this month: {userBooks.purchased.length + userBooks.rented.length}</p>
                 <p>Reading goal: 4 books/month</p>
               </div>
             </div>

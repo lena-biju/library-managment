@@ -63,21 +63,92 @@
 
 .books-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
+  gap: 2rem;
   margin-top: 1rem;
 }
 
-.book-card {
+.book-section {
   background-color: #FFF9F0;
   padding: 1.5rem;
   border-radius: 8px;
-  min-height: 200px;
 }
 
-.book-card h3 {
+.book-section h3 {
   color: #8B4513;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+}
+
+.books-list {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.book-item {
+  display: flex;
+  gap: 1.5rem;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.book-item:hover {
+  transform: translateY(-2px);
+}
+
+.book-cover {
+  width: 100px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.book-details {
+  flex: 1;
+}
+
+.book-details h4 {
+  color: #4A2B0F;
+  font-size: 1.2rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.book-details p {
+  color: #666;
+  margin: 0.25rem 0;
+}
+
+.book-details .price {
+  color: #8B4513;
+  font-weight: 500;
+  margin: 0.5rem 0;
+}
+
+.view-book {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #8B4513;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.view-book:hover {
+  background-color: #6B4423;
+}
+
+.no-books {
+  text-align: center;
+  color: #666;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 8px;
 }
 
 .preferences-card {
@@ -122,7 +193,18 @@ h2 {
     text-align: center;
   }
 
-  .books-grid {
-    grid-template-columns: 1fr;
+  .book-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .book-cover {
+    width: 120px;
+    height: 180px;
+  }
+
+  .book-details {
+    text-align: center;
   }
 } 

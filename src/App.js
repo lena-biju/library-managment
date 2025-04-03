@@ -7,6 +7,7 @@ import PricingPage from './components/frontend/PricingPage/PricingPage';
 import SignupPage from './components/frontend/Auth/SignupPage';
 import LoginPage from './components/frontend/Auth/LoginPage';
 import AccountPage from './components/frontend/Account/AccountPage';
+import CheckoutPage from './components/frontend/CheckoutPage/CheckoutPage';
 import './App.css';
 
 // Font Awesome
@@ -31,6 +32,7 @@ function App() {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/account" element={<AccountPage />} />
+          <Route path="/checkout/:id" element={<CheckoutPage />} />
         </Routes>
       </div>
     </Router>
