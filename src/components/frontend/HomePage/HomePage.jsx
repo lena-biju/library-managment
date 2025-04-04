@@ -75,8 +75,60 @@ const HomePage = () => {
       name: 'Jeff Marguel',
       text: 'This service gives me the opportunity to always read new books and get acquainted with promising authors even before people start shouting at all cross-roads about them. Thanks to Bookshelf for my wonderful evenings with a new book and a glass of wine! I will continue using the subscription!',
       date: 'March 02, 2024'
+    },
+    {
+      id: 3,
+      name: 'Sarah Mitchell',
+      text: 'ByteBooks has transformed my reading experience! The convenience of having books delivered to my doorstep combined with their excellent recommendations has helped me discover so many amazing authors. Their customer service is exceptional, and the monthly subscription is worth every penny.',
+      date: 'April 15, 2024'
+    },
+    {
+      id: 4,
+      name: 'Michael Chen',
+      text: 'As a busy professional, finding time to visit bookstores was always a challenge. ByteBooks solved that problem perfectly. Their selection is outstanding, and the mobile app makes it incredibly easy to manage my reading list. The premium membership benefits are fantastic!',
+      date: 'January 20, 2024'
     }
   ];
+
+  const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0);
+
+  const handleTestimonialChange = (index) => {
+    setCurrentTestimonialIndex(index);
+  };
+
+  const handleNextTestimonial = () => {
+    setCurrentTestimonialIndex((prevIndex) => 
+      prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  const handlePrevTestimonial = () => {
+    setCurrentTestimonialIndex((prevIndex) => 
+      prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
+    );
+  };
+
+  // Calculate the visible testimonials array with duplicates for infinite scroll
+  const getVisibleTestimonials = () => {
+    // Create a circular array by duplicating testimonials
+    return [...testimonials, ...testimonials, ...testimonials];
+  };
+
+  // Calculate the transform offset for centering
+  const calculateTransform = () => {
+    const baseIndex = currentTestimonialIndex + testimonials.length;
+    const cardWidth = 400; // Width of each card
+    const gap = 32; // 2rem gap between cards
+    return `translateX(calc(-${baseIndex * (cardWidth + gap)}px + 50% - ${cardWidth/2}px))`;
+  };
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      handleNextTestimonial();
+    }, 20000); // Change testimonial every 20 seconds
+
+    return () => clearInterval(timer);
+  }, []);
 
   const heroStyle = {
     '--hero-background': `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${heroBackground})`
@@ -198,15 +250,54 @@ const HomePage = () => {
       {/* Testimonials Section */}
       <section className="testimonials-section">
         <h2>Testimonials</h2>
-        <p>Read reviews from other book lovers.</p>
-        <div className="testimonials-container">
-          {testimonials.map((testimonial) => (
-            <div key={testimonial.id} className="testimonial-card">
-              <h3>{testimonial.name}</h3>
-              <p>{testimonial.text}</p>
-              <span className="testimonial-date">{testimonial.date}</span>
+        <p className="section-subtitle">Read reviews from other book lovers.</p>
+        <div className="testimonials-slider">
+          <button 
+            className="nav-button prev" 
+            onClick={handlePrevTestimonial}
+            aria-label="Previous testimonial"
+          >
+            ‹
+          </button>
+          <div className="testimonials-viewport">
+            <div 
+              className="testimonials-track"
+              style={{
+                transform: calculateTransform(),
+              }}
+            >
+              {getVisibleTestimonials().map((testimonial, index) => (
+                <div 
+                  key={`${testimonial.id}-${index}`}
+                  className={`testimonial-card ${index === currentTestimonialIndex + testimonials.length ? 'active' : ''}`}
+                >
+                  <div className="testimonial-content">
+                    <div className="testimonial-number">{(index % testimonials.length) + 1}</div>
+                    <h3 className="testimonial-name">{testimonial.name}</h3>
+                    <p className="testimonial-role">{testimonial.role || 'Project Manager'}</p>
+                    <p className="testimonial-text">{testimonial.text}</p>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+          <button 
+            className="nav-button next" 
+            onClick={handleNextTestimonial}
+            aria-label="Next testimonial"
+          >
+            ›
+          </button>
+          <div className="testimonial-dots">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                className={`dot ${index === currentTestimonialIndex ? 'active' : ''}`}
+                onClick={() => handleTestimonialChange(index)}
+                aria-label={`View testimonial ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
