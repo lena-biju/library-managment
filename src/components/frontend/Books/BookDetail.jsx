@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 import Footer from '../Footer/Footer';
 import { getBookById } from '../../../booksData';
+import BookEditModal from '../LibrarianDashboard/BookEditModal';
 import './BookDetail.css';
 
 const BookDetail = () => {
@@ -14,8 +15,14 @@ const BookDetail = () => {
   const [bookContent, setBookContent] = useState('');
   const [showContent, setShowContent] = useState(false);
   const [userTransactions, setUserTransactions] = useState({ purchased: [], rented: [] });
+  const [isEditing, setIsEditing] = useState(false);
+  const [isLibrarian, setIsLibrarian] = useState(false);
 
   useEffect(() => {
+    // Check if user is librarian
+    const userStatus = localStorage.getItem('userStatus');
+    setIsLibrarian(userStatus === 'librarian');
+
     // Get current user from localStorage
     const userStr = localStorage.getItem('currentUser');
     if (userStr) {
@@ -39,8 +46,8 @@ const BookDetail = () => {
         setBook({
           ...bookData,
           coverImage: `/${bookData.cover_image}`,
-          price: 29.99,
-          rentPrice: 9.99,
+          price: bookData.price || 29.99,
+          rentPrice: bookData.rentPrice || 9.99,
           category: bookData.genre.join(', ')
         });
 
@@ -85,6 +92,29 @@ const BookDetail = () => {
     }
 
     setShowContent(true);
+  };
+
+  const handleBookSave = (updatedBook) => {
+    // Get all books from localStorage
+    const books = JSON.parse(localStorage.getItem('books') || '[]');
+    
+    // Update the book in the array
+    const updatedBooks = books.map(b => 
+      b.id === updatedBook.id ? updatedBook : b
+    );
+    
+    // Save back to localStorage
+    localStorage.setItem('books', JSON.stringify(updatedBooks));
+    
+    // Update the current book state
+    setBook({
+      ...updatedBook,
+      coverImage: `/${updatedBook.cover_image}`,
+      category: updatedBook.genre.join(', ')
+    });
+    
+    setIsEditing(false);
+    alert('Book updated successfully!');
   };
 
   const checkUserStatus = () => {
@@ -146,6 +176,14 @@ const BookDetail = () => {
 
         <div className="book-detail-container">
           <div className="book-image-section">
+            {isLibrarian && (
+              <button 
+                className="edit-btn"
+                onClick={() => setIsEditing(true)}
+              >
+                <i className="fas fa-edit"></i> Edit Book
+              </button>
+            )}
             <img src={book.coverImage} alt={book.title} className="book-cover" />
             <div className="book-actions">
               {hasAccess ? (
@@ -229,6 +267,14 @@ const BookDetail = () => {
           </div>
         </div>
       </main>
+
+      {isEditing && (
+        <BookEditModal
+          book={book}
+          onSave={handleBookSave}
+          onClose={() => setIsEditing(false)}
+        />
+      )}
 
       <Footer />
     </div>

@@ -147,7 +147,7 @@ const HomePage = () => {
             Learn more
           </button>
         </div>
-      </section>
+        </section>
 
       {/* Stats Section */}
       <section className="stats-section">
@@ -157,9 +157,9 @@ const HomePage = () => {
               <h2>{stat.number}</h2>
               <p>{stat.text}</p>
             </div>
-          ))}
-        </div>
-      </section>
+            ))}
+          </div>
+        </section>
 
       {/* About Section */}
       <section className="about-section">
@@ -175,7 +175,7 @@ const HomePage = () => {
             </p>
           </div>
         </div>
-      </section>
+        </section>
 
       {/* Monthly Books Section */}
       <section className="monthly-books-section">
@@ -194,7 +194,7 @@ const HomePage = () => {
                   e.target.src = '/assets/images/book-placeholder.jpg';
                 }}
               />
-              <h3>{book.title}</h3>
+                <h3>{book.title}</h3>
               <p>{book.author}</p>
               <div className="book-rating">
                 <span>★</span> {book.rating.toFixed(1)}
@@ -219,7 +219,7 @@ const HomePage = () => {
                 ))}
               </ul>
               <button className="signup-btn" onClick={() => navigate('/signup')}>Subscribe Now</button>
-            </div>
+              </div>
           ))}
         </div>
       </section>
@@ -245,7 +245,7 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-      </section>
+        </section>
 
       {/* Testimonials Section */}
       <section className="testimonials-section">
@@ -315,8 +315,8 @@ const HomePage = () => {
           <div className="quote-image">
             <img src="/assets/images/man.jpg" alt="Book with coffee and magazine" />
           </div>
-        </div>
-      </section>
+          </div>
+        </section>
 
       <Footer />
     </div>

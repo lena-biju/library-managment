@@ -63,6 +63,7 @@
   border-radius: 12px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   min-height: 600px;
+  position: relative;
 }
 
 .book-cover {
@@ -371,4 +372,37 @@
 .read-btn:hover {
   background-color: #1B5E20 !important;
   transform: translateY(-2px);
+}
+
+.edit-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: #8B4513;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.edit-btn i {
+  font-size: 1rem;
+}
+
+.edit-btn:hover {
+  background-color: #6B3410;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.edit-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
 } 

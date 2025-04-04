@@ -4,7 +4,9 @@ import './Navigation.css';
 import logo from '../../../assets/logo.svg';
 
 const Navigation = () => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userStatus, setUserStatus] = useState('');
+  const [userName, setUserName] = useState('');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -12,15 +14,16 @@ const Navigation = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Get current user from localStorage
-    const userStr = localStorage.getItem('currentUser');
-    if (userStr) {
-      try {
-        const user = JSON.parse(userStr);
-        setCurrentUser(user);
-      } catch (e) {
-        console.error('Error parsing user data:', e);
-      }
+    const user = localStorage.getItem('currentUser');
+    const status = localStorage.getItem('userStatus');
+    if (user) {
+      setIsLoggedIn(true);
+      setUserStatus(status);
+      const userData = JSON.parse(user);
+      setUserName(userData.name || 'User');
+    } else {
+      setIsLoggedIn(false);
+      setUserStatus('');
     }
 
     // Add click outside listener
@@ -63,8 +66,17 @@ const Navigation = () => {
   const handleLogout = () => {
     localStorage.removeItem('currentUser');
     localStorage.removeItem('userStatus');
-    setCurrentUser(null);
+    setIsLoggedIn(false);
+    setUserStatus('');
     navigate('/');
+  };
+
+  const handleProfileClick = () => {
+    if (userStatus === 'librarian') {
+      navigate('/librarian-dashboard');
+    } else {
+      navigate('/account');
+    }
   };
 
   const handleSearchClick = () => {
@@ -95,11 +107,26 @@ const Navigation = () => {
       <div className="nav-center">
         <Link to="/" className="nav-link">Home</Link>
         <div className="dropdown">
-          <Link to="/books" className="nav-link">Books ▾</Link>
+          <button className="dropbtn">Books ▼</button>
+          <div className="dropdown-content">
+            <Link to="/books">All Books</Link>
+            <Link to="/category/fiction">Fiction</Link>
+            <Link to="/category/non-fiction">Non-Fiction</Link>
+            <Link to="/category/science">Science</Link>
+            <Link to="/category/technology">Technology</Link>
+          </div>
         </div>
         <div className="dropdown">
-          <Link to="/e-books" className="nav-link">E-Books ▾</Link>
+          <button className="dropbtn">E-Books ▼</button>
+          <div className="dropdown-content">
+            <Link to="/e-books">All E-Books</Link>
+            <Link to="/category/fiction?type=digital">Fiction</Link>
+            <Link to="/category/non-fiction?type=digital">Non-Fiction</Link>
+            <Link to="/category/science?type=digital">Science</Link>
+            <Link to="/category/technology?type=digital">Technology</Link>
+          </div>
         </div>
+        <Link to="/pricing">Pricing</Link>
       </div>
 
       <div className="nav-right">
@@ -154,12 +181,20 @@ const Navigation = () => {
             </div>
           )}
         </div>
-        {currentUser ? (
-          <Link to="/account" className="user-name">
-            {currentUser.name}
-          </Link>
+        {isLoggedIn ? (
+          <div className="user-menu">
+            <button className="profile-btn" onClick={handleProfileClick}>
+              {userStatus === 'librarian' ? 'Library Admin' : userName}
+            </button>
+            <button className="logout-btn" onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
         ) : (
-          <Link to="/signup" className="signup-btn">Sign up</Link>
+          <div className="auth-buttons">
+            <Link to="/login" className="login-btn">Login</Link>
+            <Link to="/signup" className="signup-btn">Sign Up</Link>
+          </div>
         )}
       </div>
     </nav>

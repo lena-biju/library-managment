@@ -8,6 +8,7 @@ import SignupPage from './components/frontend/Auth/SignupPage';
 import LoginPage from './components/frontend/Auth/LoginPage';
 import AccountPage from './components/frontend/Account/AccountPage';
 import CheckoutPage from './components/frontend/CheckoutPage/CheckoutPage';
+import LibrarianDashboard from './components/frontend/LibrarianDashboard/LibrarianDashboard';
 import './App.css';
 
 // Font Awesome
@@ -33,6 +34,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/account" element={<AccountPage />} />
           <Route path="/checkout/:id" element={<CheckoutPage />} />
+          <Route path="/librarian-dashboard/*" element={<LibrarianDashboard />} />
         </Routes>
       </div>
     </Router>
