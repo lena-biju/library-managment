@@ -6,7 +6,7 @@
       "author": {
         "name": "Niccolò Machiavelli",
         "bio": "A brief biography of Niccolò Machiavelli",
-        "profile_picture": "assets/books/covers/1_the-prince.jpg"
+        "profile_picture": "assets/books/covers/the-prince.jpg"
       },
       "isbn": "978-871869165",
       "genre": [
@@ -15,7 +15,7 @@
       ],
       "language": "English",
       "published_year": 1947,
-      "cover_image": "assets/books/covers/1_the-prince.jpg",
+      "cover_image": "assets/books/covers/the-prince.jpg",
       "description": "A classic work by Niccolò Machiavelli",
       "file_type": "text",
       "file_path": "assets/books/text\\10_capital-stock.txt",
@@ -37,7 +37,7 @@
     },
     {
       "id": 2,
-      "title": "The Prince",
+      "title": "The Prince 2",
       "author": {
         "name": "Niccolò Machiavelli",
         "bio": "A brief biography of Niccolò Machiavelli",
@@ -71,11 +71,11 @@
     },
     {
       "id": 3,
-      "title": "10_generation.txt",
+      "title": "10_generation",
       "author": {
         "name": "Unknown",
         "bio": "A brief biography of Unknown",
-        "profile_picture": "assets/books/covers/3_10_generation.txt.jpg"
+        "profile_picture": "assets/books/covers/3_10_generation.jpg"
       },
       "isbn": "978-795200562",
       "genre": [
@@ -84,7 +84,7 @@
       ],
       "language": "English",
       "published_year": 1846,
-      "cover_image": "assets/books/covers/3_10_generation.txt.jpg",
+      "cover_image": "assets/books/covers/3_10_generation.jpg",
       "description": "A classic work by Unknown",
       "file_type": "text",
       "file_path": "assets/books/text\\10_generation.txt",
@@ -1056,7 +1056,7 @@
       "author": {
         "name": "Jane Austen",
         "bio": "A brief biography of Jane Austen",
-        "profile_picture": "assets/books/covers/31_pride-and-prejudice.jpg"
+        "profile_picture": "assets/books/covers/31_pride-and-prejudice.jpeg"
       },
       "isbn": "978-431323288",
       "genre": [
@@ -1065,7 +1065,7 @@
       ],
       "language": "English",
       "published_year": 1966,
-      "cover_image": "assets/books/covers/31_pride-and-prejudice.jpg",
+      "cover_image": "assets/books/covers/31_pride-and-prejudice.jpeg",
       "description": "A classic work by Jane Austen",
       "file_type": "text",
       "file_path": "assets/books/text\\1_draw-suggest.txt",
@@ -1372,7 +1372,7 @@
       "author": {
         "name": "Unknown",
         "bio": "A brief biography of Unknown",
-        "profile_picture": "assets/books/covers/40_3_bag-character.txt.jpg"
+        "profile_picture": "assets/books/covers/40_3_bag-character.jpg"
       },
       "isbn": "978-807125528",
       "genre": [
@@ -1382,7 +1382,7 @@
       ],
       "language": "English",
       "published_year": 1885,
-      "cover_image": "assets/books/covers/40_3_bag-character.txt.jpg",
+      "cover_image": "assets/books/covers/40_3_bag-character.jpg",
       "description": "A classic work by Unknown",
       "file_type": "text",
       "file_path": "assets/books/text\\3_bag-character.txt",

@@ -36,12 +36,9 @@ const BookDetail = () => {
     const fetchBook = () => {
       const bookData = getBookById(parseInt(id));
       if (bookData) {
-        // Import the cover image
-        const coverImage = require(`../../../assets/books/covers/${bookData.id}_${bookData.title.toLowerCase().replace(/ /g, '-')}.jpg`);
-        
         setBook({
           ...bookData,
-          coverImage,
+          coverImage: `/${bookData.cover_image}`,
           price: 29.99,
           rentPrice: 9.99,
           category: bookData.genre.join(', ')

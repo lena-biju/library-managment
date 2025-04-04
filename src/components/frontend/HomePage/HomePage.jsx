@@ -1,78 +1,231 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 import Footer from '../Footer/Footer';
-import { getFeaturedBooks, getAllGenres, getBooks, getBooksByGenre } from '../../../booksData';
+import heroBackground from '../../../assets/images/hero-bg.jpg';
 import './HomePage.css';
 
 const HomePage = () => {
-  const [selectedGenre, setSelectedGenre] = useState('all');
-  const categories = ['All Books', ...getAllGenres()];
-  const featuredBooks = getFeaturedBooks();
-  const allBooks = getBooks();
-  
-  const displayedBooks = selectedGenre === 'all' 
-    ? allBooks.slice(0, 12)
-    : getBooksByGenre(selectedGenre).slice(0, 12);
+  const navigate = useNavigate();
+  const [monthlyBooks, setMonthlyBooks] = useState([]);
 
-  const handleGenreClick = (genre) => {
-    setSelectedGenre(genre === 'All Books' ? 'all' : genre);
+  useEffect(() => {
+    // Import and process books.json to get highest rated books
+    const fetchHighestRatedBooks = async () => {
+      try {
+        const booksData = await import('../../../assets/books.json');
+        const sortedBooks = booksData.books
+          .sort((a, b) => b.rating - a.rating)
+          .slice(0, 3)
+          .map(book => ({
+            id: book.id,
+            title: book.title,
+            author: book.author.name,
+            image: book.cover_image,
+            rating: book.rating
+          }));
+        setMonthlyBooks(sortedBooks);
+      } catch (error) {
+        console.error('Error loading books:', error);
+      }
+    };
+
+    fetchHighestRatedBooks();
+  }, []);
+
+  const stats = [
+    { number: '450', text: 'Customers in 2019' },
+    { number: '27,000', text: 'Books delivered' },
+    { number: '100+', text: 'Bestsellers' },
+    { number: '20', text: 'Events held' }
+  ];
+
+  const plans = [
+    {
+      name: 'Normal',
+      price: '$5',
+      features: [
+        'Borrow up to 3 books',
+        '20-day return period',
+        'Book return alerts',
+        'Basic support'
+      ]
+    },
+    {
+      name: 'Premium',
+      price: '$10',
+      features: [
+        'Unlimited book purchases',
+        '45-day return period',
+        'Priority book access',
+        'Premium support'
+      ]
+    }
+  ];
+
+  const testimonials = [
+    {
+      id: 1,
+      name: 'Jane Collston',
+      text: 'I love to read, but lately, I have had very little time. I couldnt even go to the bookstore. In addition, I do not know at all what everyone is reading now and what books are worth reading. This service helped me get back to reading, now I read 5 books a month and look forward to a new box!',
+      date: 'November 05, 2024'
+    },
+    {
+      id: 2,
+      name: 'Jeff Marguel',
+      text: 'This service gives me the opportunity to always read new books and get acquainted with promising authors even before people start shouting at all cross-roads about them. Thanks to Bookshelf for my wonderful evenings with a new book and a glass of wine! I will continue using the subscription!',
+      date: 'March 02, 2024'
+    }
+  ];
+
+  const heroStyle = {
+    '--hero-background': `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${heroBackground})`
   };
 
   return (
     <div className="home-page">
       <Navigation />
       
-      <main className="main-content paper-background">
-        <section className="hero-section">
-          <h1 className="main-title">LIBRARY IN YOUR POCKET</h1>
-          <p className="subtitle">
-            FIND ALL YOUR FAVORITES BOOKS HERE.<br />
-            READ DREAM BUY
-          </p>
-        </section>
+      {/* Hero Section */}
+      <section className="hero-section" style={heroStyle}>
+        <div className="hero-content">
+          <h1>The Library in your pocket.</h1>
+          <p>find all your favourite books here!</p>
+          <button className="learn-more-btn" onClick={() => navigate('/about')}>
+            Learn more
+          </button>
+        </div>
+      </section>
 
-        <section className="featured-books-section">
-          <div className="featured-books-container">
-            {featuredBooks.map(book => (
-              <Link to={`/book/${book.id}`} key={book.id} className="featured-book-card">
-                <img src={book.coverImage} alt={book.title} />
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        <section className="categories-bar">
-          {categories.map(category => (
-            <button 
-              key={category} 
-              className={`category-btn ${selectedGenre === (category === 'All Books' ? 'all' : category) ? 'active' : ''}`}
-              onClick={() => handleGenreClick(category)}
-            >
-              {category}
-            </button>
-          ))}
-        </section>
-
-        <section className="book-cards-grid">
-          {displayedBooks.map(book => (
-            <Link to={`/book/${book.id}`} key={book.id} className="book-card paper-effect">
-              <div className="book-info">
-                <h3>{book.title}</h3>
-                <p>{book.description}</p>
-              </div>
-              <div className="arrow-circle">
-                <span className="arrow">→</span>
-              </div>
-            </Link>
-          ))}
-          {displayedBooks.length === 0 && (
-            <div className="no-books-message">
-              No books found in this category
+      {/* Stats Section */}
+      <section className="stats-section">
+        <div className="stats-container">
+          {stats.map((stat, index) => (
+            <div key={index} className="stat-item">
+              <h2>{stat.number}</h2>
+              <p>{stat.text}</p>
             </div>
-          )}
-        </section>
-      </main>
+          ))}
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section className="about-section">
+        <div className="about-container">
+          <div className="about-image">
+            <img src="/assets/images/book-stack.jpg" alt="Stack of books" />
+          </div>
+          <div className="about-content">
+            <h2>About ByteBooks</h2>
+            <p className="tagline">We make books great again. Just kidding, books were always great!</p>
+            <p className="description">
+            Welcome to ByteBooks, where stories come to life at your convenience! Whether you want to buy, rent, or borrow, we've got a collection that spans genres, eras, and cultures. From bestsellers to hidden gems, you'll find books that inspire, entertain, and challenge your perspective. No waiting lists, no dusty shelves—just a seamless way to pick up your next great read. Your next favorite book is just a click away! 
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Monthly Books Section */}
+      <section className="monthly-books-section">
+        <h2>Books of the Month</h2>
+        <p>Discover our most loved books, rated highly by our community of readers!</p>
+        <div className="books-slider">
+          {monthlyBooks.map((book) => (
+            <div key={book.id} className="book-card">
+              <img 
+                src={`/${book.image}`}
+                alt={book.title} 
+                style={{ maxWidth: '100%', height: 'auto', objectFit: 'cover' }}
+                onError={(e) => {
+                  console.error(`Error loading image for book: ${book.title}`);
+                  e.target.onerror = null;
+                  e.target.src = '/assets/images/book-placeholder.jpg';
+                }}
+              />
+              <h3>{book.title}</h3>
+              <p>{book.author}</p>
+              <div className="book-rating">
+                <span>★</span> {book.rating.toFixed(1)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section className="pricing-section">
+        <h2>Choose Your Plan</h2>
+        <p>Select the perfect plan for your reading journey</p>
+        <div className="pricing-container">
+          {plans.map((plan, index) => (
+            <div key={index} className="pricing-card paper-effect">
+              <h3>{plan.name}</h3>
+              <div className="price">{plan.price}<span>/month</span></div>
+              <ul className="features">
+                {plan.features.map((feature, i) => (
+                  <li key={i}>{feature}</li>
+                ))}
+              </ul>
+              <button className="signup-btn" onClick={() => navigate('/signup')}>Subscribe Now</button>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Our Store Section */}
+      <section className="store-section">
+        <h2>Our Store</h2>
+        <div className="divider"></div>
+        <p className="store-description">
+          Want to find a cozy corner in a big city? Come to our bookstore in New York and spend time
+          with a book in a light insta-friendly space.
+        </p>
+        <div className="store-gallery">
+          <div className="gallery-grid">
+            <div className="gallery-item large">
+              <img src="/assets/images/tea cup on book.jpg" alt="Kinfolk magazine and notebook display" />
+            </div>
+            <div className="gallery-item">
+              <img src="/assets/images/redaing.jpg" alt="Book layout and design" />
+            </div>
+            <div className="gallery-item">
+              <img src="/assets/images/plantspace.jpg" alt="Plant and reading space" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="testimonials-section">
+        <h2>Testimonials</h2>
+        <p>Read reviews from other book lovers.</p>
+        <div className="testimonials-container">
+          {testimonials.map((testimonial) => (
+            <div key={testimonial.id} className="testimonial-card">
+              <h3>{testimonial.name}</h3>
+              <p>{testimonial.text}</p>
+              <span className="testimonial-date">{testimonial.date}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Quote Section */}
+      <section className="quote-section">
+        <div className="quote-container">
+          <div className="quote-content">
+            <div className="quote-mark">❝</div>
+            <blockquote>
+              <p>You think your pain and your heartbreak are unprecedented in the history of the world, but then you read.</p>
+              <p>It was books that taught me that the things that tormented me most were the very things that connected me with all the people who were alive, who had ever been alive.</p>
+            </blockquote>
+            <cite>James Baldwin</cite>
+          </div>
+          <div className="quote-image">
+            <img src="/assets/images/man.jpg" alt="Book with coffee and magazine" />
+          </div>
+        </div>
+      </section>
 
       <Footer />
     </div>

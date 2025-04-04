@@ -16,17 +16,21 @@
   align-items: center;
   gap: 0.5rem;
   text-decoration: none;
+  padding: 0.5rem 0;
 }
 
 .logo-image {
   height: 40px;
-  width: auto;
+  width: 40px;
+  object-fit: contain;
+  display: block;
 }
 
 .nav-logo span {
   font-size: 1.5rem;
   font-weight: bold;
   color: #4A2B0F;
+  letter-spacing: 0.5px;
 }
 
 .nav-center {
@@ -57,17 +61,92 @@
   gap: 1.5rem;
 }
 
+.search-container {
+  position: relative;
+  margin-right: 1rem;
+}
+
 .search-button {
   background: none;
   border: none;
-  color: #4A2B0F;
+  color: #333;
   cursor: pointer;
-  padding: 0.5rem;
   font-size: 1.2rem;
+  padding: 0.5rem;
+  transition: color 0.3s ease;
 }
 
-.search-button:hover {
-  color: #8B4513;
+.search-button:hover,
+.search-button.active {
+  color: #007bff;
+}
+
+.search-wrapper {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 300px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  z-index: 1000;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #007bff;
+}
+
+.search-results {
+  margin-top: 1rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-result-item:hover {
+  background-color: #f8f9fa;
+}
+
+.search-result-image {
+  width: 50px;
+  height: 75px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 1rem;
+}
+
+.search-result-info {
+  flex: 1;
+}
+
+.search-result-title {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.25rem;
+}
+
+.search-result-author {
+  font-size: 0.9rem;
+  color: #666;
 }
 
 .signup-btn {
