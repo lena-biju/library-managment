@@ -231,10 +231,18 @@
 .login-btn {
   color: #8B4513;
   border: 1px solid #8B4513;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 .login-btn:hover {
-  background: #FFF3E0;
+  background: #6B3410;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .signup-btn:hover {

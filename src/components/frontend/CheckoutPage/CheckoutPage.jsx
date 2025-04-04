@@ -86,27 +86,48 @@ const CheckoutForm = ({ amount, bookTitle, book, action }) => {
   return (
     <form onSubmit={handleSubmit} className="checkout-form">
       <div className="form-row">
-        <label>
-          Card details
+        <label htmlFor="card-element">Card Information</label>
+        <div className="card-element-container">
           <CardElement
+            id="card-element"
             options={{
               style: {
                 base: {
                   fontSize: '16px',
                   color: '#4A2B0F',
+                  fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                  fontSmoothing: 'antialiased',
                   '::placeholder': {
-                    color: '#6B4423',
+                    color: '#aab7c4',
+                  },
+                  ':-webkit-autofill': {
+                    color: '#fce883',
                   },
                 },
+                invalid: {
+                  color: '#dc3545',
+                  iconColor: '#dc3545'
+                }
               },
+              hidePostalCode: true
             }}
           />
-        </label>
+        </div>
       </div>
       {error && <div className="error-message">{error}</div>}
       <button type="submit" disabled={!stripe || processing} className="pay-button">
-        {processing ? 'Processing...' : `Pay $${amount.toFixed(2)}`}
+        {processing ? (
+          <span className="processing">
+            Processing... <i className="fas fa-spinner fa-spin"></i>
+          </span>
+        ) : (
+          `Pay $${amount.toFixed(2)}`
+        )}
       </button>
+      <div className="secure-payment-notice">
+        <i className="fas fa-lock"></i>
+        <span>Your payment information is secure and encrypted</span>
+      </div>
     </form>
   );
 };

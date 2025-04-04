@@ -143,11 +143,8 @@ const HomePage = () => {
         <div className="hero-content">
           <h1>The Library in your pocket.</h1>
           <p>find all your favourite books here!</p>
-          <button className="learn-more-btn" onClick={() => navigate('/about')}>
-            Learn more
-          </button>
         </div>
-        </section>
+      </section>
 
       {/* Stats Section */}
       <section className="stats-section">

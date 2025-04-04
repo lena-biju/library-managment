@@ -63,14 +63,6 @@ const Navigation = () => {
     return () => clearTimeout(debounceTimer);
   }, [searchQuery]);
 
-  const handleLogout = () => {
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem('userStatus');
-    setIsLoggedIn(false);
-    setUserStatus('');
-    navigate('/');
-  };
-
   const handleProfileClick = () => {
     if (userStatus === 'librarian') {
       navigate('/librarian-dashboard');
@@ -126,7 +118,6 @@ const Navigation = () => {
             <Link to="/category/technology?type=digital">Technology</Link>
           </div>
         </div>
-        <Link to="/pricing">Pricing</Link>
       </div>
 
       <div className="nav-right">
@@ -186,14 +177,10 @@ const Navigation = () => {
             <button className="profile-btn" onClick={handleProfileClick}>
               {userStatus === 'librarian' ? 'Library Admin' : userName}
             </button>
-            <button className="logout-btn" onClick={handleLogout}>
-              Logout
-            </button>
           </div>
         ) : (
           <div className="auth-buttons">
             <Link to="/login" className="login-btn">Login</Link>
-            <Link to="/signup" className="signup-btn">Sign Up</Link>
           </div>
         )}
       </div>

@@ -3,6 +3,7 @@
   background-color: #f5f5f5;
   display: flex;
   flex-direction: column;
+  padding-top: 64px;
 }
 
 .checkout-content {
@@ -19,35 +20,43 @@
   gap: 2rem;
   background: white;
   padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .order-summary {
-  padding: 1.5rem;
-  background: #f8f8f8;
-  border-radius: 8px;
+  padding: 2rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
 }
 
-.order-summary h2, .payment-section h2 {
+.order-summary h2, 
+.payment-section h2 {
   color: #4A2B0F;
   font-size: 1.8rem;
   margin-bottom: 2rem;
   font-family: 'American Typewriter', serif;
+  border-bottom: 2px solid #E6D5C3;
+  padding-bottom: 1rem;
 }
 
 .book-info {
   display: flex;
   gap: 1.5rem;
   margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .book-thumbnail {
   width: 120px;
   height: 180px;
   object-fit: cover;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .book-details {
@@ -57,50 +66,105 @@
 .book-details h3 {
   margin: 0 0 0.5rem;
   color: #4A2B0F;
-  font-size: 1.25rem;
+  font-size: 1.4rem;
 }
 
 .book-details p {
   margin: 0.5rem 0;
   color: #666;
+  line-height: 1.6;
 }
 
 .action-type {
-  font-weight: 500;
-  color: #8B4513 !important;
+  font-weight: 600;
+  color: #8B4513;
+  font-size: 1.1rem;
+  margin-top: 1rem;
 }
 
 .price {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #4A2B0F !important;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #4A2B0F;
+  margin-top: 1rem;
 }
 
 .payment-section {
-  padding: 1.5rem;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+  position: relative;
+}
+
+.payment-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #8B4513, #E6D5C3);
+  border-radius: 12px 12px 0 0;
 }
 
 .checkout-form {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
 }
 
 .form-row {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .form-row label {
-  display: block;
-  margin-bottom: 0.5rem;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1rem;
   color: #4A2B0F;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.form-row label::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 2rem;
+  height: 2px;
+  background-color: #8B4513;
+}
+
+/* Stripe Elements styling */
+.StripeElement {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 2px solid #E6D5C3;
+  transition: all 0.3s ease;
+}
+
+.StripeElement--focus {
+  border-color: #8B4513;
+  box-shadow: 0 2px 4px rgba(139, 69, 19, 0.1);
+}
+
+.StripeElement--invalid {
+  border-color: #dc3545;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
 }
 
 .error-message {
   color: #dc3545;
   background-color: #f8d7da;
-  padding: 0.75rem;
-  border-radius: 4px;
+  border: 1px solid #f5c6cb;
+  padding: 1rem;
+  border-radius: 8px;
   margin: 1rem 0;
+  font-size: 0.9rem;
 }
 
 .pay-button {
@@ -109,51 +173,58 @@
   background-color: #8B4513;
   color: white;
   border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  font-weight: 500;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.3s ease;
+  margin-top: 2rem;
 }
 
 .pay-button:hover:not(:disabled) {
-  background-color: #6B4423;
+  background-color: #6B3410;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(139, 69, 19, 0.2);
 }
 
 .pay-button:disabled {
-  background-color: #ccc;
+  background-color: #cccccc;
   cursor: not-allowed;
+  transform: none;
 }
 
 .loading {
   text-align: center;
-  padding: 2rem;
+  padding: 3rem;
   color: #4A2B0F;
   font-size: 1.2rem;
 }
 
 .error-container {
   text-align: center;
-  padding: 2rem;
+  padding: 3rem;
   background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .return-home {
-  margin-top: 1rem;
-  padding: 0.75rem 1.5rem;
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 1rem 2rem;
   background-color: #8B4513;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 1rem;
-  transition: background-color 0.2s;
+  transition: all 0.3s ease;
 }
 
 .return-home:hover {
-  background-color: #6B4423;
+  background-color: #6B3410;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(139, 69, 19, 0.2);
 }
 
 /* Paper background effect */
@@ -194,4 +265,61 @@
     width: 100px;
     height: 150px;
   }
+
+  .order-summary,
+  .payment-section {
+    padding: 1.5rem;
+  }
+
+  .book-info {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .book-details {
+    margin-top: 1rem;
+  }
+}
+
+.card-element-container {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 2px solid #E6D5C3;
+  transition: all 0.3s ease;
+}
+
+.card-element-container:hover {
+  border-color: #8B4513;
+}
+
+.processing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.processing i {
+  animation: spin 1s linear infinite;
+}
+
+.secure-payment-notice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  color: #6B4423;
+  font-size: 0.9rem;
+}
+
+.secure-payment-notice i {
+  color: #8B4513;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 } 
