@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { FaSearch, FaTimes } from 'react-icons/fa';
+import SearchResults from '../Search/SearchResults';
+import { getBooks } from '../../../booksData';
 import './Navigation.css';
 import logo from '../../../assets/logo.svg';
 
@@ -7,61 +10,28 @@ const Navigation = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userStatus, setUserStatus] = useState('');
   const [userName, setUserName] = useState('');
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const searchRef = useRef(null);
+  const searchInputRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const user = localStorage.getItem('currentUser');
-    const status = localStorage.getItem('userStatus');
-    if (user) {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser) {
       setIsLoggedIn(true);
-      setUserStatus(status);
-      const userData = JSON.parse(user);
-      setUserName(userData.name || 'User');
-    } else {
-      setIsLoggedIn(false);
-      setUserStatus('');
+      setUserStatus(currentUser.status);
+      setUserName(currentUser.name);
     }
-
-    // Add click outside listener
-    const handleClickOutside = (event) => {
-      if (searchRef.current && !searchRef.current.contains(event.target)) {
-        setIsSearchOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  useEffect(() => {
-    // Live search functionality
-    const performSearch = async () => {
-      if (searchQuery.trim() === '') {
-        setSearchResults([]);
-        return;
-      }
-
-      try {
-        const response = await fetch('/assets/books.json');
-        const data = await response.json();
-        const filteredBooks = data.books.filter(book => 
-          book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          book.author.name.toLowerCase().includes(searchQuery.toLowerCase())
-        ).slice(0, 5); // Limit to 5 results
-
-        setSearchResults(filteredBooks);
-      } catch (error) {
-        console.error('Error searching books:', error);
-      }
-    };
-
-    const debounceTimer = setTimeout(performSearch, 300);
-    return () => clearTimeout(debounceTimer);
-  }, [searchQuery]);
+  const handleLogout = () => {
+    localStorage.removeItem('currentUser');
+    setIsLoggedIn(false);
+    setUserStatus('');
+    setUserName('');
+    navigate('/');
+  };
 
   const handleProfileClick = () => {
     if (userStatus === 'librarian') {
@@ -71,20 +41,33 @@ const Navigation = () => {
     }
   };
 
-  const handleSearchClick = () => {
-    setIsSearchOpen(!isSearchOpen);
-    if (!isSearchOpen) {
-      setTimeout(() => {
-        const searchInput = document.querySelector('.search-input');
-        if (searchInput) searchInput.focus();
-      }, 100);
+  const toggleSearch = () => {
+    setShowSearch(!showSearch);
+    setSearchQuery('');
+    setSearchResults([]);
+    if (!showSearch && searchInputRef.current) {
+      setTimeout(() => searchInputRef.current.focus(), 100);
     }
   };
 
-  const handleSearchSelect = (bookId) => {
-    setIsSearchOpen(false);
-    setSearchQuery('');
-    navigate(`/books/${bookId}`);
+  const handleSearchChange = (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+
+    if (query.trim()) {
+      const books = getBooks();
+      const filtered = books.filter(book => {
+        const searchTerm = query.toLowerCase();
+        const titleMatch = book.title?.toLowerCase().includes(searchTerm) || false;
+        const authorMatch = book.author?.name?.toLowerCase().includes(searchTerm) || false;
+        const categoryMatch = book.category?.toLowerCase().includes(searchTerm) || false;
+        
+        return titleMatch || authorMatch || categoryMatch;
+      });
+      setSearchResults(filtered);
+    } else {
+      setSearchResults([]);
+    }
   };
 
   return (
@@ -121,54 +104,20 @@ const Navigation = () => {
       </div>
 
       <div className="nav-right">
-        <div className="search-container" ref={searchRef}>
-          <button 
-            className={`search-button ${isSearchOpen ? 'active' : ''}`}
-            onClick={handleSearchClick}
-          >
-            <i className="fas fa-search"></i>
+        <div className="search-container">
+          <button className="search-toggle" onClick={toggleSearch}>
+            {showSearch ? <FaTimes /> : <FaSearch />}
           </button>
-          {isSearchOpen && (
-            <div className="search-wrapper">
+          {showSearch && (
+            <div className="search-input-container">
               <input
+                ref={searchInputRef}
                 type="text"
-                className="search-input"
-                placeholder="Search books..."
+                placeholder="Search books by title, author, or category..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={handleSearchChange}
+                className="search-input"
               />
-              {searchResults.length > 0 && (
-                <div className="search-results">
-                  {searchResults.map((book) => (
-                    <div
-                      key={book.id}
-                      className="search-result-item"
-                      onClick={() => handleSearchSelect(book.id)}
-                    >
-                      <img 
-                        src={`/${book.cover_image}`}
-                        alt={book.title}
-                        className="search-result-image"
-                        onError={(e) => {
-                          console.error(`Error loading image: ${book.cover_image}`);
-                          e.target.onerror = null;
-                          // Try alternative path
-                          const altPath = book.cover_image.replace('assets/', '');
-                          e.target.src = `/${altPath}`;
-                          // If alternative path fails, use placeholder
-                          e.target.onerror = () => {
-                            e.target.src = '/assets/images/book-placeholder.jpg';
-                          };
-                        }}
-                      />
-                      <div className="search-result-info">
-                        <div className="search-result-title">{book.title}</div>
-                        <div className="search-result-author">{book.author.name}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
             </div>
           )}
         </div>
@@ -177,6 +126,9 @@ const Navigation = () => {
             <button className="profile-btn" onClick={handleProfileClick}>
               {userStatus === 'librarian' ? 'Library Admin' : userName}
             </button>
+            <button className="logout-btn" onClick={handleLogout}>
+              Logout
+            </button>
           </div>
         ) : (
           <div className="auth-buttons">
@@ -184,6 +136,12 @@ const Navigation = () => {
           </div>
         )}
       </div>
+
+      <SearchResults
+        results={searchResults}
+        isVisible={showSearch && searchResults.length > 0}
+        onClose={toggleSearch}
+      />
     </nav>
   );
 };

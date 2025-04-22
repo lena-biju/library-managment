@@ -73,7 +73,7 @@ const LoginPage = () => {
     if (Object.values(newErrors).every(error => error === '')) {
       if (selectedRole === 'librarian') {
         // Check librarian credentials (in a real app, this would be a server call)
-        if (formData.phone === '9999999999' && formData.password === 'admin123') {
+        if (formData.phone === '1234567890' && formData.password === 'admin123') {
           localStorage.setItem('userStatus', 'librarian');
           localStorage.setItem('currentUser', JSON.stringify({
             ...formData,
