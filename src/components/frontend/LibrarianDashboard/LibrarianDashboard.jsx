@@ -7,7 +7,13 @@ import './LibrarianDashboard.css';
 
 const LibrarianDashboard = () => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState('books');
+  const [activeTab, setActiveTab] = useState(() => {
+    // Get the active tab from localStorage or default to 'books'
+    const savedTab = localStorage.getItem('dashboardActiveTab');
+    // Clear the saved tab after reading it
+    localStorage.removeItem('dashboardActiveTab');
+    return savedTab || 'books';
+  });
   const [books, setBooks] = useState([]);
   const [users, setUsers] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);

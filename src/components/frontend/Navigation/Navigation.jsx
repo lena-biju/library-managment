@@ -126,6 +126,11 @@ const Navigation = () => {
             <button className="profile-btn" onClick={handleProfileClick}>
               {userStatus === 'librarian' ? 'Library Admin' : userName}
             </button>
+            {userStatus === 'librarian' && (
+              <button className="dashboard-btn" onClick={() => navigate('/librarian-dashboard')}>
+                Dashboard
+              </button>
+            )}
             <button className="logout-btn" onClick={handleLogout}>
               Logout
             </button>

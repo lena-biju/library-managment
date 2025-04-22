@@ -29,6 +29,10 @@ const AccountPage = () => {
     }
   }, [navigate]);
 
+  const handleDashboardClick = () => {
+    navigate('/librarian-dashboard');
+  };
+
   const handleLogout = () => {
     localStorage.removeItem('currentUser');
     localStorage.removeItem('userStatus');
@@ -47,6 +51,9 @@ const AccountPage = () => {
     return null;
   }
 
+  // Check if user is librarian
+  const isLibrarian = currentUser.role === 'librarian' || localStorage.getItem('userStatus') === 'librarian';
+
   return (
     <div className="account-page">
       <Navigation />
@@ -54,9 +61,14 @@ const AccountPage = () => {
       <main className="account-content">
         <div className="account-header">
           <h1>Welcome back, {currentUser.name}!</h1>
-          <button onClick={handleLogout} className="logout-btn">
-            Log out
-          </button>
+          <div className="header-actions">
+            {isLibrarian && (
+              <button onClick={handleDashboardClick} className="dashboard-btn">
+                Dashboard
+              </button>
+            )}
+           
+          </div>
         </div>
 
         <div className="account-sections">
