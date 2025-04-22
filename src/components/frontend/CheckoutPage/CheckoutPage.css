@@ -90,71 +90,294 @@
 }
 
 .payment-section {
-  padding: 2rem;
   background: white;
-  border-radius: 12px;
-  border: 1px solid #e9ecef;
-  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 24px;
 }
 
-.payment-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(to right, #8B4513, #E6D5C3);
-  border-radius: 12px 12px 0 0;
+.payment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 16px;
 }
 
-.checkout-form {
-  margin-top: 2rem;
+.payment-header h2 {
+  font-size: 20px;
+  color: #333;
+  margin: 0;
+  border: none;
+  padding: 0;
 }
 
-.form-row {
-  margin-bottom: 2rem;
+.card-brands {
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }
 
-.form-row label {
-  position: relative;
-  display: inline-block;
-  margin-bottom: 1rem;
+.card-icon {
+  font-size: 28px;
+  transition: all 0.3s ease;
+}
+
+.card-icon.visa {
+  color: #1A1F71;
+}
+
+.card-icon.mastercard {
+  color: #EB001B;
+}
+
+.card-icon.amex {
+  color: #006FCF;
+}
+
+.card-icon.discover {
+  color: #FF6000;
+}
+
+.card-icon:hover {
+  transform: scale(1.1);
+}
+
+.input-icon {
+  margin-right: 8px;
   color: #4A2B0F;
-  font-weight: 600;
-  font-size: 1.1rem;
+  vertical-align: middle;
 }
 
-.form-row label::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 2rem;
-  height: 2px;
-  background-color: #8B4513;
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.form-group label::after {
+  display: none;
+}
+
+.card-input-container {
+  border: 1px solid #ccc;
+  padding: 12px;
+  border-radius: 4px;
+  background: white;
+  transition: border-color 0.2s;
+}
+
+.card-input-container:hover {
+  border-color: #666;
+}
+
+.form-row-split {
+  display: flex;
+  gap: 16px;
+}
+
+.form-group.half {
+  flex: 1;
+}
+
+.form-select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+  background: white;
+}
+
+.form-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+}
+
+.form-group.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-group.checkbox label {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.info-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #666;
+  color: white;
+  font-size: 12px;
+  font-style: italic;
+  cursor: help;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.cancel-btn,
+.save-btn {
+  padding: 8px 24px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cancel-btn {
+  background: white;
+  border: 1px solid #ccc;
+  color: #666;
+}
+
+.cancel-btn:hover {
+  background: #f5f5f5;
+}
+
+.save-btn {
+  background: #4A2B0F;
+  border: none;
+  color: white;
+}
+
+.save-btn:hover:not(:disabled) {
+  background: #6B3410;
+}
+
+.save-btn:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Remove the previous styles that don't match the new design */
+.card-element-container,
+.secure-payment-notice,
+.pay-button,
+.error-message {
+  display: none;
 }
 
 /* Stripe Elements styling */
+.stripe-element {
+  width: 100%;
+  padding: 0;
+}
+
 .StripeElement {
-  background-color: white;
-  padding: 1rem;
-  border-radius: 8px;
-  border: 2px solid #E6D5C3;
+  width: 100%;
+  padding: 0;
+  background: white;
   transition: all 0.3s ease;
 }
 
 .StripeElement--focus {
+  box-shadow: none;
+  border-color: #8B4513;
+}
+
+/* Card Element Iframe specific styles */
+.StripeElement iframe {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  display: block !important;
+  transform: translateZ(0) !important;
+  min-height: 120px !important;
+}
+
+/* Custom styling for card fields */
+.__PrivateStripeElement iframe {
+  opacity: 1 !important;
+  min-height: 120px !important;
+}
+
+.stripe-element--complete {
+  border-color: #4CAF50;
+}
+
+.stripe-element--empty {
+  border-color: #E6D5C3;
+}
+
+.stripe-element--focus {
   border-color: #8B4513;
   box-shadow: 0 2px 4px rgba(139, 69, 19, 0.1);
 }
 
-.StripeElement--invalid {
-  border-color: #dc3545;
+/* Input field spacing */
+.ElementsApp {
+  font-size: 18px !important;
+  line-height: 1.8 !important;
 }
 
-.StripeElement--webkit-autofill {
-  background-color: #fefde5 !important;
+.ElementsApp .InputElement {
+  color: #4A2B0F !important;
+}
+
+.ElementsApp .InputContainer {
+  margin-bottom: 16px !important;
+}
+
+/* Card number field */
+.ElementsApp .CardNumberField {
+  margin-bottom: 20px !important;
+}
+
+/* Expiry and CVC fields container */
+.ElementsApp .CardField-expiry,
+.ElementsApp .CardField-cvc {
+  margin-top: 16px !important;
+}
+
+/* Enhanced focus states */
+.card-element-container:focus-within {
+  border-color: #8B4513;
+  box-shadow: 0 4px 6px rgba(139, 69, 19, 0.1);
+  outline: none;
+}
+
+/* Card completion animation */
+@keyframes cardComplete {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.stripe-element--complete {
+  animation: cardComplete 0.3s ease-in-out;
 }
 
 .error-message {
@@ -168,29 +391,27 @@
 }
 
 .pay-button {
-  width: 100%;
-  padding: 1rem;
-  background-color: #8B4513;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1.1rem;
+  padding: 12px 32px;
+  border-radius: 4px;
+  font-size: 16px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 2rem;
+  background: #4A2B0F;
+  border: none;
+  color: white;
+  min-width: 150px;
 }
 
 .pay-button:hover:not(:disabled) {
-  background-color: #6B3410;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(139, 69, 19, 0.2);
+  background: #6B3410;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .pay-button:disabled {
-  background-color: #cccccc;
+  background: #cccccc;
   cursor: not-allowed;
-  transform: none;
 }
 
 .loading {
@@ -284,10 +505,13 @@
 
 .card-element-container {
   background-color: white;
-  padding: 1rem;
+  padding: 1.5rem;
   border-radius: 8px;
   border: 2px solid #E6D5C3;
   transition: all 0.3s ease;
+  min-height: 150px;
+  display: flex;
+  align-items: flex-start;
 }
 
 .card-element-container:hover {
@@ -309,10 +533,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  margin-top: 1.5rem;
-  color: #6B4423;
-  font-size: 0.9rem;
+  gap: 8px;
+  margin: 24px 0;
+  color: #4A2B0F;
+  font-size: 14px;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
 }
 
 .secure-payment-notice i {
@@ -322,4 +550,312 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/* Payment Overlay */
+.payment-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.payment-overlay-content {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 90%;
+  animation: slideUp 0.3s ease-out;
+}
+
+.payment-animation {
+  margin-bottom: 24px;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #4A2B0F;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 24px;
+}
+
+.payment-overlay-content h3 {
+  color: #333;
+  margin: 0 0 12px;
+  font-size: 24px;
+}
+
+.payment-overlay-content p {
+  color: #666;
+  margin: 0;
+  font-size: 16px;
+}
+
+.payment-error {
+  margin-top: 20px;
+  padding: 16px;
+  background: #fff2f2;
+  border: 1px solid #ffcdd2;
+  border-radius: 8px;
+  color: #dc3545;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Remove old save button styles */
+.save-btn {
+  display: none;
+}
+
+/* Update form actions container */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #e0e0e0;
+}
+
+/* Responsive styles for payment overlay */
+@media (max-width: 768px) {
+  .payment-overlay-content {
+    padding: 24px;
+    width: 85%;
+  }
+}
+
+/* Pay Now button styles */
+.pay-now-btn {
+  padding: 12px 32px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #4A2B0F;
+  border: none;
+  color: white;
+  min-width: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pay-now-btn:hover:not(:disabled) {
+  background: #6B3410;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pay-now-btn:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.pay-now-btn .processing {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: pulse 1.5s infinite;
+}
+
+.spinner-small {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Update form actions */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.cancel-btn {
+  padding: 12px 32px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: white;
+  border: 1px solid #ccc;
+  color: #666;
+  height: 48px;
+}
+
+.cancel-btn:hover {
+  background: #f5f5f5;
+  border-color: #999;
+}
+
+/* Remove old button styles */
+.pay-button,
+.save-btn {
+  display: none;
+}
+
+/* Update payment overlay styles */
+.payment-overlay-content {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 90%;
+}
+
+.payment-overlay-content h3 {
+  color: #333;
+  margin: 0 0 16px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.payment-overlay-content p {
+  color: #666;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.payment-error {
+  margin-top: 20px;
+  padding: 16px;
+  background: #fff2f2;
+  border: 1px solid #ffcdd2;
+  border-radius: 8px;
+  color: #dc3545;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .pay-now-btn,
+  .cancel-btn {
+    padding: 12px 24px;
+    font-size: 14px;
+    height: 44px;
+  }
+
+  .form-actions {
+    margin-top: 24px;
+    padding-top: 20px;
+    gap: 12px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Success and Error Icons */
+.success-checkmark {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #4CAF50;
+  color: white;
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  animation: scaleIn 0.3s ease-out;
+}
+
+.error-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #dc3545;
+  color: white;
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  animation: scaleIn 0.3s ease-out;
+}
+
+.redirect-notice {
+  margin-top: 16px !important;
+  color: #666;
+  font-size: 14px;
+  font-style: italic;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 } 
