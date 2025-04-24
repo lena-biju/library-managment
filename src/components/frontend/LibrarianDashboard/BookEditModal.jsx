@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './BookEditModal.css';
+import { toast } from 'react-hot-toast';
+
+// Generate a random ISBN-13 number
+const generateISBN = () => {
+  const prefix = '978';
+  const randomPart = Math.floor(Math.random() * 9000000000 + 1000000000);
+  const isbn = `${prefix}${randomPart}`;
+  return isbn;
+};
 
 const BookEditModal = ({ book, onSave, onClose }) => {
   const [formData, setFormData] = useState({
@@ -17,11 +26,13 @@ const BookEditModal = ({ book, onSave, onClose }) => {
     reviews: [],
     price: 0,
     rentPrice: 0,
-    status: 'available'
+    status: 'available',
+    category: []
   });
 
   const [coverPreview, setCoverPreview] = useState('');
   const [authorImagePreview, setAuthorImagePreview] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (book) {
@@ -29,7 +40,8 @@ const BookEditModal = ({ book, onSave, onClose }) => {
         ...book,
         genre: book.genre || [],
         price: book.price || 29.99,
-        rentPrice: book.rentPrice || 9.99
+        rentPrice: book.rentPrice || 9.99,
+        category: book.category || []
       });
       setCoverPreview(book.cover_image || '');
       setAuthorImagePreview(book.author?.profile_picture || '');
@@ -53,6 +65,24 @@ const BookEditModal = ({ book, onSave, onClose }) => {
         [name]: value
       }));
     }
+  };
+
+  const handleBookTypeChange = (type) => {
+    setFormData(prev => {
+      const newCategory = [...prev.category];
+      const index = newCategory.indexOf(type);
+      
+      if (index === -1) {
+        newCategory.push(type);
+      } else {
+        newCategory.splice(index, 1);
+      }
+      
+      return {
+        ...prev,
+        category: newCategory
+      };
+    });
   };
 
   const handleImageChange = async (e, type) => {
@@ -115,9 +145,87 @@ const BookEditModal = ({ book, onSave, onClose }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSave(formData);
+    setIsLoading(true);
+
+    try {
+      // Get current books
+      const response = await fetch('http://localhost:3001/api/books');
+      const data = await response.json();
+      let books = data.books || [];
+
+      // Create new book object
+      const newBook = {
+        id: book ? formData.id : String(Math.max(...books.map(b => parseInt(b.id) || 0), 0) + 1),
+        title: formData.title,
+        author: formData.author,
+        isbn: formData.isbn || generateISBN(),
+        genre: formData.genre,
+        language: formData.language || 'English',
+        published_year: formData.published_year || new Date().getFullYear(),
+        cover_image: formData.cover_image || `/src/assets/books/covers/default-cover.jpg`,
+        description: formData.description || '',
+        file_type: formData.category?.includes('ebook') ? 'pdf' : 'physical',
+        file_path: formData.category?.includes('ebook') 
+          ? `/src/assets/books/text/${formData.id || 'new'}-${formData.title.toLowerCase().replace(/\s+/g, '-')}.pdf`
+          : null,
+        content: '',
+        total_pages: formData.total_pages || '0',
+        read_time: formData.read_time || '0',
+        rating: formData.rating || '0',
+        reviews: [],
+        availability: true,
+        bookmark: null,
+        audio_version: false,
+        purchase_link: '',
+        category: formData.category || []
+      };
+
+      // Update books array
+      if (book) {
+        books = books.map(b => b.id === formData.id ? newBook : b);
+      } else {
+        books.push(newBook);
+      }
+
+      // Sort books by ID
+      books.sort((a, b) => parseInt(a.id) - parseInt(b.id));
+
+      // Prepare data for API
+      const updateData = {
+        books,
+        metadata: {
+          total_books: books.length,
+          last_updated: new Date().toISOString().split('T')[0],
+          version: "1.0"
+        }
+      };
+
+      // Send update to server
+      const updateResponse = await fetch('http://localhost:3001/api/books/update', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updateData)
+      });
+
+      if (!updateResponse.ok) {
+        throw new Error('Failed to update books');
+      }
+
+      // Update local storage
+      localStorage.setItem('books', JSON.stringify(books));
+
+      setIsLoading(false);
+      onClose();
+      toast.success(book ? 'Book updated successfully!' : 'Book added successfully!');
+    } catch (error) {
+      console.error('Error saving book:', error);
+      setIsLoading(false);
+      toast.error('Failed to save book. Please try again.');
+    }
   };
 
   const genres = [
@@ -149,6 +257,28 @@ const BookEditModal = ({ book, onSave, onClose }) => {
                   onChange={handleChange}
                   required
                 />
+              </div>
+
+              <div className="form-group">
+                <label>Book Type</label>
+                <div className="book-type-checkboxes">
+                  <label className="checkbox-label">
+                    <input
+                      type="checkbox"
+                      checked={formData.category.includes('ebook')}
+                      onChange={() => handleBookTypeChange('ebook')}
+                    />
+                    E-book
+                  </label>
+                  <label className="checkbox-label">
+                    <input
+                      type="checkbox"
+                      checked={formData.category.includes('offline')}
+                      onChange={() => handleBookTypeChange('offline')}
+                    />
+                    Physical Book
+                  </label>
+                </div>
               </div>
 
               <div className="form-group">
@@ -275,13 +405,44 @@ const BookEditModal = ({ book, onSave, onClose }) => {
               </div>
             </div>
           </div>
-
-          <div className="form-actions">
-            <button type="button" className="cancel-btn" onClick={onClose}>
+          <div style={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            gap: '10px',
+            marginTop: '20px',
+            padding: '10px',
+            position: 'sticky',
+            bottom: '0',
+            backgroundColor: 'white',
+            zIndex: '1000'
+          }}>
+            <button
+              type="button"
+              onClick={onClose}
+              style={{
+                padding: '10px 20px',
+                background: '#f0f0f0',
+                border: '1px solid #ddd',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                minWidth: '100px'
+              }}
+            >
               Cancel
             </button>
-            <button type="submit" className="save-btn">
-              {book?.id ? 'Save Changes' : 'Add Book'}
+            <button
+              type="submit"
+              style={{
+                padding: '10px 20px',
+                background: '#007bff',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                minWidth: '100px'
+              }}
+            >
+              Save Changes
             </button>
           </div>
         </form>

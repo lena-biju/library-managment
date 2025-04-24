@@ -29,21 +29,24 @@ const SignupPage = () => {
     confirmPassword: false
   });
 
-  const [showPayment, setShowPayment] = useState(false);
-  const registrationFee = 5.99;
-
   const validateField = (name, value) => {
     switch (name) {
       case 'name':
-        return !value ? 'Name is required' : '';
+        return value.trim() === '' ? 'Name is required' : '';
       case 'phone':
-        return !/^\d{10}$/.test(value) ? 'Please enter a valid 10-digit phone number' : '';
-      case 'email':
-        return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? 'Please enter a valid email address' : '';
-      case 'password':
-        return !/^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{8,}$/.test(value)
-          ? 'Password must contain at least 8 characters, one uppercase letter, one number, and one special character'
+        return !/^\d{10}$/.test(value) 
+          ? 'Phone number must be exactly 10 digits' 
           : '';
+      case 'email':
+        return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+          ? 'Please enter a valid email address (e.g., user@example.com)'
+          : '';
+      case 'password':
+        const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        if (!passwordRegex.test(value)) {
+          return 'Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&)';
+        }
+        return '';
       case 'confirmPassword':
         return value !== formData.password ? 'Passwords do not match' : '';
       default:
@@ -64,6 +67,14 @@ const SignupPage = () => {
         [name]: validateField(name, value)
       }));
     }
+
+    // Special handling for confirmPassword
+    if (name === 'password' && touched.confirmPassword) {
+      setErrors(prev => ({
+        ...prev,
+        confirmPassword: formData.confirmPassword !== value ? 'Passwords do not match' : ''
+      }));
+    }
   };
 
   const handleBlur = (e) => {
@@ -78,51 +89,83 @@ const SignupPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
+    // Mark all fields as touched
+    const allTouched = Object.keys(touched).reduce((acc, key) => ({
+      ...acc,
+      [key]: true
+    }), {});
+    setTouched(allTouched);
+
     // Validate all fields
     const newErrors = {};
     Object.keys(formData).forEach(key => {
       newErrors[key] = validateField(key, formData[key]);
     });
     setErrors(newErrors);
-    
+
     // Check if there are any errors
-    if (Object.values(newErrors).every(error => error === '')) {
-      // Check if user already exists
-      const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
-      if (registeredUsers.some(user => user.phone === formData.phone)) {
-        alert('A user with this phone number already exists. Please login instead.');
-        navigate('/login');
-        return;
+    const hasErrors = Object.values(newErrors).some(error => error !== '');
+    
+    if (!hasErrors) {
+      try {
+        // Get existing users or initialize empty array
+        const existingUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+        
+        // Check for existing user
+        if (existingUsers.some(user => user.email === formData.email)) {
+          setErrors(prev => ({
+            ...prev,
+            email: 'An account with this email already exists'
+          }));
+          return;
+        }
+
+        if (existingUsers.some(user => user.phone === formData.phone)) {
+          setErrors(prev => ({
+            ...prev,
+            phone: 'An account with this phone number already exists'
+          }));
+          return;
+        }
+
+        // Create new user object
+        const newUser = {
+          id: Date.now().toString(),
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          password: formData.password,
+          role: 'normalUser',
+          createdAt: new Date().toISOString(),
+          library: {
+            borrowed: [],
+            purchased: [],
+            wishlist: []
+          }
+        };
+
+        // Add new user to existing users
+        existingUsers.push(newUser);
+
+        // Save to localStorage
+        localStorage.setItem('registeredUsers', JSON.stringify(existingUsers));
+        localStorage.setItem('currentUser', JSON.stringify(newUser));
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userStatus', 'normalUser');
+
+        // Show success message
+        alert('Registration successful! Welcome to your account.');
+        
+        // Navigate to account page
+        navigate('/account');
+      } catch (error) {
+        console.error('Registration error:', error);
+        alert('Registration failed. Please try again.');
       }
-      
-      // Show payment section
-      setShowPayment(true);
     }
-  };
-
-  const handlePayment = () => {
-    // In a real application, this would integrate with a payment gateway
-    // For demo purposes, we'll simulate a successful payment
-    const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
-    const newUser = {
-      ...formData,
-      status: 'normalUser'
-    };
-    
-    registeredUsers.push(newUser);
-    localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
-    localStorage.setItem('userStatus', 'normalUser');
-    localStorage.setItem('currentUser', JSON.stringify(newUser));
-    
-    alert('Registration successful! Please login with your credentials.');
-    navigate('/login');
-  };
-
-  const getInputClassName = (fieldName) => {
-    return `form-input ${touched[fieldName] && errors[fieldName] ? 'error' : ''}`;
   };
 
   return (
@@ -133,117 +176,96 @@ const SignupPage = () => {
           <h1>Create Account</h1>
           <p className="auth-subtitle">Join our book community</p>
 
-          {!showPayment ? (
-            <form onSubmit={handleSubmit} noValidate>
-              <div className="form-group">
-                <label htmlFor="name">Full Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  className={getInputClassName('name')}
-                  value={formData.name}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  placeholder="Enter your full name"
-                  required
-                />
-                {touched.name && errors.name && (
-                  <span className="error-message">{errors.name}</span>
-                )}
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="phone">Phone Number</label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  className={getInputClassName('phone')}
-                  value={formData.phone}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  placeholder="Enter your phone number"
-                  required
-                />
-                {touched.phone && errors.phone && (
-                  <span className="error-message">{errors.phone}</span>
-                )}
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  className={getInputClassName('email')}
-                  value={formData.email}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  placeholder="Enter your email"
-                  required
-                />
-                {touched.email && errors.email && (
-                  <span className="error-message">{errors.email}</span>
-                )}
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  className={getInputClassName('password')}
-                  value={formData.password}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  placeholder="Create a password"
-                  required
-                />
-                {touched.password && errors.password && (
-                  <span className="error-message">{errors.password}</span>
-                )}
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="confirmPassword">Confirm Password</label>
-                <input
-                  type="password"
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  className={getInputClassName('confirmPassword')}
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  placeholder="Confirm your password"
-                  required
-                />
-                {touched.confirmPassword && errors.confirmPassword && (
-                  <span className="error-message">{errors.confirmPassword}</span>
-                )}
-              </div>
-
-              <button type="submit" className="auth-btn">Continue to Payment</button>
-            </form>
-          ) : (
-            <div className="payment-section">
-              <h2>Registration Fee</h2>
-              <div className="fee-amount">₹{registrationFee}</div>
-              <p className="fee-description">
-                A small one-time registration fee is required to create your account.
-                This helps us maintain the quality of our service and provide you with
-                the best reading experience.
-              </p>
-              <button onClick={handlePayment} className="auth-btn">
-                Pay Now
-              </button>
-              <button onClick={() => setShowPayment(false)} className="back-btn">
-                Back to Form
-              </button>
+          <form onSubmit={handleSubmit} noValidate>
+            <div className="form-group">
+              <label htmlFor="name">Full Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={`form-input ${touched.name && errors.name ? 'error' : ''}`}
+                placeholder="Enter your full name"
+              />
+              {touched.name && errors.name && (
+                <span className="error-message">{errors.name}</span>
+              )}
             </div>
-          )}
+
+            <div className="form-group">
+              <label htmlFor="phone">Phone Number</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={`form-input ${touched.phone && errors.phone ? 'error' : ''}`}
+                placeholder="Enter 10-digit phone number"
+              />
+              {touched.phone && errors.phone && (
+                <span className="error-message">{errors.phone}</span>
+              )}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={`form-input ${touched.email && errors.email ? 'error' : ''}`}
+                placeholder="Enter your email address"
+              />
+              {touched.email && errors.email && (
+                <span className="error-message">{errors.email}</span>
+              )}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={`form-input ${touched.password && errors.password ? 'error' : ''}`}
+                placeholder="Create a strong password"
+              />
+              {touched.password && errors.password && (
+                <span className="error-message">{errors.password}</span>
+              )}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="confirmPassword">Confirm Password</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={`form-input ${touched.confirmPassword && errors.confirmPassword ? 'error' : ''}`}
+                placeholder="Confirm your password"
+              />
+              {touched.confirmPassword && errors.confirmPassword && (
+                <span className="error-message">{errors.confirmPassword}</span>
+              )}
+            </div>
+
+            <button type="submit" className="auth-btn">
+              Register
+            </button>
+          </form>
 
           <p className="auth-link">
             Already have an account? <Link to="/login">Login</Link>

@@ -3,18 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 import BookEditModal from './BookEditModal';
 import AboutEditor from './AboutEditor';
+import AddBookForm from './AddBookForm';
 import './LibrarianDashboard.css';
 
 const LibrarianDashboard = () => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState(() => {
-    // Get the active tab from localStorage or default to 'books'
-    const savedTab = localStorage.getItem('dashboardActiveTab');
-    // Clear the saved tab after reading it
-    localStorage.removeItem('dashboardActiveTab');
-    return savedTab || 'books';
-  });
+  const [activeTab, setActiveTab] = useState('books');
   const [books, setBooks] = useState([]);
+  const [filteredBooks, setFilteredBooks] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
   const [users, setUsers] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
@@ -65,6 +62,8 @@ const LibrarianDashboard = () => {
       }
     };
   });
+  const [isAddingBook, setIsAddingBook] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     // Check if user is librarian
@@ -83,10 +82,25 @@ const LibrarianDashboard = () => {
     loadTransactions();
   }, [navigate]);
 
+  useEffect(() => {
+    // Filter books based on search query
+    const filtered = books.filter(book => {
+      const searchLower = searchQuery.toLowerCase();
+      return (
+        book.title.toLowerCase().includes(searchLower) ||
+        book.author.name.toLowerCase().includes(searchLower) ||
+        book.isbn.toLowerCase().includes(searchLower) ||
+        book.genre.some(g => g.toLowerCase().includes(searchLower))
+      );
+    });
+    setFilteredBooks(filtered);
+  }, [searchQuery, books]);
+
   // Data loading functions
   const loadBooks = () => {
     const savedBooks = JSON.parse(localStorage.getItem('books') || '[]');
     setBooks(savedBooks);
+    setFilteredBooks(savedBooks);
   };
 
   const loadTestimonials = () => {
@@ -115,21 +129,65 @@ const LibrarianDashboard = () => {
     setIsEditing(true);
   };
 
-  const handleBookSave = (updatedBook) => {
-    let updatedBooks;
-    if (updatedBook.id) {
-      updatedBooks = books.map(book => 
-        book.id === updatedBook.id ? updatedBook : book
-      );
-    } else {
-      updatedBook.id = Date.now().toString();
-      updatedBooks = [...books, updatedBook];
+  const handleBookSave = async (updatedBookData) => {
+    try {
+      // Get existing books from the API
+      const response = await fetch('http://localhost:3001/api/books');
+      const data = await response.json();
+      const existingBooks = data.books;
+
+      let updatedBooks;
+      if (updatedBookData.id) {
+        // Update existing book
+        updatedBooks = existingBooks.map(book => 
+          book.id === updatedBookData.id ? { ...book, ...updatedBookData } : book
+        );
+      } else {
+        // This shouldn't happen as new books are handled by handleSaveBook
+        return;
+      }
+
+      // Sort books by ID
+      updatedBooks.sort((a, b) => a.id - b.id);
+
+      // Update metadata
+      const updatedData = {
+        books: updatedBooks,
+        metadata: {
+          total_books: updatedBooks.length,
+          last_updated: new Date().toISOString().split('T')[0],
+          version: "1.0"
+        }
+      };
+
+      // Save to books.json via API
+      const saveResponse = await fetch('http://localhost:3001/api/books/update', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedData)
+      });
+
+      if (!saveResponse.ok) {
+        throw new Error('Failed to save books');
+      }
+
+      // Update localStorage
+      localStorage.setItem('books', JSON.stringify(updatedBooks));
+      
+      // Update state
+      setBooks(updatedBooks);
+      setSelectedBook(null);
+      setIsEditing(false);
+
+      // Show success message
+      alert('Book updated successfully!');
+
+    } catch (error) {
+      console.error('Error updating book:', error);
+      alert('Failed to update book. Please try again.');
     }
-    
-    localStorage.setItem('books', JSON.stringify(updatedBooks));
-    setBooks(updatedBooks);
-    setSelectedBook(null);
-    setIsEditing(false);
   };
 
   const handleBookDelete = (bookId) => {
@@ -218,6 +276,99 @@ const LibrarianDashboard = () => {
     alert('Settings saved successfully!');
   };
 
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleAddNewBook = () => {
+    setIsAddingBook(true);
+  };
+
+  const handleSaveBook = async (newBookData) => {
+    try {
+      console.log('Attempting to save new book:', newBookData);
+
+      // Fetch current books from API
+      const response = await fetch('http://localhost:3001/api/books');
+      if (!response.ok) {
+        throw new Error(`Failed to fetch existing books: ${response.statusText}`);
+      }
+      const data = await response.json();
+      const existingBooks = data.books || [];
+
+      console.log('Fetched existing books:', existingBooks);
+
+      // Find highest ID and increment
+      const maxId = existingBooks.length > 0 
+        ? Math.max(...existingBooks.map(book => parseInt(book.id)))
+        : 0;
+      const newId = (maxId + 1).toString();
+
+      // Create new book object with proper structure
+      const newBook = {
+        id: newId,
+        title: newBookData.title,
+        author: newBookData.author,
+        isbn: newBookData.isbn,
+        genre: newBookData.genre || 'Uncategorized',
+        language: newBookData.language || 'English',
+        published_year: newBookData.published_year || new Date().getFullYear().toString(),
+        cover_image: newBookData.cover_image || `books/covers/default-cover.jpg`,
+        author_image: newBookData.author_image || `books/authors/default-author.jpg`,
+        description: newBookData.description || '',
+        bio: newBookData.bio || '',
+        review: newBookData.review || '',
+        category: newBookData.category || 'General',
+        file_path: `books/text/${newId}-${newBookData.title.toLowerCase().replace(/\s+/g, '-')}.pdf`
+      };
+
+      // Add new book to existing books
+      const updatedBooks = [...existingBooks, newBook].sort((a, b) => parseInt(a.id) - parseInt(b.id));
+
+      // Prepare data for API
+      const updatedData = {
+        books: updatedBooks,
+        metadata: {
+          total_books: updatedBooks.length,
+          last_updated: new Date().toISOString().split('T')[0],
+          version: "1.0"
+        }
+      };
+
+      console.log('Sending updated data to API:', updatedData);
+
+      // Save to API
+      const saveResponse = await fetch('http://localhost:3001/api/books/update', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedData)
+      });
+
+      if (!saveResponse.ok) {
+        const errorData = await saveResponse.json();
+        throw new Error(`Server error: ${errorData.error || saveResponse.statusText}`);
+      }
+
+      // Update local storage
+      localStorage.setItem('books', JSON.stringify(updatedBooks));
+      
+      // Show success message
+      alert('Book added successfully!');
+      
+      // Refresh books list
+      setBooks(updatedBooks);
+    } catch (error) {
+      console.error('Error saving book:', error);
+      alert(`Failed to add book: ${error.message}`);
+    }
+  };
+
+  const handleCancelAdd = () => {
+    setIsAddingBook(false);
+  };
+
   const renderContent = () => {
     switch (activeTab) {
       case 'books':
@@ -225,31 +376,66 @@ const LibrarianDashboard = () => {
           <div className="books-management">
             <div className="section-header">
               <h2>Books Management</h2>
-              <button className="add-btn" onClick={() => setSelectedBook({})}>
-                Add New Book
-              </button>
+              <div className="header-actions">
+                <div className="search-container">
+                  <input
+                    type="text"
+                    placeholder="Search books by title, author, ISBN, or genre..."
+                    value={searchQuery}
+                    onChange={handleSearchChange}
+                    className="search-input"
+                  />
+                </div>
+                <button className="add-btn" onClick={handleAddNewBook}>
+                  Add New Book
+                </button>
+              </div>
             </div>
             
-            <div className="books-grid">
-              {books.map(book => (
-                <div key={book.id} className="book-card">
-                  <img src={book.cover_image} alt={book.title} />
-                  <div className="book-info">
-                    <h3>{book.title}</h3>
-                    <p>{book.author.name}</p>
-                    <div className="book-actions">
-                      <button onClick={() => handleBookEdit(book)}>Edit</button>
-                      <button 
-                        className="delete-btn"
-                        onClick={() => handleBookDelete(book.id)}
-                      >
-                        Delete
-                      </button>
-                    </div>
+            {isAddingBook ? (
+              <AddBookForm 
+                onSave={handleSaveBook}
+                onCancel={handleCancelAdd}
+              />
+            ) : (
+              <div className="books-grid">
+                {filteredBooks.length === 0 ? (
+                  <div className="no-results">
+                    No books found matching your search criteria
                   </div>
-                </div>
-              ))}
-            </div>
+                ) : (
+                  filteredBooks.map(book => (
+                    <div key={book.id} className="book-card">
+                      <img
+                        src={book.cover_image || '/default-book-cover.jpg'}
+                        alt={book.title}
+                        className="book-cover"
+                      />
+                      <div className="book-info">
+                        <h3>{book.title}</h3>
+                        <p className="author">by {book.author.name}</p>
+                        <div className="book-type-tags">
+                          <span className={`type-tag ${book.category?.includes('ebook') ? 'ebook' : 'offline'}`}>
+                            {book.category?.includes('ebook') ? 'E-Book' : 'Physical Book'}
+                          </span>
+                        </div>
+                        <p className="isbn">ISBN: {book.isbn}</p>
+                        <p className="genre">{book.genre.join(', ')}</p>
+                        <div className="book-actions">
+                          <button onClick={() => handleBookEdit(book)}>Edit</button>
+                          <button 
+                            className="delete-btn"
+                            onClick={() => handleBookDelete(book.id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            )}
 
             {selectedBook && (
               <BookEditModal

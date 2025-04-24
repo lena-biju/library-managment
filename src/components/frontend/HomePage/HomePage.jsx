@@ -8,8 +8,24 @@ import './HomePage.css';
 const HomePage = () => {
   const navigate = useNavigate();
   const [monthlyBooks, setMonthlyBooks] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
+    // Check if user is logged in
+    const userStr = localStorage.getItem('currentUser');
+    const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+    if (loggedIn && userStr) {
+      try {
+        const user = JSON.parse(userStr);
+        setCurrentUser(user);
+        setIsLoggedIn(true);
+      } catch (error) {
+        console.error('Error parsing user data:', error);
+      }
+    }
+
     // Import and process books.json to get highest rated books
     const fetchHighestRatedBooks = async () => {
       try {
@@ -32,6 +48,10 @@ const HomePage = () => {
 
     fetchHighestRatedBooks();
   }, []);
+
+  const handleGetStarted = () => {
+    navigate('/signup');
+  };
 
   const stats = [
     { number: '450', text: 'Customers in 2019' },
@@ -141,8 +161,26 @@ const HomePage = () => {
       {/* Hero Section */}
       <section className="hero-section" style={heroStyle}>
         <div className="hero-content">
-          <h1>The Library in your pocket.</h1>
-          <p>find all your favourite books here!</p>
+          {isLoggedIn && currentUser ? (
+            <>
+              <h1>Welcome {currentUser.name}!</h1>
+              <p>Find all your favourite books here!</p>
+              {currentUser.library && (
+                <div className="user-stats">
+                  <p>Books in your library: {currentUser.library.purchased?.length + currentUser.library.borrowed?.length}</p>
+                  <p>Books in wishlist: {currentUser.library.wishlist?.length}</p>
+                </div>
+              )}
+            </>
+          ) : (
+            <>
+              <h1>The Library in your pocket.</h1>
+              <p>Find all your favourite books here!</p>
+              <button onClick={handleGetStarted} className="get-started-btn">
+                Get Started
+              </button>
+            </>
+          )}
         </div>
       </section>
 
@@ -154,9 +192,9 @@ const HomePage = () => {
               <h2>{stat.number}</h2>
               <p>{stat.text}</p>
             </div>
-            ))}
-          </div>
-        </section>
+          ))}
+        </div>
+      </section>
 
       {/* About Section */}
       <section className="about-section">
@@ -168,11 +206,11 @@ const HomePage = () => {
             <h2>About ByteBooks</h2>
             <p className="tagline">We make books great again. Just kidding, books were always great!</p>
             <p className="description">
-            Welcome to ByteBooks, where stories come to life at your convenience! Whether you want to buy, rent, or borrow, we've got a collection that spans genres, eras, and cultures. From bestsellers to hidden gems, you'll find books that inspire, entertain, and challenge your perspective. No waiting lists, no dusty shelves—just a seamless way to pick up your next great read. Your next favorite book is just a click away! 
+              Welcome to ByteBooks, where stories come to life at your convenience! Whether you want to buy, rent, or borrow, we've got a collection that spans genres, eras, and cultures. From bestsellers to hidden gems, you'll find books that inspire, entertain, and challenge your perspective. No waiting lists, no dusty shelves—just a seamless way to pick up your next great read. Your next favorite book is just a click away!
             </p>
           </div>
         </div>
-        </section>
+      </section>
 
       {/* Monthly Books Section */}
       <section className="monthly-books-section">
@@ -186,12 +224,11 @@ const HomePage = () => {
                 alt={book.title} 
                 style={{ maxWidth: '100%', height: 'auto', objectFit: 'cover' }}
                 onError={(e) => {
-                  console.error(`Error loading image for book: ${book.title}`);
                   e.target.onerror = null;
                   e.target.src = '/assets/images/book-placeholder.jpg';
                 }}
               />
-                <h3>{book.title}</h3>
+              <h3>{book.title}</h3>
               <p>{book.author}</p>
               <div className="book-rating">
                 <span>★</span> {book.rating.toFixed(1)}
@@ -215,8 +252,13 @@ const HomePage = () => {
                   <li key={i}>{feature}</li>
                 ))}
               </ul>
-              <button className="signup-btn" onClick={() => navigate('/signup')}>Subscribe Now</button>
-              </div>
+              <button 
+                className="signup-btn" 
+                onClick={() => isLoggedIn ? navigate('/subscription') : navigate('/signup')}
+              >
+                {isLoggedIn ? 'Subscribe Now' : 'Sign Up'}
+              </button>
+            </div>
           ))}
         </div>
       </section>
@@ -242,7 +284,7 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-        </section>
+      </section>
 
       {/* Testimonials Section */}
       <section className="testimonials-section">
@@ -312,8 +354,8 @@ const HomePage = () => {
           <div className="quote-image">
             <img src="/assets/images/man.jpg" alt="Book with coffee and magazine" />
           </div>
-          </div>
-        </section>
+        </div>
+      </section>
 
       <Footer />
     </div>

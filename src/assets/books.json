@@ -51,23 +51,20 @@
       "published_year": 1930,
       "cover_image": "assets/books/covers/2_the-prince.jpg",
       "description": "A classic work by Niccolò Machiavelli",
-      "file_type": "text",
-      "file_path": "assets/books/text\\10_floor-race-within.txt",
-      "content": "Content preview...",
+      "file_type": "pdf",
+      "file_path": "/src/assets/books/text/2-the-prince-2.pdf",
+      "content": "",
       "total_pages": 147,
       "read_time": 3,
       "rating": 3.1,
-      "reviews": [
-        {
-          "user": "User657",
-          "rating": 5,
-          "comment": "Great book!"
-        }
-      ],
-      "availability": "available",
+      "reviews": [],
+      "availability": true,
       "bookmark": null,
-      "audio_version": null,
-      "purchase_link": "https://example.com/store/2"
+      "audio_version": false,
+      "purchase_link": "",
+      "category": [
+        "ebook"
+      ]
     },
     {
       "id": 3,
@@ -86,23 +83,20 @@
       "published_year": 1846,
       "cover_image": "assets/books/covers/3_10_generation.jpg",
       "description": "A classic work by Unknown",
-      "file_type": "text",
-      "file_path": "assets/books/text\\10_generation.txt",
-      "content": "Content preview...",
+      "file_type": "pdf",
+      "file_path": "/src/assets/books/text/3-10_generation.pdf",
+      "content": "",
       "total_pages": 294,
       "read_time": 7,
       "rating": 3.3,
-      "reviews": [
-        {
-          "user": "User11",
-          "rating": 5,
-          "comment": "Great book!"
-        }
-      ],
-      "availability": "available",
+      "reviews": [],
+      "availability": true,
       "bookmark": null,
-      "audio_version": null,
-      "purchase_link": "https://example.com/store/3"
+      "audio_version": false,
+      "purchase_link": "",
+      "category": [
+        "ebook"
+      ]
     },
     {
       "id": 4,
@@ -195,7 +189,7 @@
       "content": "Content preview...",
       "total_pages": 306,
       "read_time": 8,
-      "rating": 4.0,
+      "rating": 4,
       "reviews": [
         {
           "user": "User689",
@@ -437,7 +431,7 @@
       "content": "Content preview...",
       "total_pages": 145,
       "read_time": 8,
-      "rating": 4.0,
+      "rating": 4,
       "reviews": [
         {
           "user": "User897",
@@ -1072,7 +1066,7 @@
       "content": "Content preview...",
       "total_pages": 248,
       "read_time": 2,
-      "rating": 5.0,
+      "rating": 5,
       "reviews": [
         {
           "user": "User484",
@@ -1178,7 +1172,7 @@
       "content": "Content preview...",
       "total_pages": 389,
       "read_time": 2,
-      "rating": 4.0,
+      "rating": 4,
       "reviews": [
         {
           "user": "User386",
@@ -1389,7 +1383,7 @@
       "content": "Content preview...",
       "total_pages": 255,
       "read_time": 7,
-      "rating": 5.0,
+      "rating": 5,
       "reviews": [
         {
           "user": "User154",
@@ -1580,7 +1574,7 @@
     },
     {
       "id": 46,
-      "title": "Moby Dick",
+      "title": "Moby Dickary",
       "author": {
         "name": "Herman Melville",
         "bio": "A brief biography of Herman Melville",
@@ -1592,26 +1586,21 @@
         "Fiction"
       ],
       "language": "English",
-      "published_year": 1881,
-      "cover_image": "assets/books/covers/46_moby-dick.jpg",
+      "published_year": 2025,
+      "cover_image": "/src/assets/books/covers/default-cover.jpg",
       "description": "A classic work by Herman Melville",
-      "file_type": "text",
-      "file_path": "assets/books/text\\5_relationship-side.txt",
-      "content": "Content preview...",
-      "total_pages": 284,
-      "read_time": 5,
-      "rating": 5.0,
-      "reviews": [
-        {
-          "user": "User923",
-          "rating": 4,
-          "comment": "Great book!"
-        }
-      ],
-      "availability": "available",
+      "file_type": "physical",
+      "file_path": null,
+      "content": "",
+      "total_pages": "0",
+      "read_time": "0",
+      "rating": 5,
+      "reviews": [],
+      "availability": true,
       "bookmark": null,
-      "audio_version": null,
-      "purchase_link": "https://example.com/store/46"
+      "audio_version": false,
+      "purchase_link": "",
+      "category": "Romance, Fiction"
     },
     {
       "id": 47,
@@ -1916,7 +1905,7 @@
       "content": "Content preview...",
       "total_pages": 414,
       "read_time": 3,
-      "rating": 3.0,
+      "rating": 3,
       "reviews": [
         {
           "user": "User946",
@@ -1986,7 +1975,7 @@
       "content": "Content preview...",
       "total_pages": 396,
       "read_time": 7,
-      "rating": 4.0,
+      "rating": 4,
       "reviews": [
         {
           "user": "User784",
@@ -2103,11 +2092,63 @@
       "bookmark": null,
       "audio_version": null,
       "purchase_link": "https://example.com/store/60"
+    },
+    {
+      "id": "61",
+      "title": "asdad",
+      "author": {
+        "name": "adasd",
+        "bio": "asd asd",
+        "profile_picture": ""
+      },
+      "isbn": "64",
+      "genre": [],
+      "language": "English",
+      "published_year": 2025,
+      "cover_image": "books/covers/default-cover.jpg",
+      "author_image": "books/authors/default-author.jpg",
+      "description": "rewerfghg",
+      "bio": "",
+      "review": "",
+      "category": [
+        "offline"
+      ],
+      "file_path": "books/text/61-asdad.pdf"
+    },
+    {
+      "id": "62",
+      "title": "glorias house",
+      "author": {
+        "name": "as",
+        "bio": "sa",
+        "profile_picture": ""
+      },
+      "isbn": "as",
+      "genre": [],
+      "language": "English",
+      "published_year": 2025,
+      "cover_image": "books/covers/default-cover.jpg",
+      "description": "as",
+      "file_type": "pdf",
+      "file_path": "/src/assets/books/text/62-glorias-house.pdf",
+      "content": "",
+      "total_pages": "0",
+      "read_time": "0",
+      "rating": "0",
+      "reviews": [],
+      "availability": true,
+      "bookmark": null,
+      "audio_version": false,
+      "purchase_link": "",
+      "category": [
+        "offline",
+        "ebook"
+      ]
     }
   ],
   "metadata": {
-    "total_books": 60,
-    "last_updated": "2025-04-03",
+    "total_books": 62,
+    "last_updated": "2025-04-22",
     "version": "1.0"
   }
 }
