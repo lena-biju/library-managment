@@ -154,6 +154,10 @@ const HomePage = () => {
     '--hero-background': `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${heroBackground})`
   };
 
+  const handlePlanSelection = (planType) => {
+    navigate(`/signup?plan=${planType}`);
+  };
+
   return (
     <div className="home-page">
       <Navigation />
@@ -253,10 +257,10 @@ const HomePage = () => {
                 ))}
               </ul>
               <button 
-                className="signup-btn" 
-                onClick={() => isLoggedIn ? navigate('/subscription') : navigate('/signup')}
+                onClick={() => handlePlanSelection(plan.name.toLowerCase())} 
+                className="signup-btn"
               >
-                {isLoggedIn ? 'Subscribe Now' : 'Sign Up'}
+                Sign Up
               </button>
             </div>
           ))}

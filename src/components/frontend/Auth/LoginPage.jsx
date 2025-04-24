@@ -61,7 +61,7 @@ const LoginPage = () => {
           localStorage.setItem('isLoggedIn', 'true');
           localStorage.setItem('userStatus', 'librarian');
           alert('Login successful! Welcome back, Librarian');
-          navigate('/librarian-dashboard');
+          navigate('/'); // Navigate to homepage instead of librarian dashboard
           return;
         }
 
@@ -70,7 +70,8 @@ const LoginPage = () => {
         const user = registeredUsers.find(u => u.phone === formData.phone);
 
         if (!user) {
-          setErrors(prev => ({ ...prev, phone: 'No account found with this phone number' }));
+          alert('No account found with this phone number. Please register first.');
+          navigate('/signup'); // Navigate to signup page if user doesn't exist
           return;
         }
 
@@ -87,8 +88,8 @@ const LoginPage = () => {
         // Show success message
         alert('Login successful! Welcome back, ' + user.name);
         
-        // Navigate to account page
-        navigate('/account');
+        // Navigate to home page
+        navigate('/');
       } catch (error) {
         console.error('Login error:', error);
         alert('Login failed. Please try again.');

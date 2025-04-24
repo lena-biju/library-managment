@@ -1,0 +1,133 @@
+.subscription-page {
+  min-height: 100vh;
+  padding: 2rem;
+  background-color: #fdf6e9;
+}
+
+.subscription-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.subscription-container h1 {
+  text-align: center;
+  color: #4a3419;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  text-align: center;
+  color: #6c584c;
+  font-size: 1.2rem;
+  margin-bottom: 3rem;
+}
+
+.plans-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.plan-card {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  width: 300px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.plan-card:hover {
+  transform: translateY(-5px);
+}
+
+.plan-card h2 {
+  text-align: center;
+  color: #4a3419;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.price {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.amount {
+  font-size: 2.5rem;
+  color: #8b4513;
+  font-weight: bold;
+}
+
+.period {
+  color: #6c584c;
+  font-size: 1.1rem;
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.features li {
+  padding: 0.8rem 0;
+  color: #6c584c;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+.features li:last-child {
+  border-bottom: none;
+}
+
+.registration-fee {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #fff3e6;
+  border-radius: 8px;
+}
+
+.registration-fee p {
+  color: #8b4513;
+  font-weight: 500;
+}
+
+.plan-button {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #8b4513;
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.plan-button:hover {
+  background-color: #6b3410;
+}
+
+.premium {
+  border: 2px solid #8b4513;
+  position: relative;
+  overflow: hidden;
+}
+
+.premium::before {
+  content: 'BEST VALUE';
+  position: absolute;
+  top: 20px;
+  right: -35px;
+  background: #8b4513;
+  color: white;
+  padding: 5px 40px;
+  transform: rotate(45deg);
+  font-size: 0.8rem;
+  font-weight: bold;
+} 

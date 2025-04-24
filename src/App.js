@@ -9,6 +9,7 @@ import LoginPage from './components/frontend/Auth/LoginPage';
 import AccountPage from './components/frontend/Account/AccountPage';
 import CheckoutPage from './components/frontend/CheckoutPage/CheckoutPage';
 import LibrarianDashboard from './components/frontend/LibrarianDashboard/LibrarianDashboard';
+import RegistrationCheckout from './components/frontend/Checkout/RegistrationCheckout';
 import './App.css';
 
 // Font Awesome
@@ -34,6 +35,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/account" element={<AccountPage />} />
           <Route path="/checkout/:id" element={<CheckoutPage />} />
+          <Route path="/registration-checkout" element={<RegistrationCheckout />} />
           <Route path="/librarian-dashboard/*" element={<LibrarianDashboard />} />
         </Routes>
       </div>

@@ -131,6 +131,13 @@ const SignupPage = () => {
           return;
         }
 
+        // Get subscription plan from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const planType = urlParams.get('plan');
+        const subscriptionFee = planType === 'premium' ? 10 : 5;
+        const registrationFee = 3;
+        const totalAmount = subscriptionFee + registrationFee;
+
         // Create new user object
         const newUser = {
           id: Date.now().toString(),
@@ -139,6 +146,8 @@ const SignupPage = () => {
           phone: formData.phone,
           password: formData.password,
           role: 'normalUser',
+          subscriptionPlan: planType || 'normal',
+          subscriptionFee: subscriptionFee,
           createdAt: new Date().toISOString(),
           library: {
             borrowed: [],
@@ -147,20 +156,26 @@ const SignupPage = () => {
           }
         };
 
-        // Add new user to existing users
-        existingUsers.push(newUser);
+        // Show payment confirmation
+        const paymentConfirmed = window.confirm(
+          `Total Payment: $${totalAmount}\n` +
+          `- Registration Fee: $${registrationFee}\n` +
+          `- ${planType === 'premium' ? 'Premium' : 'Normal'} Plan: $${subscriptionFee}\n\n` +
+          'Click OK to proceed with payment'
+        );
 
-        // Save to localStorage
-        localStorage.setItem('registeredUsers', JSON.stringify(existingUsers));
-        localStorage.setItem('currentUser', JSON.stringify(newUser));
-        localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('userStatus', 'normalUser');
+        if (!paymentConfirmed) {
+          return;
+        }
 
-        // Show success message
-        alert('Registration successful! Welcome to your account.');
-        
-        // Navigate to account page
-        navigate('/account');
+        // Navigate to payment page with user data and payment details
+        navigate('/payment', {
+          state: {
+            amount: totalAmount,
+            userData: newUser,
+            planType: planType || 'normal'
+          }
+        });
       } catch (error) {
         console.error('Registration error:', error);
         alert('Registration failed. Please try again.');
@@ -276,4 +291,4 @@ const SignupPage = () => {
   );
 };
 
-export default SignupPage; 
+export default SignupPage;
