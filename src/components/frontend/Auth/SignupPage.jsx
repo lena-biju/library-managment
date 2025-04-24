@@ -9,6 +9,7 @@ const SignupPage = () => {
     name: '',
     phone: '',
     email: '',
+    subscriptionType: 'normal',
     password: '',
     confirmPassword: ''
   });
@@ -17,6 +18,7 @@ const SignupPage = () => {
     name: '',
     phone: '',
     email: '',
+    subscriptionType: '',
     password: '',
     confirmPassword: ''
   });
@@ -25,6 +27,7 @@ const SignupPage = () => {
     name: false,
     phone: false,
     email: false,
+    subscriptionType: false,
     password: false,
     confirmPassword: false
   });
@@ -39,7 +42,7 @@ const SignupPage = () => {
           : '';
       case 'email':
         return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-          ? 'Please enter a valid email address (e.g., user@example.com)'
+          ? 'Please enter a valid email address'
           : '';
       case 'password':
         const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -68,7 +71,6 @@ const SignupPage = () => {
       }));
     }
 
-    // Special handling for confirmPassword
     if (name === 'password' && touched.confirmPassword) {
       setErrors(prev => ({
         ...prev,
@@ -89,9 +91,7 @@ const SignupPage = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleContinueToPayment = () => {
     // Mark all fields as touched
     const allTouched = Object.keys(touched).reduce((acc, key) => ({
       ...acc,
@@ -131,12 +131,8 @@ const SignupPage = () => {
           return;
         }
 
-        // Get subscription plan from URL parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        const planType = urlParams.get('plan');
-        const subscriptionFee = planType === 'premium' ? 10 : 5;
-        const registrationFee = 3;
-        const totalAmount = subscriptionFee + registrationFee;
+        // Calculate total amount based on subscription type
+        const totalAmount = formData.subscriptionType === 'premium' ? 10 : 5;
 
         // Create new user object
         const newUser = {
@@ -146,8 +142,8 @@ const SignupPage = () => {
           phone: formData.phone,
           password: formData.password,
           role: 'normalUser',
-          subscriptionPlan: planType || 'normal',
-          subscriptionFee: subscriptionFee,
+          subscriptionPlan: formData.subscriptionType,
+          subscriptionFee: totalAmount,
           createdAt: new Date().toISOString(),
           library: {
             borrowed: [],
@@ -156,24 +152,12 @@ const SignupPage = () => {
           }
         };
 
-        // Show payment confirmation
-        const paymentConfirmed = window.confirm(
-          `Total Payment: $${totalAmount}\n` +
-          `- Registration Fee: $${registrationFee}\n` +
-          `- ${planType === 'premium' ? 'Premium' : 'Normal'} Plan: $${subscriptionFee}\n\n` +
-          'Click OK to proceed with payment'
-        );
-
-        if (!paymentConfirmed) {
-          return;
-        }
-
-        // Navigate to payment page with user data and payment details
-        navigate('/payment', {
+        // Navigate to subscription payment page
+        navigate('/subscription-payment', {
           state: {
             amount: totalAmount,
             userData: newUser,
-            planType: planType || 'normal'
+            planType: formData.subscriptionType
           }
         });
       } catch (error) {
@@ -191,7 +175,7 @@ const SignupPage = () => {
           <h1>Create Account</h1>
           <p className="auth-subtitle">Join our book community</p>
 
-          <form onSubmit={handleSubmit} noValidate>
+          <div className="signup-form">
             <div className="form-group">
               <label htmlFor="name">Full Name</label>
               <input
@@ -244,6 +228,24 @@ const SignupPage = () => {
             </div>
 
             <div className="form-group">
+              <label htmlFor="subscriptionType">Subscription Type</label>
+              <select
+                id="subscriptionType"
+                name="subscriptionType"
+                value={formData.subscriptionType}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={`form-input ${touched.subscriptionType && errors.subscriptionType ? 'error' : ''}`}
+              >
+                <option value="normal">Normal Plan ($5/month)</option>
+                <option value="premium">Premium Plan ($10/month)</option>
+              </select>
+              {touched.subscriptionType && errors.subscriptionType && (
+                <span className="error-message">{errors.subscriptionType}</span>
+              )}
+            </div>
+
+            <div className="form-group">
               <label htmlFor="password">Password</label>
               <input
                 type="password"
@@ -277,10 +279,14 @@ const SignupPage = () => {
               )}
             </div>
 
-            <button type="submit" className="auth-btn">
-              Register
+            <button 
+              type="button" 
+              className="auth-btn" 
+              onClick={handleContinueToPayment}
+            >
+              Continue to Payment
             </button>
-          </form>
+          </div>
 
           <p className="auth-link">
             Already have an account? <Link to="/login">Login</Link>

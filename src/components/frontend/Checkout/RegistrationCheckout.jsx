@@ -6,8 +6,8 @@ import Navigation from '../Navigation/Navigation';
 import Footer from '../Footer/Footer';
 import './RegistrationCheckout.css';
 
-// Initialize Stripe
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+// Initialize Stripe with a test public key
+const stripePromise = loadStripe('pk_test_51O5QN5SCR7aQtYVlHlPFPaELxKIOZxIqXXrVMxJL5Zw0Gg7Q5JKqR8zwJ0EkOzZR0YhqFE4BPF1oRPat0LkT00Hy00Hs1bb7Uy');
 
 const CheckoutForm = ({ amount, planType, userData }) => {
   const stripe = useStripe();
@@ -18,38 +18,25 @@ const CheckoutForm = ({ amount, planType, userData }) => {
   const [paymentStatus, setPaymentStatus] = useState('processing');
   const navigate = useNavigate();
 
-  const handlePayment = async (event) => {
+  const handlePayment = (event) => {
     event.preventDefault();
+    
+    // Start payment process
     setShowPaymentOverlay(true);
     setProcessing(true);
     setPaymentStatus('processing');
     setError(null);
 
-    if (!stripe || !elements) {
-      setError('Payment processing is not available. Please try again later.');
-      setProcessing(false);
-      setPaymentStatus('error');
-      return;
-    }
-
-    try {
-      const { error, paymentMethod } = await stripe.createPaymentMethod({
-        type: 'card',
-        card: elements.getElement(CardElement),
-      });
-
-      if (error) {
-        setError(error.message);
-        setProcessing(false);
-        setPaymentStatus('error');
-      } else {
+    // Simulate payment process
+    setTimeout(() => {
+      try {
         // Get existing users array
         const existingUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
         
         // Add payment and subscription details to user data
         const userWithSubscription = {
           ...userData,
-          paymentMethod: paymentMethod.id,
+          paymentMethod: 'card',
           subscriptionStartDate: new Date().toISOString(),
           subscriptionStatus: 'active'
         };
@@ -59,30 +46,31 @@ const CheckoutForm = ({ amount, planType, userData }) => {
         
         // Save to localStorage
         localStorage.setItem('registeredUsers', JSON.stringify(existingUsers));
+        localStorage.setItem('currentUser', JSON.stringify(userWithSubscription));
 
-        // Show success state and redirect after delay
+        // Show success state
+        setPaymentStatus('success');
+        
+        // Redirect after success
         setTimeout(() => {
-          setPaymentStatus('success');
-          setTimeout(() => {
-            navigate('/login');
-          }, 1500);
-        }, 2000);
+          navigate('/account');
+        }, 1500);
+
+      } catch (error) {
+        setError('Payment processing failed. Please try again.');
+        setPaymentStatus('error');
       }
-    } catch (err) {
-      setError('An unexpected error occurred. Please try again.');
-      setProcessing(false);
-      setPaymentStatus('error');
-    }
+    }, 2000);
   };
 
   return (
     <>
       <form onSubmit={handlePayment} className="checkout-form">
         <div className="form-group">
-          <label htmlFor="card-number">Card Number*</label>
+          <label htmlFor="card-element">Card Details*</label>
           <div className="card-input-container">
             <CardElement
-              id="card-number"
+              id="card-element"
               options={{
                 style: {
                   base: {
@@ -102,40 +90,6 @@ const CheckoutForm = ({ amount, planType, userData }) => {
           </div>
         </div>
 
-        <div className="form-row-split">
-          <div className="form-group half">
-            <label htmlFor="exp-month">Exp. Month*</label>
-            <select id="exp-month" className="form-select">
-              {Array.from({ length: 12 }, (_, i) => {
-                const month = (i + 1).toString().padStart(2, '0');
-                return (
-                  <option key={month} value={month}>
-                    {month}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-          <div className="form-group half">
-            <label htmlFor="exp-year">Exp. Year*</label>
-            <select id="exp-year" className="form-select">
-              {Array.from({ length: 10 }, (_, i) => {
-                const year = (new Date().getFullYear() + i).toString().slice(-2);
-                return (
-                  <option key={year} value={year}>
-                    {year}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="security-code">Security Code*</label>
-          <input type="text" id="security-code" className="form-input" maxLength="4" />
-        </div>
-
         <div className="form-group">
           <label htmlFor="name-on-card">Name on Card</label>
           <input 
@@ -148,7 +102,9 @@ const CheckoutForm = ({ amount, planType, userData }) => {
         </div>
 
         <div className="form-actions">
-          <button type="button" className="cancel-btn" onClick={() => navigate(-1)}>CANCEL</button>
+          <button type="button" className="cancel-btn" onClick={() => navigate(-1)}>
+            Cancel
+          </button>
           <button 
             type="submit" 
             className="pay-now-btn" 
@@ -184,9 +140,9 @@ const CheckoutForm = ({ amount, planType, userData }) => {
                 <div className="payment-animation">
                   <div className="success-checkmark">✓</div>
                 </div>
-                <h3>Registration Successful!</h3>
+                <h3>Payment Successful!</h3>
                 <p>Thank you for subscribing to our {planType} plan.</p>
-                <p className="redirect-notice">Redirecting to login...</p>
+                <p className="redirect-notice">Redirecting to your account...</p>
               </>
             )}
 
@@ -196,7 +152,18 @@ const CheckoutForm = ({ amount, planType, userData }) => {
                   <div className="error-icon">✕</div>
                 </div>
                 <h3>Payment Failed</h3>
-                <div className="payment-error">{error}</div>
+                <p className="payment-error">{error}</p>
+                <button 
+                  className="try-again-btn"
+                  onClick={() => {
+                    setShowPaymentOverlay(false);
+                    setProcessing(false);
+                    setPaymentStatus('processing');
+                    setError(null);
+                  }}
+                >
+                  Try Again
+                </button>
               </>
             )}
           </div>
@@ -233,8 +200,7 @@ const RegistrationCheckout = () => {
                 <p className="user-name">{userData.name}</p>
                 <p className="user-email">{userData.email}</p>
                 <div className="price-breakdown">
-                  <p>Registration Fee: <span>$3.00</span></p>
-                  <p>Subscription Fee: <span>${(amount - 3).toFixed(2)}</span></p>
+                  <p>Subscription Fee: <span>${amount.toFixed(2)}</span></p>
                   <p className="total">Total Amount: <span>${amount.toFixed(2)}</span></p>
                 </div>
               </div>

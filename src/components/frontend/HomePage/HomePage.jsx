@@ -154,8 +154,8 @@ const HomePage = () => {
     '--hero-background': `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${heroBackground})`
   };
 
-  const handlePlanSelection = (planType) => {
-    navigate(`/signup?plan=${planType}`);
+  const handlePlanSelection = () => {
+    navigate('/signup');
   };
 
   return (
@@ -180,9 +180,7 @@ const HomePage = () => {
             <>
               <h1>The Library in your pocket.</h1>
               <p>Find all your favourite books here!</p>
-              <button onClick={handleGetStarted} className="get-started-btn">
-                Get Started
-              </button>
+              
             </>
           )}
         </div>
@@ -257,7 +255,7 @@ const HomePage = () => {
                 ))}
               </ul>
               <button 
-                onClick={() => handlePlanSelection(plan.name.toLowerCase())} 
+                onClick={handlePlanSelection} 
                 className="signup-btn"
               >
                 Sign Up
