@@ -85,20 +85,14 @@ const Navigation = () => {
           <button className="dropbtn">Books ▼</button>
           <div className="dropdown-content">
             <Link to="/books">All Books</Link>
-            <Link to="/category/fiction">Fiction</Link>
-            <Link to="/category/non-fiction">Non-Fiction</Link>
-            <Link to="/category/science">Science</Link>
-            <Link to="/category/technology">Technology</Link>
+            
           </div>
         </div>
         <div className="dropdown">
           <button className="dropbtn">E-Books ▼</button>
           <div className="dropdown-content">
             <Link to="/e-books">All E-Books</Link>
-            <Link to="/category/fiction?type=digital">Fiction</Link>
-            <Link to="/category/non-fiction?type=digital">Non-Fiction</Link>
-            <Link to="/category/science?type=digital">Science</Link>
-            <Link to="/category/technology?type=digital">Technology</Link>
+            
           </div>
         </div>
       </div>
