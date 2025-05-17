@@ -64,6 +64,11 @@ const LibrarianDashboard = () => {
   });
   const [isAddingBook, setIsAddingBook] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [testimonialPage, setTestimonialPage] = useState(0);
+  const [editingTestimonial, setEditingTestimonial] = useState(null);
+  const [editForm, setEditForm] = useState({ name: '', text: '', date: '' });
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [newTestimonial, setNewTestimonial] = useState({ name: '', text: '', date: '' });
 
   useEffect(() => {
     // Check if user is librarian
@@ -369,6 +374,60 @@ const LibrarianDashboard = () => {
     setIsAddingBook(false);
   };
 
+  // Add these at the top level of the component, after other handlers
+  const handleTransactionEdit = (transaction) => {
+    alert('Edit transaction feature not implemented yet.');
+  };
+  const handleTransactionDelete = (transactionId) => {
+    if (window.confirm('Are you sure you want to delete this transaction?')) {
+      const updatedTransactions = transactions.filter(t => t.id !== transactionId);
+      setTransactions(updatedTransactions);
+      localStorage.setItem('transactions', JSON.stringify(updatedTransactions));
+    }
+  };
+
+  // Add this after testimonials state initialization
+  useEffect(() => {
+    if (!localStorage.getItem('testimonials') || JSON.parse(localStorage.getItem('testimonials')).length === 0) {
+      const defaultTestimonials = [
+        {
+          id: 1,
+          name: 'Jane Collston',
+          text: 'I love to read, but lately, I have had very little time. I couldnt even go to the bookstore. In addition, I do not know at all what everyone is reading now and what books are worth reading. This service helped me get back to reading, now I read 5 books a month and look forward to a new box!',
+          date: 'November 05, 2024',
+          role: 'Project Manager',
+          rating: 5
+        },
+        {
+          id: 2,
+          name: 'Jeff Marguel',
+          text: 'This service gives me the opportunity to always read new books and get acquainted with promising authors even before people start shouting at all cross-roads about them. Thanks to Bookshelf for my wonderful evenings with a new book and a glass of wine! I will continue using the subscription!',
+          date: 'March 02, 2024',
+          role: 'Project Manager',
+          rating: 5
+        },
+        {
+          id: 3,
+          name: 'Sarah Mitchell',
+          text: 'ByteBooks has transformed my reading experience! The convenience of having books delivered to my doorstep combined with their excellent recommendations has helped me discover so many amazing authors. Their customer service is exceptional, and the monthly subscription is worth every penny.',
+          date: 'April 15, 2024',
+          role: 'Project Manager',
+          rating: 5
+        },
+        {
+          id: 4,
+          name: 'Michael Chen',
+          text: 'As a busy professional, finding time to visit bookstores was always a challenge. ByteBooks solved that problem perfectly. Their selection is outstanding, and the mobile app makes it incredibly easy to manage my reading list. The premium membership benefits are fantastic!',
+          date: 'January 20, 2024',
+          role: 'Project Manager',
+          rating: 5
+        }
+      ];
+      localStorage.setItem('testimonials', JSON.stringify(defaultTestimonials));
+      setTestimonials(defaultTestimonials);
+    }
+  }, []);
+
   const renderContent = () => {
     switch (activeTab) {
       case 'books':
@@ -596,6 +655,199 @@ const LibrarianDashboard = () => {
               <button className="save-btn" onClick={handleSettingsSave}>
                 Save Changes
               </button>
+            </div>
+          </div>
+        );
+      case 'testimonials':
+        // Carousel logic
+        const testimonialsPerPage = 4;
+        const paginatedTestimonials = testimonials.slice(testimonialPage * testimonialsPerPage, (testimonialPage + 1) * testimonialsPerPage);
+        const totalPages = Math.ceil(testimonials.length / testimonialsPerPage);
+
+        const handleNextPage = () => {
+          setTestimonialPage((prev) => (prev + 1) % totalPages);
+        };
+        const handlePrevPage = () => {
+          setTestimonialPage((prev) => (prev - 1 + totalPages) % totalPages);
+        };
+
+        const startEdit = (testimonial) => {
+          setEditingTestimonial(testimonial.id);
+          setEditForm({ name: testimonial.name, text: testimonial.text, date: testimonial.date });
+        };
+        const cancelEdit = () => {
+          setEditingTestimonial(null);
+          setEditForm({ name: '', text: '', date: '' });
+        };
+        const saveEdit = (id) => {
+          const updated = testimonials.map(t => t.id === id ? { ...t, ...editForm } : t);
+          setTestimonials(updated);
+          localStorage.setItem('testimonials', JSON.stringify(updated));
+          setEditingTestimonial(null);
+        };
+
+        return (
+          <div className="testimonials-management">
+            <div className="section-header">
+              <h2>Manage Testimonials</h2>
+              <div style={{ display: 'flex', gap: '1rem' }}>
+                <button onClick={handlePrevPage}>&lt;</button>
+                <button onClick={handleNextPage}>&gt;</button>
+                <button onClick={() => setShowAddForm(true)} style={{ marginLeft: '2rem', background: '#8B4513', color: 'white', border: 'none', borderRadius: '4px', padding: '0.5rem 1rem', cursor: 'pointer' }}>+ Add Testimonial</button>
+              </div>
+            </div>
+            {showAddForm && (
+              <div style={{ background: '#fff', borderRadius: '10px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)', padding: '2rem', margin: '1rem 0', maxWidth: 500, marginLeft: 'auto', marginRight: 'auto' }}>
+                <h3 style={{ fontFamily: 'inherit', fontWeight: 700, fontSize: '1.3rem', marginBottom: '1rem' }}>Add New Testimonial</h3>
+                <div style={{ marginBottom: '1rem' }}>
+                  <label style={{ display: 'block', marginBottom: '0.3rem', color: '#6B3410', fontWeight: 500 }}>Name</label>
+                  <input
+                    type="text"
+                    value={newTestimonial.name}
+                    onChange={e => setNewTestimonial(f => ({ ...f, name: e.target.value }))}
+                    placeholder="Name"
+                    style={{ width: '100%', marginBottom: '0.5rem', padding: '0.5rem', borderRadius: '5px', border: '1px solid #E6D5C3' }}
+                  />
+                </div>
+                <div style={{ marginBottom: '1rem' }}>
+                  <label style={{ display: 'block', marginBottom: '0.3rem', color: '#6B3410', fontWeight: 500 }}>Testimonial</label>
+                  <textarea
+                    value={newTestimonial.text}
+                    onChange={e => setNewTestimonial(f => ({ ...f, text: e.target.value }))}
+                    placeholder="Testimonial"
+                    style={{ width: '100%', marginBottom: '0.5rem', padding: '0.5rem', borderRadius: '5px', border: '1px solid #E6D5C3', minHeight: '80px' }}
+                  />
+                </div>
+                <div style={{ marginBottom: '1.5rem' }}>
+                  <label style={{ display: 'block', marginBottom: '0.3rem', color: '#6B3410', fontWeight: 500 }}>Date</label>
+                  <input
+                    type="text"
+                    value={newTestimonial.date}
+                    onChange={e => setNewTestimonial(f => ({ ...f, date: e.target.value }))}
+                    placeholder="Date"
+                    style={{ width: '100%', marginBottom: '0.5rem', padding: '0.5rem', borderRadius: '5px', border: '1px solid #E6D5C3' }}
+                  />
+                </div>
+                <div style={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end' }}>
+                  <button style={{ background: '#8B4513', color: 'white', border: 'none', borderRadius: '4px', padding: '0.5rem 1.5rem', cursor: 'pointer', fontWeight: 600 }} onClick={() => {
+                    if (!newTestimonial.name || !newTestimonial.text || !newTestimonial.date) return;
+                    const newId = Date.now();
+                    const toAdd = { ...newTestimonial, id: newId };
+                    const updated = [...testimonials, toAdd];
+                    setTestimonials(updated);
+                    localStorage.setItem('testimonials', JSON.stringify(updated));
+                    setShowAddForm(false);
+                    setNewTestimonial({ name: '', text: '', date: '' });
+                  }}>Add</button>
+                  <button style={{ background: '#aaa', color: 'white', border: 'none', borderRadius: '4px', padding: '0.5rem 1.5rem', cursor: 'pointer', fontWeight: 600 }} onClick={() => {
+                    setShowAddForm(false);
+                    setNewTestimonial({ name: '', text: '', date: '' });
+                  }}>Cancel</button>
+                </div>
+              </div>
+            )}
+            <div className="testimonials-carousel-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr', gap: '1.5rem', maxWidth: 800 }}>
+              {paginatedTestimonials.length === 0 ? (
+                <div style={{ gridColumn: '1 / -1', textAlign: 'center', color: '#888' }}>No testimonials found. Click "+ Add Testimonial" to add one.</div>
+              ) : (
+                paginatedTestimonials.map((testimonial) => (
+                  <div key={testimonial.id || 'new'} className="testimonial-card paper-effect" style={{ padding: '1.5rem', position: 'relative', background: '#fff', color: '#4A2B0F', borderRadius: '10px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)', opacity: 1, margin: '0.5rem 0' }}>
+                    <h3 style={{ fontWeight: 700, fontSize: '1.1rem', marginBottom: '0.5rem' }}>{testimonial.name}</h3>
+                    <p style={{ fontStyle: 'italic', color: '#6B3410', marginBottom: '0.5rem' }}>{testimonial.text}</p>
+                    <div style={{ fontSize: '0.95em', color: '#888', marginBottom: '0.5rem' }}>{testimonial.date}</div>
+                    <div style={{ display: 'flex', gap: '0.5rem', position: 'absolute', top: 8, right: 8 }}>
+                      <button style={{ background: '#DC3545', color: 'white', border: 'none', borderRadius: '4px', padding: '0.3rem 0.7rem', cursor: 'pointer' }} onClick={() => {
+                        setTestimonials(prevTestimonials => {
+                          const updated = prevTestimonials.filter(t => String(t.id) !== String(testimonial.id));
+                          localStorage.setItem('testimonials', JSON.stringify(updated));
+                          return updated;
+                        });
+                      }}>Delete</button>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+            <div style={{ marginTop: '1rem', textAlign: 'center' }}>
+              Page {testimonialPage + 1} of {totalPages}
+            </div>
+          </div>
+        );
+      case 'subscriptions':
+        return (
+          <div className="subscriptions-management">
+            <div className="section-header">
+              <h2>Subscription Plans</h2>
+            </div>
+            <div className="subscriptions-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Plan Name</th>
+                    <th>Duration</th>
+                    <th>Discount</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {subscriptionPlans.map(plan => (
+                    <tr key={plan.id}>
+                      <td>{plan.name}</td>
+                      <td>{plan.duration} months</td>
+                      <td>{plan.discount}%</td>
+                      <td>
+                        <button onClick={() => handlePlanEdit(plan)}>Edit</button>
+                        <button 
+                          className="delete-btn"
+                          onClick={() => handlePlanDelete(plan.id)}
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        );
+      case 'transactions':
+        return (
+          <div className="transactions-management">
+            <div className="section-header">
+              <h2>Transactions</h2>
+            </div>
+            <div className="transactions-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Transaction ID</th>
+                    <th>Book Title</th>
+                    <th>User</th>
+                    <th>Transaction Date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {transactions.map(transaction => (
+                    <tr key={transaction.id}>
+                      <td>{transaction.id}</td>
+                      <td>{transaction.book.title}</td>
+                      <td>{transaction.user.name}</td>
+                      <td>{transaction.transaction_date}</td>
+                      <td>
+                        <button onClick={() => handleTransactionEdit(transaction)}>Edit</button>
+                        <button 
+                          className="delete-btn"
+                          onClick={() => handleTransactionDelete(transaction.id)}
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         );

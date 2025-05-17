@@ -8,6 +8,8 @@ const LoginPage = () => {
   const [formData, setFormData] = useState({ phone: '', password: '' });
   const [errors, setErrors] = useState({ phone: '', password: '' });
   const [touched, setTouched] = useState({ phone: false, password: false });
+  const librarianCredentials = { phone: '1234567890', password: 'admin123' };
+  const [loginMode, setLoginMode] = useState('user'); // 'user' or 'librarian'
 
   const validateField = (name, value) => {
     switch (name) {
@@ -47,25 +49,29 @@ const LoginPage = () => {
 
     if (!Object.values(newErrors).some(error => error !== '')) {
       try {
-        // Check for librarian login
-        if (formData.phone === '1234567890' && formData.password === 'admin123') {
-          const librarianUser = {
-            id: 'admin',
-            name: 'Librarian',
-            phone: formData.phone,
-            role: 'librarian',
-            email: 'admin@library.com'
-          };
-
-          localStorage.setItem('currentUser', JSON.stringify(librarianUser));
-          localStorage.setItem('isLoggedIn', 'true');
-          localStorage.setItem('userStatus', 'librarian');
-          alert('Login successful! Welcome back, Librarian');
-          navigate('/'); // Navigate to homepage instead of librarian dashboard
-          return;
+        // Check for librarian login if in librarian mode
+        if (loginMode === 'librarian') {
+          if (formData.phone === librarianCredentials.phone && formData.password === librarianCredentials.password) {
+            const librarianUser = {
+              id: 'admin',
+              name: 'Librarian',
+              phone: formData.phone,
+              role: 'librarian',
+              email: 'admin@library.com'
+            };
+            localStorage.setItem('currentUser', JSON.stringify(librarianUser));
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('userStatus', 'librarian');
+            alert('Login successful! Welcome back, Librarian');
+            navigate('/librarian-dashboard');
+            return;
+          } else {
+            setErrors(prev => ({ ...prev, password: 'Incorrect librarian credentials' }));
+            return;
+          }
         }
 
-        // Check for regular user
+        // Check for regular user if in user mode
         const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
         const user = registeredUsers.find(u => u.phone === formData.phone);
 
@@ -84,11 +90,7 @@ const LoginPage = () => {
         localStorage.setItem('currentUser', JSON.stringify(user));
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('userStatus', user.role || 'normalUser');
-        
-        // Show success message
         alert('Login successful! Welcome back, ' + user.name);
-        
-        // Navigate to home page
         navigate('/');
       } catch (error) {
         console.error('Login error:', error);
@@ -104,7 +106,22 @@ const LoginPage = () => {
         <div className="auth-card paper-effect">
           <h1>Welcome Back</h1>
           <p className="auth-subtitle">Login to your account</p>
-
+          <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
+            <button
+              type="button"
+              className={`auth-btn${loginMode === 'user' ? ' active' : ''}`}
+              onClick={() => setLoginMode('user')}
+            >
+              User Login
+            </button>
+            <button
+              type="button"
+              className={`auth-btn${loginMode === 'librarian' ? ' active' : ''}`}
+              onClick={() => setLoginMode('librarian')}
+            >
+              Librarian Login
+            </button>
+          </div>
           <form onSubmit={handleSubmit} noValidate>
             <div className="form-group">
               <label htmlFor="phone">Phone Number</label>
@@ -122,7 +139,6 @@ const LoginPage = () => {
                 <span className="error-message">{errors.phone}</span>
               )}
             </div>
-
             <div className="form-group">
               <label htmlFor="password">Password</label>
               <input
@@ -139,10 +155,8 @@ const LoginPage = () => {
                 <span className="error-message">{errors.password}</span>
               )}
             </div>
-
             <button type="submit" className="auth-btn">Login</button>
           </form>
-
           <p className="auth-link">
             Don't have an account? <Link to="/signup">Sign Up</Link>
           </p>

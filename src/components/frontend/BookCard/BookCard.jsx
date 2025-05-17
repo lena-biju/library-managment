@@ -9,6 +9,7 @@ const BookCard = ({ book }) => {
     description,
     coverImage
   } = book;
+  console.log('book',book)
 
   return (
     <div className="book-card">

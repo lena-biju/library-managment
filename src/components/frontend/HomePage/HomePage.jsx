@@ -83,32 +83,45 @@ const HomePage = () => {
     }
   ];
 
-  const testimonials = [
+  const defaultTestimonials = [
     {
       id: 1,
       name: 'Jane Collston',
       text: 'I love to read, but lately, I have had very little time. I couldnt even go to the bookstore. In addition, I do not know at all what everyone is reading now and what books are worth reading. This service helped me get back to reading, now I read 5 books a month and look forward to a new box!',
-      date: 'November 05, 2024'
+      date: 'November 05, 2024',
+      role: 'Project Manager',
+      rating: 5
     },
     {
       id: 2,
       name: 'Jeff Marguel',
       text: 'This service gives me the opportunity to always read new books and get acquainted with promising authors even before people start shouting at all cross-roads about them. Thanks to Bookshelf for my wonderful evenings with a new book and a glass of wine! I will continue using the subscription!',
-      date: 'March 02, 2024'
+      date: 'March 02, 2024',
+      role: 'Project Manager',
+      rating: 5
     },
     {
       id: 3,
       name: 'Sarah Mitchell',
       text: 'ByteBooks has transformed my reading experience! The convenience of having books delivered to my doorstep combined with their excellent recommendations has helped me discover so many amazing authors. Their customer service is exceptional, and the monthly subscription is worth every penny.',
-      date: 'April 15, 2024'
+      date: 'April 15, 2024',
+      role: 'Project Manager',
+      rating: 5
     },
     {
       id: 4,
       name: 'Michael Chen',
       text: 'As a busy professional, finding time to visit bookstores was always a challenge. ByteBooks solved that problem perfectly. Their selection is outstanding, and the mobile app makes it incredibly easy to manage my reading list. The premium membership benefits are fantastic!',
-      date: 'January 20, 2024'
+      date: 'January 20, 2024',
+      role: 'Project Manager',
+      rating: 5
     }
   ];
+
+  const [testimonials, setTestimonials] = useState(() => {
+    const stored = localStorage.getItem('testimonials');
+    return stored ? JSON.parse(stored) : defaultTestimonials;
+  });
 
   const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0);
 

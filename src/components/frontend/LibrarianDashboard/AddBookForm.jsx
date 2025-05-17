@@ -109,6 +109,7 @@ const AddBookForm = ({ onSave, onCancel }) => {
   };
 
   const handleSubmit = async (e) => {
+    
     e.preventDefault();
 
     // Generate a new unique ID

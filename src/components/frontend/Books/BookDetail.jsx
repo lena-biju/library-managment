@@ -143,8 +143,12 @@ const BookDetail = () => {
     }
 
     if (userStatus === 'normalUser') {
-      // Proceed with buy/rent action
-      navigate(`/checkout/${id}?action=${action}`);
+      // Make sure we have the prices
+      const price = book.price || 29.99;
+      const rentPrice = book.rentPrice || 9.99;
+      
+      // Redirect to the payment page with book ID and action
+      navigate(`/payment?bookId=${id}&action=${action}`);
     } else {
       // If not logged in, redirect to login
       alert('Please login to continue');
@@ -162,6 +166,7 @@ const BookDetail = () => {
     userTransactions.purchased.some(t => t.bookId === parseInt(id)) ||
     userTransactions.rented.some(t => t.bookId === parseInt(id))
   );
+  console.log('book',book)
 
   return (
     <div className="book-detail-page">

@@ -11,6 +11,7 @@ import CheckoutPage from './components/frontend/CheckoutPage/CheckoutPage';
 import LibrarianDashboard from './components/frontend/LibrarianDashboard/LibrarianDashboard';
 import RegistrationCheckout from './components/frontend/Checkout/RegistrationCheckout';
 import SubscriptionPayment from './components/frontend/Payment/SubscriptionPayment';
+import BookPayment from './components/frontend/Payment/BookPayment';
 import './App.css';
 
 // Font Awesome
@@ -38,6 +39,7 @@ function App() {
           <Route path="/checkout/:id" element={<CheckoutPage />} />
           <Route path="/registration-checkout" element={<RegistrationCheckout />} />
           <Route path="/subscription-payment" element={<SubscriptionPayment />} />
+          <Route path="/payment" element={<BookPayment />} />
           <Route path="/librarian-dashboard/*" element={<LibrarianDashboard />} />
         </Routes>
       </div>
